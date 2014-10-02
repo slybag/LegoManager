@@ -11,4 +11,6 @@ package cz.muni.fi.pa165.legomanager.entity;
  */
 public class BuildingKit {
     
+    private String name;
+    
 }
