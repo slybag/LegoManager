@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.legomanager.entity;
+package cz.muni.fi.pa156.legomanager;
 
+import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import java.util.List;
 
 /**
