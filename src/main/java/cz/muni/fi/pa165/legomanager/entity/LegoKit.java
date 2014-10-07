@@ -5,34 +5,52 @@
  */
 package cz.muni.fi.pa165.legomanager.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Petr Konecny
  */
-public class LegoKit {
+@Entity
+public class LegoKit implements Serializable {
     
+    @Id
+    @GeneratedValue
+    private Long id;
     
-    private long id;
     private BigDecimal price;
+    
     private int ageRestriction;
+    
+    private String name;
+    
+    @Transient
     private Set<Category> categories;
+    
+    @Transient
     private List<LegoSet> legoSets;
 
+    @Transient
+    private List<LegoPiece> legoPieces;
+    
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,6 +110,51 @@ public class LegoKit {
         this.legoSets = legoSets;
     }
     
-    
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LegoKit other = (LegoKit) obj;
+        return this.id == other.id;
+    }   
+
+    /**
+     * @return the legoPieces
+     */
+    public List<LegoPiece> getLegoPieces() {
+        return legoPieces;
+    }
+
+    /**
+     * @param legoPieces the legoPieces to set
+     */
+    public void setLegoPieces(List<LegoPiece> legoPieces) {
+        this.legoPieces = legoPieces;
+    }
     
 }

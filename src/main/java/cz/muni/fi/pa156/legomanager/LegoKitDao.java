@@ -14,9 +14,10 @@ import java.util.List;
  */
 public interface LegoKitDao {
     
-    public List<LegoKit> getAllLegoKits();
-    public void updateLegoKit(LegoKit kit);
-    public void deleteLegoKit (LegoKit kit);
-    public void addLegoKit (LegoKit kit);
+    public List<LegoKit> getAllLegoKits() throws IllegalArgumentException,LegoDaoException;
+    public void updateLegoKit(LegoKit kit) throws IllegalArgumentException,LegoDaoException;
+    public void deleteLegoKit (LegoKit kit) throws IllegalArgumentException,LegoDaoException;
+    public void addLegoKit (LegoKit kit) throws IllegalArgumentException,LegoDaoException;
+    public void findLegoKitById (Long id) throws IllegalArgumentException,LegoDaoException;
     
 }

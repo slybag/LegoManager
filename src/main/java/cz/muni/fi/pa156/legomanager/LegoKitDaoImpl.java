@@ -5,10 +5,10 @@
  */
 package cz.muni.fi.pa156.legomanager;
 
-import cz.muni.fi.pa156.legomanager.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 
 /**
@@ -18,26 +18,76 @@ import javax.persistence.EntityManager;
 public class LegoKitDaoImpl implements LegoKitDao{
     
     List<LegoKit> kits;
+    
+    @PersistenceContext
     EntityManager em;
     
     @Override
     public List<LegoKit> getAllLegoKits() {
-        return null;
+        kits =  em.createQuery("Select k from LegoKit k",LegoKit.class).getResultList();
+        return kits;
     }
-
+    
     @Override
     public void updateLegoKit(LegoKit kit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (kit == null) {
+            throw new IllegalArgumentException("Kit argument is null");
+        } else if (kit.getName() == null) {
+            throw new IllegalArgumentException("Kit name wasn't set");
+        } else if (kit.getPrice() == null) {
+            throw new IllegalArgumentException("Price argument is null");
+        } else if (kit.getLegoPieces() == null){
+            throw new IllegalArgumentException("Lego pieces argument is null");
+        }else if (kit.getPrice().intValue() <= 0) {
+            throw new IllegalArgumentException("Price must be greater than 0");
+        } else if (kit.getAgeRestriction()<= 0) {
+            throw new IllegalArgumentException("Age restriciton must be greater than 0");
+        }else if(em.find(LegoKit.class, kit.getId()) == null) {
+            throw new LegoDaoException("Kit is not in database");
+        }     
+        em.merge(kit);
     }
 
     @Override
     public void deleteLegoKit(LegoKit kit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        if (kit == null) {
+            throw new IllegalArgumentException("Kit argument is null");
+        }else if(kit.getId() == null){
+            throw new IllegalArgumentException("Kit id was not specified");
+        }else if(em.find(LegoKit.class, kit.getId()) == null) {
+            throw new LegoDaoException("Kit is not in database");
+        }
+        em.remove(kit);
+   }
 
     @Override
     public void addLegoKit(LegoKit kit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (kit == null) {
+            throw new IllegalArgumentException("Kit argument is null");
+        } else if (kit.getName() == null) {
+            throw new IllegalArgumentException("Kit name wasn't set");
+        } else if (kit.getPrice() == null) {
+            throw new IllegalArgumentException("Price argument is null");
+        } else if (kit.getLegoPieces() == null){
+            throw new IllegalArgumentException("Lego pieces argument is null");
+        }else if (kit.getPrice().intValue() <= 0) {
+            throw new IllegalArgumentException("Price must be greater than 0");
+        } else if (kit.getAgeRestriction()<= 0) {
+            throw new IllegalArgumentException("Age restriciton must be greater than 0");
+        }      
+        em.persist(kit);
     }
-    
+
+    @Override
+    public void findLegoKitById(Long id) {
+        
+        if(id == null) {
+            throw new IllegalArgumentException("Id is null.");
+        }
+        LegoKit kitToReturn = em.find(LegoKit.class, id);       
+        if(kitToReturn == null){
+            throw new LegoDaoException("Kit is not in the database");
+        }       
+        em.find(LegoKit.class, id);
+    }   
 }
