@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa156.legomanager;
+package cz.muni.fi.pa165.legomanager;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import java.util.List;

@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa156.legomanager;
+package cz.muni.fi.pa165.legomanager;
 
+import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
+import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
+import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 
 /**
@@ -70,7 +74,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
             throw new IllegalArgumentException("Price argument is null");
         } else if (kit.getLegoPieces() == null){
             throw new IllegalArgumentException("Lego pieces argument is null");
-        }else if (kit.getPrice().intValue() <= 0) {
+        } else if (kit.getPrice().intValue() <= 0) {
             throw new IllegalArgumentException("Price must be greater than 0");
         } else if (kit.getAgeRestriction()<= 0) {
             throw new IllegalArgumentException("Age restriciton must be greater than 0");
@@ -79,7 +83,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
     }
 
     @Override
-    public void findLegoKitById(Long id) {
+    public LegoKit findLegoKitById(Long id) {
         
         if(id == null) {
             throw new IllegalArgumentException("Id is null.");
@@ -88,6 +92,6 @@ public class LegoKitDaoImpl implements LegoKitDao{
         if(kitToReturn == null){
             throw new LegoDaoException("Kit is not in the database");
         }       
-        em.find(LegoKit.class, id);
+        return em.find(LegoKit.class, id);
     }   
 }
