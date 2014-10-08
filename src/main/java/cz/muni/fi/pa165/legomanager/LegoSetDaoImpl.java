@@ -8,7 +8,8 @@ package cz.muni.fi.pa165.legomanager;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -16,8 +17,8 @@ import javax.persistence.PersistenceContext;
  */
 public class LegoSetDaoImpl implements LegoSetDao {
     
-    @PersistenceContext
-    EntityManager entityManager;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("InMemoryUnit");
+    EntityManager entityManager = emf.createEntityManager();
     
     @Override
     public List<LegoSet> getAllLegoSets() throws IllegalArgumentException, LegoDaoException{

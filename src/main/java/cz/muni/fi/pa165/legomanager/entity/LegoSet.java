@@ -5,37 +5,45 @@
  */
 package cz.muni.fi.pa165.legomanager.entity;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Michal Rais
  */
+@Entity
 public class LegoSet {
+    
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     
-    @ManyToMany
+    //@ManyToMany
+    @Transient
     private List<LegoKit> legoKits;
     
     @Column
-    private int price;
+    private BigDecimal price;
     
-    @ManyToMany
+    //@ManyToMany
+    @Transient
     private Set<Category> categories;
 
+    private String name;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,11 +55,11 @@ public class LegoSet {
         this.legoKits = legoKits;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -84,4 +92,18 @@ public class LegoSet {
         }
         return true;
     }        
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }
