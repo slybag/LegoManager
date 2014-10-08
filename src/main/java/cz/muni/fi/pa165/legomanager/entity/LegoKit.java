@@ -1,9 +1,11 @@
+package cz.muni.fi.pa165.legomanager.entity;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.legomanager.entity;
+
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,7 +14,9 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -31,13 +35,17 @@ public class LegoKit implements Serializable {
     
     private String name;
     
-    @Transient
+    @ManyToMany(mappedBy="Category")
     private Set<Category> categories;
     
-    @Transient
+    @ManyToMany(mappedBy="LegoSet")
     private List<LegoSet> legoSets;
 
-    @Transient
+    @ManyToMany(mappedBy="LegoKit")
+    @JoinTable(
+      name="Kit_Piece",
+      joinColumns={@JoinColumn(name="Kit_Id", referencedColumnName="Id")},
+      inverseJoinColumns={@JoinColumn(name="Piece_Id", referencedColumnName="Id")})
     private List<LegoPiece> legoPieces;
     
     /**
