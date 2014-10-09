@@ -30,7 +30,7 @@ public class LegoSetDaoImpl implements LegoSetDao {
 
     @Override
     public void updateLegoSet(LegoSet legoSet) throws IllegalArgumentException {
-        if (!isValidLegoSet(legoSet)) throw new IllegalArgumentException();
+        if (!isValidLegoSet(legoSet) || legoSet == null) throw new IllegalArgumentException();
         entityManager.merge(legoSet);
     }
 
@@ -41,7 +41,7 @@ public class LegoSetDaoImpl implements LegoSetDao {
 
     @Override
     public void addLegoSet(LegoSet legoSet) throws IllegalArgumentException {
-        if (!isValidLegoSet(legoSet)) throw new IllegalArgumentException();
+        if (!isValidLegoSet(legoSet) || legoSet == null) throw new IllegalArgumentException();
         entityManager.persist(legoSet);
     }
 
