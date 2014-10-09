@@ -24,26 +24,31 @@ public class LegoSetDaoImpl implements LegoSetDao {
     
     @Override
     public List<LegoSet> getAllLegoSets() throws IllegalArgumentException, LegoDaoException{
-        return entityManager.createNamedQuery("SELECT s FROM LegoSet S", LegoSet.class).getResultList();
+        return entityManager.createQuery("SELECT s FROM LegoSet s", LegoSet.class).getResultList();
     }
 
     @Override
     @Transactional
     public void updateLegoSet(LegoSet legoSet) throws IllegalArgumentException {
-        if (!isValidLegoSet(legoSet) || legoSet == null) throw new IllegalArgumentException();
+        if (legoSet == null || !isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.merge(legoSet);
     }
 
     @Override
     @Transactional
-    public void deleteLegoSet(LegoSet legoSet) {
-        entityManager.remove(legoSet);
+    public void deleteLegoSet(LegoSet legoSet) throws IllegalArgumentException, LegoDaoException {
+        if (legoSet == null) throw new IllegalArgumentException();
+        if (legoSet.getId() == null) throw new LegoDaoException();
+        
+        LegoSet setToDelete = entityManager.merge(legoSet);
+        
+        entityManager.remove(setToDelete);
     }
 
     @Override
     @Transactional
     public void addLegoSet(LegoSet legoSet) throws IllegalArgumentException {
-        if (!isValidLegoSet(legoSet) || legoSet == null) throw new IllegalArgumentException();
+        if (legoSet == null || !isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.persist(legoSet);
     }
 
@@ -57,7 +62,11 @@ public class LegoSetDaoImpl implements LegoSetDao {
     
     //prepared function
     private boolean isValidLegoSet(LegoSet legoSet) {                        
-        if (legoSet.getCategories() == null || legoSet.getLegoKits() == null) return false;        
+        if (legoSet.getCategories() == null || 
+                legoSet.getLegoKits() == null || 
+                legoSet.getName() == null || 
+                legoSet.getPrice() == null ||
+                legoSet.getPrice().intValue() < 0) return false;        
         return true;
     }
 }
