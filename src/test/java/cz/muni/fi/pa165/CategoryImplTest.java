@@ -24,31 +24,23 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Michal
  */
-public class CategoryImplTest extends AbstractTest {
-//    @Autowired
-//    CategoryDaoImpl categoryDao;
-//    EntityManagerFactory emf;
-//    
-//    @PersistenceContext
-//    //@Autowired
-//    //@PersistenceUnit        
-//    EntityManager entityManager;
-    
-    
-    private EntityManagerFactory emf;
-    private EntityManager entityManager;
-    
+public class CategoryImplTest extends BaseTest {
+
     @Autowired
-    private CategoryDao categoryDao;
+    CategoryDao categoryDao;
     
+    @PersistenceContext       
+    //@Autowired
+    EntityManager entityManager;
+                      
     private String descriptionBoys = "This category contains kits suitable for boys";
     private String descriptionGirls = "This category contains kits suitable for girls";
     
-    @Before
-    public void setup() {
-        emf = Persistence.createEntityManagerFactory("InMemoryUnit");
-        entityManager = emf.createEntityManager();
-    }
+//    @Before
+//    public void setup() {
+//        emf = Persistence.createEntityManagerFactory("InMemoryUnit");
+//        entityManager = emf.createEntityManager();
+//    }
     
     @Test
     public void createCategory() {
@@ -59,14 +51,9 @@ public class CategoryImplTest extends AbstractTest {
         } catch (Exception e) {
             fail("Exception thrown" + e.getMessage());
         }
-        
-        entityManager.getTransaction().begin();               
-        entityManager.getTransaction().commit();
-        
-        entityManager.getTransaction().begin();
-        Category categoryFromDb = entityManager.find(Category.class, category1.getId());        
-        assertDeepEquals(categoryFromDb, category1);
-        entityManager.getTransaction().commit();
+                
+        Category categoryFromDb = categoryDao.findCategoryById(category1.getId());        
+        assertDeepEquals(categoryFromDb, category1);        
         
         //with null
         try {
@@ -87,9 +74,7 @@ public class CategoryImplTest extends AbstractTest {
     @Test
     public void updateCategory() {
         Category category1 = createCategory("Star Wars", descriptionBoys);
-        entityManager.getTransaction().begin();
-        entityManager.persist(category1);
-        entityManager.getTransaction().commit();
+        categoryDao.addCategory(category1);
         
         //OK
         try {
@@ -109,15 +94,14 @@ public class CategoryImplTest extends AbstractTest {
     @Test
     public void removeCategory() {
         Category category1 = createCategory("Star Trek", descriptionBoys);
-        entityManager.getTransaction().begin();
-        entityManager.persist(category1);
-        entityManager.getTransaction().commit();
+        categoryDao.addCategory(category1);
+        Category catToRemove = categoryDao.findCategoryById(category1.getId());
         
         //OK
         try {
-            categoryDao.deleteCategory(category1);
+            categoryDao.deleteCategory(catToRemove);
         } catch (Exception ex) {
-            fail ("Exception thrown");
+            fail ("Exception thrown: " + ex.getMessage());
         }
         
         //with null
@@ -128,16 +112,14 @@ public class CategoryImplTest extends AbstractTest {
         }
         
         //not in DB
-        entityManager.getTransaction().begin();
-        entityManager.persist(category1);
-        entityManager.getTransaction().commit();
+        Category category2 = createCategory("Ponnies", descriptionGirls);
+        categoryDao.addCategory(category2);
         
-        entityManager.getTransaction().begin();
-        entityManager.remove(category1);
-        entityManager.getTransaction().commit();
+        Category catToRemove2 = categoryDao.findCategoryById(category2.getId());
+        categoryDao.deleteCategory(catToRemove2);
         
         try {
-            categoryDao.deleteCategory(category1);
+            categoryDao.deleteCategory(catToRemove2);
             fail ("No exception thrown");
         } catch (Exception ex) {
         }
