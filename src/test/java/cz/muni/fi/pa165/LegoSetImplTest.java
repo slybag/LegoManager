@@ -7,6 +7,7 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.LegoSetDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -25,16 +26,22 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Petr
  */
-public class LegoSetImplTest extends AbstractTest {
+
+public class LegoSetImplTest extends BaseTest {
   
    @Autowired
-   LegoSetDaoImpl legoSetDao;
+   LegoSetDao legoSetDao;
    @PersistenceContext
    EntityManager em;
     
@@ -58,9 +65,11 @@ public class LegoSetImplTest extends AbstractTest {
             legoSetDao.addLegoSet(null);
             fail("No exception thrown");
         } catch(IllegalArgumentException ex) {
+            return;
         } catch (Exception ex) {
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
         }
+         fail();
         
     }
     
@@ -71,9 +80,12 @@ public class LegoSetImplTest extends AbstractTest {
          try{
              legoSetDao.addLegoSet(set);
          }catch(IllegalArgumentException ex) {
+             return;
          }catch(Exception ex){
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
          }
+         fail();
+
     }
     
     @Test
@@ -83,9 +95,11 @@ public class LegoSetImplTest extends AbstractTest {
         try{
             legoSetDao.addLegoSet(set);
         }catch(IllegalArgumentException ex) {
+            return;
         }catch(Exception ex){
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
-       }
+        }
+        fail();
     }
     
     @Test
@@ -95,9 +109,11 @@ public class LegoSetImplTest extends AbstractTest {
          try{
              legoSetDao.addLegoSet(set);
          }catch(IllegalArgumentException ex) {
+             return;
          }catch(Exception ex){
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
-         } 
+         }
+         fail();
     }
     
    //@Test
@@ -110,8 +126,9 @@ public class LegoSetImplTest extends AbstractTest {
     @Test
     public void testFindSetById(){
         LegoSet set = createLegoSet("Castle",new BigDecimal(100),new ArrayList<LegoKit>(),new HashSet<Category>());
-        em.persist(set);
+        legoSetDao.addLegoSet(set);
         LegoSet setFromDb = em.find(LegoSet.class, set.getId());
+        System.out.println(set.getId());
         assertDeepEquals(set,setFromDb);
     }
     
@@ -132,8 +149,10 @@ public class LegoSetImplTest extends AbstractTest {
         legoSetDao.addLegoSet(set1);
         legoSetDao.addLegoSet(set2);
 
-        assertNotNull(legoSetDao.findLegoSetById(set1.getId()));
-        assertNotNull(legoSetDao.findLegoSetById(set2.getId()));
+        set1 = legoSetDao.findLegoSetById(set1.getId());
+        set2 = legoSetDao.findLegoSetById(set2.getId());
+        assertNotNull(set1);
+        assertNotNull(set2);
 
         legoSetDao.deleteLegoSet(set1);
         assertNotNull(legoSetDao.findLegoSetById(set2.getId()));
@@ -152,9 +171,11 @@ public class LegoSetImplTest extends AbstractTest {
         try{
         legoSetDao.deleteLegoSet(null);
         }catch(IllegalArgumentException ex){
+            return;
         }catch(Exception ex){
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
         }
+        fail();
     }
     
     @Test
@@ -179,8 +200,8 @@ public class LegoSetImplTest extends AbstractTest {
         List<LegoSet> expected = Arrays.asList(set1,set2);
         List<LegoSet> actual = legoSetDao.getAllLegoSets();
         
-        Collections.sort(actual,idComparator);
-        Collections.sort(expected,idComparator);
+        //Collections.sort(actual,idComparator);
+        //Collections.sort(expected,idComparator);
         
         assertEquals(expected, actual);
         assertDeepEquals(expected, actual);     
@@ -213,13 +234,16 @@ public class LegoSetImplTest extends AbstractTest {
     
     /**
      * Comparator by id.
-     */
+     
+    
     
     private static Comparator<LegoSet> idComparator = new Comparator<LegoSet>() {
         @Override
         public int compare(LegoSet set1, LegoSet set2) {
+            
             return set1.getId().compareTo(set2.getId());
         }
     };
+    */
     
 }

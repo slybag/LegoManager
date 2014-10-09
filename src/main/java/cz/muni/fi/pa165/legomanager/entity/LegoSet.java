@@ -24,7 +24,7 @@ public class LegoSet {
     
     @Id
     @GeneratedValue
-    private Long id;
+    private long id = -1;
     
     //@ManyToMany
     @Transient
@@ -39,11 +39,11 @@ public class LegoSet {
 
     private String name;
     
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

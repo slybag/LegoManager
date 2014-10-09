@@ -8,10 +8,9 @@ package cz.muni.fi.pa165.legomanager;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -29,17 +28,20 @@ public class LegoSetDaoImpl implements LegoSetDao {
     }
 
     @Override
+    @Transactional
     public void updateLegoSet(LegoSet legoSet) throws IllegalArgumentException {
         if (!isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.merge(legoSet);
     }
 
     @Override
+    @Transactional
     public void deleteLegoSet(LegoSet legoSet) {
         entityManager.remove(legoSet);
     }
 
     @Override
+    @Transactional
     public void addLegoSet(LegoSet legoSet) throws IllegalArgumentException {
         if (!isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.persist(legoSet);

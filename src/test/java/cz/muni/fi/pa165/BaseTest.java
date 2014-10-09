@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"file:src/main/resources/testApplicationContext.xml"})
-public abstract class AbstractTest {
+@ContextConfiguration("file:src/main/resources/testApplicationContext.xml")
+public abstract class BaseTest {
     
 }
