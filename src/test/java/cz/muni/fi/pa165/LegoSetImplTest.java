@@ -7,7 +7,6 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
-import cz.muni.fi.pa165.legomanager.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.LegoSetDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -20,41 +19,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import org.junit.After;
+import javax.persistence.PersistenceContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Petr
  */
- 
-public class LegoSetImplTest  {
+public class LegoSetImplTest extends AbstractTest {
   
+   @Autowired
+   LegoSetDaoImpl legoSetDao;
+   @PersistenceContext
+   EntityManager em;
     
-    LegoSetDao legoSetDao;
-    EntityManagerFactory emf;
-    EntityManager em;
-    
-    
-    @Before
-    public void setUp(){
-        legoSetDao = new LegoSetDaoImpl();
-        emf = Persistence.createEntityManagerFactory("InMemoryUnit");
-        em = emf.createEntityManager();
-    }
-    
-    @After
-    public void clean(){
-        em.clear();
-        em.close();
-    }
+   
        
     @Test
     public void testCreate(){

@@ -10,15 +10,18 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Michal
  */
+@Repository
 public class LegoSetDaoImpl implements LegoSetDao {
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("InMemoryUnit");
-    EntityManager entityManager = emf.createEntityManager();
+    @PersistenceContext
+    EntityManager entityManager;
     
     @Override
     public List<LegoSet> getAllLegoSets() throws IllegalArgumentException, LegoDaoException{
