@@ -25,7 +25,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  *
  * @author Martin Laštovička
  */
-public class LegoPieceTest extends BaseTest {
+public class LegoPieceImplTest extends BaseTest {
 
     @Autowired
     LegoPieceDao legoPieceDao;
