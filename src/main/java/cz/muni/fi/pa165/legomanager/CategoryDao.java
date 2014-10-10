@@ -7,6 +7,8 @@
 package cz.muni.fi.pa165.legomanager;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
+import cz.muni.fi.pa165.legomanager.entity.LegoKit;
+import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 
 /**
@@ -53,5 +55,5 @@ public interface CategoryDao {
      * @throws IllegalArgumentException
      * @throws LegoDaoException 
      */
-    public Category findCategoryById (Long id) throws IllegalArgumentException,LegoDaoException;
+    public Category findCategoryById (Long id) throws IllegalArgumentException,LegoDaoException;   
 }

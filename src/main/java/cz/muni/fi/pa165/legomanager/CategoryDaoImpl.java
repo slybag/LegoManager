@@ -27,37 +27,64 @@ public class CategoryDaoImpl implements CategoryDao{
 
     @Override    
     public List<Category> getAllCategories() {
-        return entityManager.createNamedQuery("SELECT c FROM Category C", Category.class).getResultList();
+        return entityManager.createQuery("SELECT c FROM Category C", Category.class).getResultList();
     }
 
     @Override 
     @Transactional
     public void updateCategory(Category category) {
-        entityManager.merge(category);
-        entityManager.flush();
+        if (category == null){
+            throw new IllegalArgumentException("Category is null");
+        }
+        if (category.getName() == null) {
+            throw new IllegalArgumentException("Category name is null");
+        }
+        Category cat = entityManager.find(Category.class, category.getId());
+        if (cat == null) {
+            throw new LegoDaoException("Category not found in database");
+        } else {
+            entityManager.merge(category);
+            entityManager.flush();
+        }
+        
     }
 
     @Override   
     @Transactional
     public void deleteCategory(Category category) throws IllegalArgumentException {
-        if (findCategoryById(category.getId()) == null) throw new IllegalArgumentException();
-        
-        Category cat = entityManager.merge(category);
-        entityManager.remove(cat);
-        
-        entityManager.flush();
+        if (category == null){
+            throw new IllegalArgumentException("Category is null");
+        }
+        if (category.getId() == null) {
+            throw new IllegalArgumentException("Category Id is null");
+        }
+        Category cat = entityManager.find(Category.class, category.getId());
+        if (cat == null) {
+            throw new LegoDaoException("Category not found in database");
+        } else {
+            entityManager.remove(cat);
+            entityManager.flush();
+        }
     }
 
     @Override 
     @Transactional
     public void addCategory(Category category) {
+        if (category == null){
+            throw new IllegalArgumentException("Category is null");
+        }
+        if (category.getName() == null) {
+            throw new IllegalArgumentException("Category name is null");
+        }
         entityManager.persist(category);
         entityManager.flush();
     }
 
     @Override    
     public Category findCategoryById(Long id){
+        if (id == null){
+            throw new IllegalArgumentException("Id is null");
+        }
         return entityManager.find(Category.class, id);
     }
-    
 }
