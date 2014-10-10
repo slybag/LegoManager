@@ -45,10 +45,20 @@ public class LegoPiece {
         this.color = color;
     }
 
+    public List<LegoKit> getKits() {
+        return kits;
+    }
+
+    public void setKits(List<LegoKit> kits) {
+        this.kits = kits;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.color);
+        hash = 17 * hash + Objects.hashCode(this.kits);
         return hash;
     }
 
@@ -64,8 +74,13 @@ public class LegoPiece {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.color, other.color)) {
+            return false;
+        }
+        if (!Objects.equals(this.kits, other.kits)) {
+            return false;
+        }
         return true;
     }
-    
     
 }
