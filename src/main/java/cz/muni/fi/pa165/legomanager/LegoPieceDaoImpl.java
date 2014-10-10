@@ -25,7 +25,8 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
 
     @Override
     public void updateLegoPiece(LegoPiece legoPiece) throws IllegalArgumentException, LegoDaoException {
-        if (!isValidLegoPiece(legoPiece)) throw new IllegalArgumentException();
+        String error = isValidLegoPiece(legoPiece);
+        if (error.length() != 0) throw new IllegalArgumentException(error);
         try{
             entityManager.merge(legoPiece);
         }catch(IllegalArgumentException ex){
@@ -34,7 +35,7 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
     }
 
     @Override
-    public void deleteLegoPiece(LegoPiece legoPiece) {
+    public void deleteLegoPiece(LegoPiece legoPiece) throws LegoDaoException {
         try{
             entityManager.remove(legoPiece);
         }catch(IllegalArgumentException ex){
@@ -44,14 +45,15 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
 
     @Override
     public void addLegoPiece(LegoPiece legoPiece) throws IllegalArgumentException {
-        if (!isValidLegoPiece(legoPiece)) throw new IllegalArgumentException();
+        String error = isValidLegoPiece(legoPiece);
+        if (error.length() != 0) throw new IllegalArgumentException(error);
         entityManager.persist(legoPiece);
     }
 
     @Override
     public LegoPiece findLegoPieceById(Long id) throws IllegalArgumentException, LegoDaoException {
-        if(id < 0){
-            throw new IllegalArgumentException();
+        if(id == null){
+            throw new IllegalArgumentException("given LegoPiece id is null");
         }
         LegoPiece setToFind = entityManager.find(LegoPiece.class, id);
         if (setToFind == null) throw new LegoDaoException("Lego Piece with id: " + id + " is not in DB");
@@ -59,9 +61,19 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
         return setToFind;
     }
     
-    //prepared function
-    private boolean isValidLegoPiece(LegoPiece legoPiece) {                        
-        if (legoPiece == null || legoPiece.getKits() == null) return false;        
-        return true;
+    private String isValidLegoPiece(LegoPiece legoPiece) {
+        String error;
+        if(legoPiece == null){
+            error = "lego piece is null";
+        }else if(legoPiece.getId() == null){
+            error = "lego piece id is null";
+        }else if(legoPiece.getColor() == null){
+            error = "lego piece color is null";
+        }else if(legoPiece.getKits() == null){
+            error = "lego piece kits set is null";
+        }else{
+            error = "";
+        }
+        return error;
     }
 }
