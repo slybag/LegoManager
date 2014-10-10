@@ -14,8 +14,6 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
@@ -36,20 +34,13 @@ public class LegoKit implements Serializable {
     
     private String name;
     
-    @Transient
-    //@ManyToMany(mappedBy="Category")
+    @ManyToMany(mappedBy="legoKits")
     private Set<Category> categories;
     
-    @Transient
-    //@ManyToMany(mappedBy="LegoSet")
+    @ManyToMany(mappedBy="legoKits")
     private List<LegoSet> legoSets;
 
-    @Transient
-    /*@ManyToMany(mappedBy="LegoKit")
-    @JoinTable(
-      name="Kit_Piece",
-      joinColumns={@JoinColumn(name="Kit_Id", referencedColumnName="Id")},
-      inverseJoinColumns={@JoinColumn(name="Piece_Id", referencedColumnName="Id")})*/
+    @ManyToMany
     private List<LegoPiece> legoPieces;
     
     /**

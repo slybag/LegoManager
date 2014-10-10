@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -34,10 +35,10 @@ public class Category implements Serializable {
     @Column
     private String description;
     
-    @Transient
+    @ManyToMany
     private List<LegoKit> legoKits;
     
-    @Transient
+    @ManyToMany
     private List<LegoSet> legoSets;
 
     /**

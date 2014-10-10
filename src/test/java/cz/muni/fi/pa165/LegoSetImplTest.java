@@ -8,7 +8,6 @@ package cz.muni.fi.pa165;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.LegoSetDao;
-import cz.muni.fi.pa165.legomanager.LegoSetDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.math.BigDecimal;
@@ -26,12 +25,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
@@ -57,7 +51,7 @@ public class LegoSetImplTest extends BaseTest {
          fail("Exception thrown"+ex.toString());
         }       
     }
-    
+       
     @Test
     public void testCreateSetWithNullArgument(){
         
@@ -69,7 +63,7 @@ public class LegoSetImplTest extends BaseTest {
         } catch (Exception ex) {
             fail("IllegalArgumentException expected, thrown:" + ex.toString());
         }
-         fail();
+         fail("IllegalArgumentException expected, nothing thrown");
         
     }
     
@@ -125,7 +119,7 @@ public class LegoSetImplTest extends BaseTest {
     
     @Test
     public void testFindSetById(){
-        LegoSet set = createLegoSet("Castle",new BigDecimal(100),new ArrayList<LegoKit>(),new HashSet<Category>());
+        LegoSet set = createLegoSet("Castle",new BigDecimal(100.00),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
         LegoSet setFromDb = em.find(LegoSet.class, set.getId());
         System.out.println(set.getId());
@@ -200,12 +194,39 @@ public class LegoSetImplTest extends BaseTest {
         List<LegoSet> expected = Arrays.asList(set1,set2);
         List<LegoSet> actual = legoSetDao.getAllLegoSets();
         
-        //Collections.sort(actual,idComparator);
-        //Collections.sort(expected,idComparator);
+        Collections.sort(actual,idComparator);
+        Collections.sort(expected,idComparator);
         
         assertEquals(expected, actual);
         assertDeepEquals(expected, actual);     
     }
+    
+    @Test
+    public void testGetCategoriesFromSet(){
+        
+        Category category = new Category();
+        category.setName("For kids");
+        Set categories = new HashSet<Category>();
+        categories.add(category);
+        LegoSet set1 = createLegoSet("Castle",new BigDecimal(100),new ArrayList<LegoKit>(),categories);
+        em.persist(set1);
+        LegoSet setFromDb = em.find(LegoSet.class, set1.getId());
+        assertTrue(!setFromDb.getCategories().isEmpty());
+    }
+    
+     @Test
+    public void testGetKitsFromSet(){
+        
+        LegoKit kit = new LegoKit();
+        kit.setName("Star Wars");
+        List kits = new ArrayList<LegoKit>();
+        kits.add(kit);
+        LegoSet set1 = createLegoSet("Castle",new BigDecimal(100),kits,new HashSet());
+        em.persist(set1);
+        LegoSet setFromDb = em.find(LegoSet.class, set1.getId());
+        assertTrue(!setFromDb.getLegoKits().isEmpty());
+    }
+    
         
     private void assertDeepEquals(LegoSet set1, LegoSet set2){
         assertEquals(set1.getId(), set2.getId());
@@ -231,12 +252,7 @@ public class LegoSetImplTest extends BaseTest {
         set.setCategories(categories);
         return set;
     }
-    
-    /**
-     * Comparator by id.
-     
-    
-    
+      
     private static Comparator<LegoSet> idComparator = new Comparator<LegoSet>() {
         @Override
         public int compare(LegoSet set1, LegoSet set2) {
@@ -244,6 +260,4 @@ public class LegoSetImplTest extends BaseTest {
             return set1.getId().compareTo(set2.getId());
         }
     };
-    */
-    
 }

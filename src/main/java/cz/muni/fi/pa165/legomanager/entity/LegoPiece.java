@@ -1,9 +1,11 @@
 package cz.muni.fi.pa165.legomanager.entity;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +16,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Petr
+ * @author 
  */
 @Entity
 public class LegoPiece {
@@ -23,6 +25,9 @@ public class LegoPiece {
     private Long id;
         
     private String color;
+    
+    @ManyToMany(mappedBy="legoPieces")
+    private List<LegoKit> kits;
 
     public Long getId() {
         return id;
