@@ -6,10 +6,17 @@
 
 package cz.muni.fi.pa165.legomanager;
 
+import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
+import java.util.List;
+
 /**
  *
  * @author Dazle
  */
 public interface LegoPieceDao {
-    
+    public List<LegoPiece> getAllLegoPieces() throws IllegalArgumentException,LegoDaoException;
+    public void updateLegoPiece(LegoPiece legoPiece) throws IllegalArgumentException,LegoDaoException;
+    public void deleteLegoPiece (LegoPiece legoPiece) throws IllegalArgumentException,LegoDaoException;
+    public void addLegoPiece (LegoPiece legoPiece) throws IllegalArgumentException,LegoDaoException;
+    public LegoPiece findLegoPieceById (Long id) throws IllegalArgumentException,LegoDaoException;
 }
