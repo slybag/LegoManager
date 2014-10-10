@@ -5,20 +5,18 @@
  */
 package cz.muni.fi.pa165.legomanager;
 
-import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
-import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
-import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import org.springframework.stereotype.Repository;
 
 
 /**
  *
  * @author Petr
  */
+@Repository
 public class LegoKitDaoImpl implements LegoKitDao{
     
     List<LegoKit> kits;
