@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
- * @author Petr
+ * @author Petr Konecny
  */
 
 public class LegoSetImplTest extends BaseTest {
@@ -52,62 +52,34 @@ public class LegoSetImplTest extends BaseTest {
         }       
     }
        
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNullArgument(){
         
-         try{
-            legoSetDao.addLegoSet(null);
-            fail("No exception thrown");
-        } catch(IllegalArgumentException ex) {
-            return;
-        } catch (Exception ex) {
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-        }
-         fail("IllegalArgumentException expected, nothing thrown");
-        
+         legoSetDao.addLegoSet(null);
     }
     
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNullPrice(){
                 
          LegoSet set = createLegoSet("Star Wars",null,new ArrayList<LegoKit>(),new HashSet<Category>());
-         try{
-             legoSetDao.addLegoSet(set);
-         }catch(IllegalArgumentException ex) {
-             return;
-         }catch(Exception ex){
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-         }
-         fail();
-
+         legoSetDao.addLegoSet(set);
+        
     }
     
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNullName(){
 
         LegoSet set = createLegoSet(null,new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
-        try{
-            legoSetDao.addLegoSet(set);
-        }catch(IllegalArgumentException ex) {
-            return;
-        }catch(Exception ex){
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-        }
-        fail();
+        legoSetDao.addLegoSet(set);
+      
     }
     
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNegativePrice(){ 
         
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(-10),new ArrayList<LegoKit>(),new HashSet<Category>());
-         try{
-             legoSetDao.addLegoSet(set);
-         }catch(IllegalArgumentException ex) {
-             return;
-         }catch(Exception ex){
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-         }
-         fail();
+        legoSetDao.addLegoSet(set);
+       
     }
     
    //@Test
@@ -126,17 +98,12 @@ public class LegoSetImplTest extends BaseTest {
         assertDeepEquals(set,setFromDb);
     }
     
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testFindSetByIdNull(){
-        try{
         LegoSet setFromDb = legoSetDao.findLegoSetById(null);
-        }catch(IllegalArgumentException ex){
-        }catch(Exception ex){
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-        }
     }
     
-    @Test
+    @Test(expected=LegoDaoException.class)
     public void testDeleteSet(){
         LegoSet set1 = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         LegoSet set2 = createLegoSet("Cast;e",new BigDecimal(100),new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -151,36 +118,19 @@ public class LegoSetImplTest extends BaseTest {
         legoSetDao.deleteLegoSet(set1);
         assertNotNull(legoSetDao.findLegoSetById(set2.getId()));
         
-        try {
-            LegoSet removedSet = legoSetDao.findLegoSetById(set1.getId());
-        } catch (LegoDaoException ex) {
-            return;
-        }
-        fail();
-       
+        legoSetDao.findLegoSetById(set1.getId());  
     }
     
-    @Test
+    @Test(expected=IllegalArgumentException.class)
     public void testDeleteSetNull(){
-        try{
-        legoSetDao.deleteLegoSet(null);
-        }catch(IllegalArgumentException ex){
-            return;
-        }catch(Exception ex){
-            fail("IllegalArgumentException expected, thrown:" + ex.toString());
-        }
-        fail();
+        legoSetDao.deleteLegoSet(null);  
     }
     
-    @Test
+    @Test(expected=LegoDaoException.class)
     public void testDeleteNonExistingSet(){
-        try{
         LegoSet set1 = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.deleteLegoSet(set1);
-        }catch(LegoDaoException ex){
-        }catch(Exception ex){
-            fail("LegoDaoException expected, thrown:" + ex.toString());
-        }
+        
     }
     
     @Test
