@@ -41,7 +41,7 @@ public class LegoPieceImplTest extends BaseTest {
 
     @After
     public void close() {
-
+        em.close();
     }
 
     @Test
