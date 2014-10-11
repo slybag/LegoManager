@@ -37,14 +37,6 @@ public class LegoPieceImplTest extends BaseTest {
     @PersistenceContext
     EntityManager em;
 
-    @Before
-    public void setup() {
-    }
-
-    @After
-    public void close() {
-    }
-
     @Test
     public void addLegoPieceTest() {
         LegoPiece legoPiece1 = createLegoPiece("Red");
@@ -56,16 +48,18 @@ public class LegoPieceImplTest extends BaseTest {
 
         LegoPiece piece = legoPieceDao.findLegoPieceById(legoPiece1.getId());
         assertDeepEquals(piece, legoPiece1);
-
-        //with null
+    }
+    @Test
+    public void addLegoPieceTestNullPiece() {
         try {
             legoPieceDao.addLegoPiece(null);
             fail("No exception thrown");
         } catch (Exception ex) {
         }
-
+    }
+    @Test
+    public void addLegoPieceTestNullColor() {
         LegoPiece legoPieceNull = createLegoPiece(null);
-        //with null params
         try {
             legoPieceDao.addLegoPiece(legoPieceNull);
             fail("No exception thrown");
@@ -101,11 +95,7 @@ public class LegoPieceImplTest extends BaseTest {
         Long id = legoPiece1.getId();
         
         LegoPiece legoPiece = em.find(LegoPiece.class, id);
-        /*legoPiece = em.createQuery("SELECT l FROM LegoPiece l where l.id =  :var", LegoPiece.class)
-                .setParameter(":var", id)
-                .getSingleResult();
-        */
-        Assert.assertEquals("Red", legoPiece.getColor());
+        assertDeepEquals(legoPiece1, legoPiece);
     }
 
     @Test
@@ -128,9 +118,10 @@ public class LegoPieceImplTest extends BaseTest {
         } catch (Exception ex){
             fail("No exception");
         }
-        
-        
-        //with null
+    }
+    
+    @Test
+    public void updateLegoPieceTestNullPiece() {
         try {
             legoPieceDao.updateLegoPiece(null);
             fail ("No exception");
