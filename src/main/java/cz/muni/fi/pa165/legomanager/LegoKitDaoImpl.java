@@ -40,11 +40,15 @@ public class LegoKitDaoImpl implements LegoKitDao{
             throw new IllegalArgumentException("Price argument is null");
         } else if (kit.getLegoPieces() == null){
             throw new IllegalArgumentException("Lego pieces argument is null");
-        }else if (kit.getPrice().intValue() <= 0) {
+        } else if (kit.getCategories()== null){
+            throw new IllegalArgumentException("Categories argument is null");
+        } else if (kit.getLegoSets()== null){
+            throw new IllegalArgumentException("Lego sets argument is null");
+        } else if (kit.getPrice().intValue() <= 0) {
             throw new IllegalArgumentException("Price must be greater than 0");
         } else if (kit.getAgeRestriction()<= 0) {
             throw new IllegalArgumentException("Age restriciton must be greater than 0");
-        }else if(em.find(LegoKit.class, kit.getId()) == null) {
+        } else if(em.find(LegoKit.class, kit.getId()) == null) {
             throw new LegoDaoException("Kit is not in database");
         }     
         em.merge(kit);
@@ -72,11 +76,17 @@ public class LegoKitDaoImpl implements LegoKitDao{
             throw new IllegalArgumentException("Price argument is null");
         } else if (kit.getLegoPieces() == null){
             throw new IllegalArgumentException("Lego pieces argument is null");
-        } else if (kit.getPrice().intValue() <= 0) {
-            throw new IllegalArgumentException("Price must be greater than 0");
-        } else if (kit.getAgeRestriction()<= 0) {
-            throw new IllegalArgumentException("Age restriciton must be greater than 0");
-        }      
+        } else if (kit.getCategories()== null){
+            throw new IllegalArgumentException("Categories argument is null");
+        } else if (kit.getLegoSets()== null){
+            throw new IllegalArgumentException("Lego sets argument is null");
+        } else if (kit.getPrice().intValue() < 0){
+            throw new IllegalArgumentException("Price can't be negative number");
+        } else if (kit.getAgeRestriction()< 0) {
+            throw new IllegalArgumentException("Age restriciton can't be negative nuber");
+        } else if (em.find(LegoKit.class,kit.getId()) != null){
+            throw new LegoDaoException("Kit already in database");
+        }
         em.persist(kit);
     }
 

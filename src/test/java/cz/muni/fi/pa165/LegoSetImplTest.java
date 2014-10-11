@@ -40,21 +40,22 @@ public class LegoSetImplTest extends BaseTest {
    EntityManager em;
     
    
+   //CREATE tests
        
     @Test
     public void testCreate(){
         
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
-        try{
-            legoSetDao.addLegoSet(set);
-        }catch(Exception ex){
-         fail("Exception thrown"+ex.toString());
-        }       
+        legoSetDao.addLegoSet(set);
+        LegoSet setFromDb = em.find(LegoSet.class, set.getId());
+        assertNotNull (setFromDb);
+        assertDeepEquals (setFromDb,set);
+            
     }
        
     @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNullArgument(){
-        
+      
          legoSetDao.addLegoSet(null);
     }
     
@@ -75,6 +76,22 @@ public class LegoSetImplTest extends BaseTest {
     }
     
     @Test(expected=IllegalArgumentException.class)
+    public void testCreateSetWithNullCategories(){
+
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),null);
+        legoSetDao.addLegoSet(set);
+      
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testCreateSetWithNullKits(){
+
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),null,new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+      
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
     public void testCreateSetWithNegativePrice(){ 
         
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(-10),new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -82,19 +99,77 @@ public class LegoSetImplTest extends BaseTest {
        
     }
     
-   //@Test
+    @Test(expected=LegoDaoException.class)
+    public void testCreateWithSameId(){ 
+    
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        legoSetDao.addLegoSet(em.find(LegoSet.class,set.getId()));    
+    }
+    
+    // UPDATE tests 
+    
+   @Test
     public void testUpdateSet(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
-
+        set.setName("Indiana Jones");
+        legoSetDao.updateLegoSet(set);
+        LegoSet setFromDatabase = em.find(LegoSet.class,set.getId());
+        assertTrue(setFromDatabase.getName().equals(set.getName()));
     }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testUpdateSetWithNull(){
+        legoSetDao.updateLegoSet(null);
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testUpdateSetWithNullName(){
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        set.setName(null);
+        legoSetDao.updateLegoSet(set);   
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testUpdateSetWithNullPrice(){
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        set.setPrice(null);
+        legoSetDao.updateLegoSet(set);   
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testUpdateSetWithNullKits(){
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        set.setLegoKits(null);
+        legoSetDao.updateLegoSet(set);   
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testUpdateSetWithNulCategories(){
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        set.setCategories(null);
+        legoSetDao.updateLegoSet(set);   
+    }
+    
+    public void testUpdateSetWithNegativePrice(){
+        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
+        legoSetDao.addLegoSet(set);
+        set.setPrice(new BigDecimal(10));
+        legoSetDao.updateLegoSet(set);   
+    }
+    
+    //FIND BY ID Test
     
     @Test
     public void testFindSetById(){
         LegoSet set = createLegoSet("Castle",new BigDecimal(100.00),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
         LegoSet setFromDb = em.find(LegoSet.class, set.getId());
-        System.out.println(set.getId());
         assertDeepEquals(set,setFromDb);
     }
     
@@ -156,7 +231,7 @@ public class LegoSetImplTest extends BaseTest {
         
         Category category = new Category();
         category.setName("For kids");
-        Set categories = new HashSet<Category>();
+        Set categories = new HashSet<>();
         categories.add(category);
         LegoSet set1 = createLegoSet("Castle",new BigDecimal(100),new ArrayList<LegoKit>(),categories);
         em.persist(set1);
