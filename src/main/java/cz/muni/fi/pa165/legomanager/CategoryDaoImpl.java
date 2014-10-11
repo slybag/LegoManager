@@ -25,9 +25,9 @@ public class CategoryDaoImpl implements CategoryDao{
     @PersistenceContext
     EntityManager entityManager;
 
-    @Override    
+    @Override   
     public List<Category> getAllCategories() {
-        return entityManager.createQuery("SELECT c FROM Category C", Category.class).getResultList();
+        return entityManager.createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 
     @Override 
@@ -85,6 +85,10 @@ public class CategoryDaoImpl implements CategoryDao{
         if (id == null){
             throw new IllegalArgumentException("Id is null");
         }
-        return entityManager.find(Category.class, id);
+        
+        Category categoryToFind = entityManager.find(Category.class, id);
+        if (categoryToFind == null) throw new IllegalArgumentException();
+        
+        return categoryToFind;
     }
 }

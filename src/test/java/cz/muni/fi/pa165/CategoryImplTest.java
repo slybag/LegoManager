@@ -8,6 +8,8 @@ package cz.muni.fi.pa165;
 import cz.muni.fi.pa165.legomanager.CategoryDao;
 import cz.muni.fi.pa165.legomanager.CategoryDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.Category;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -29,19 +31,12 @@ public class CategoryImplTest extends BaseTest {
     @Autowired
     CategoryDao categoryDao;
     
-    @PersistenceContext       
-    //@Autowired
+    @PersistenceContext           
     EntityManager entityManager;
                       
     private String descriptionBoys = "This category contains kits suitable for boys";
     private String descriptionGirls = "This category contains kits suitable for girls";
-    
-//    @Before
-//    public void setup() {
-//        emf = Persistence.createEntityManagerFactory("InMemoryUnit");
-//        entityManager = emf.createEntityManager();
-//    }
-    
+       
     @Test
     public void createCategory() {
         //everything right
@@ -124,6 +119,60 @@ public class CategoryImplTest extends BaseTest {
         } catch (Exception ex) {
         }
     }
+    
+    @Test
+    public void getCategory() {
+        Category category1 = createCategory("Houses", descriptionGirls);
+        categoryDao.addCategory(category1);
+        
+        //OK
+        try {
+            categoryDao.findCategoryById(category1.getId());
+        } catch (Exception ex) {
+            fail ("Exception thrown");
+        }
+        
+        Category category2 = categoryDao.findCategoryById(category1.getId());
+        assertDeepEquals(category1, category2);
+        
+        //with null
+        try {
+            categoryDao.findCategoryById(null);
+            fail ("No exception thrown");
+        } catch (Exception ex) {
+        }
+        
+        //Not in DB
+        Category category3 = createCategory("Star ships", descriptionBoys);
+        categoryDao.addCategory(category3);
+        categoryDao.deleteCategory(category3);
+        
+        try {            
+            categoryDao.findCategoryById(category3.getId());
+            fail ("No exception thrown");
+        } catch (Exception ex) {
+        }        
+    }
+    
+    @Test 
+    public void getAllCategories() {
+        Category category1 = createCategory("Star Wars", descriptionBoys);
+        Category category2 = createCategory("Star Trek", descriptionBoys);
+        Category category3 = createCategory("Firefly", descriptionBoys);
+        
+        categoryDao.addCategory(category1);
+        categoryDao.addCategory(category3);
+        categoryDao.addCategory(category2);
+        
+        //OK
+        List<Category> categoryList1;
+        try {
+            categoryList1 = categoryDao.getAllCategories();
+        } catch (Exception ex) {
+            fail ("Exception thrown");
+        }                
+    }
+    
                 
     public static Category createCategory(String name, String description) {
         Category category = new Category();

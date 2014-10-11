@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Michal
+ * @author Michal 
  */
 @Repository
 public class LegoSetDaoImpl implements LegoSetDao {
