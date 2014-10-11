@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
@@ -16,7 +17,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -27,24 +30,29 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Tomas
  */
-public class LegoKitTest {
+public class LegoKitTest extends BaseTest{
     
     @Autowired
     LegoKitDao legoKitDao;
 
+    @PersistenceUnit
+    EntityManagerFactory emf;
+    
     @PersistenceContext
     EntityManager em;
-
+    
     @Test
     public void addLegoKitTest() {
-        int sizeBefore = em.createQuery("SELECT * FROM LegoKit l", LegoKit.class).getResultList().size();
+        List<LegoKit> legoKitsBefore = em.createQuery("SELECT l FROM LegoKit l", LegoKit.class).getResultList();
+        int sizeBefore = legoKitsBefore.size();
         LegoKit legoKit1 = createLegoKit("Star Wars Death Star", BigDecimal.valueOf(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         try {
             legoKitDao.addLegoKit(legoKit1);
         } catch (Exception e) {
-            fail("Exception thrown " + e.getMessage());
+            fail("Exception thrown adding lego kit: " + e.getMessage());
         }
-        int sizeAfter = em.createQuery("SELECT * FROM LegoKit l", LegoKit.class).getResultList().size();
+        List<LegoKit> legoKitsAfter = em.createQuery("SELECT l FROM LegoKit l", LegoKit.class).getResultList();
+        int sizeAfter = legoKitsAfter.size();
         assertEquals(sizeBefore + 1, sizeAfter);
     }
     
@@ -221,7 +229,7 @@ public class LegoKitTest {
         LegoKit stored = legoKitDao.findLegoKitById(legoKit1.getId());
         
         
-        List<LegoKit> legoKits = em.createQuery("SELECT * FROM LegoKit l", LegoKit.class).getResultList();
+        List<LegoKit> legoKits = em.createQuery("SELECT l FROM LegoKit l", LegoKit.class).getResultList();
         int sizeBefore = legoKits.size();
         //OK
         try {
@@ -229,7 +237,7 @@ public class LegoKitTest {
         } catch (Exception ex) {
             fail ("Exception thrown: " + ex.getMessage());
         }
-        legoKits = em.createQuery("SELECT * FROM LegoKit l", LegoKit.class).getResultList();
+        legoKits = em.createQuery("SELECT l FROM LegoKit l", LegoKit.class).getResultList();
         int sizeAfter = legoKits.size();
         
         assertEquals(sizeBefore - 1, sizeAfter);
@@ -240,7 +248,7 @@ public class LegoKitTest {
         legoKitDao.deleteLegoKit(null);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = LegoDaoException.class)
     public void deleteLegoKitNotExistTest(){
         LegoKit legoKit2 = createLegoKit("StarWars Death Star", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit2);
