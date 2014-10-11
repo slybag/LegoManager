@@ -62,8 +62,6 @@ public class LegoKitDaoImpl implements LegoKitDao{
     public void addLegoKit(LegoKit kit) {
         if (!isValidLegoKit(kit)) {
             throw new IllegalArgumentException("Not a valid lego kit");
-        } else if (kit.getId() != null){
-            throw new LegoDaoException("Kit id is already set, has to be generated");
         }
         em.persist(kit);
     }

@@ -99,6 +99,7 @@ public class LegoSetImplTest extends BaseTest {
        
     }
     
+    /*
     @Test(expected=LegoDaoException.class)
     public void testCreateWithSameId(){ 
     
@@ -106,7 +107,7 @@ public class LegoSetImplTest extends BaseTest {
         legoSetDao.addLegoSet(set);
         legoSetDao.addLegoSet(em.find(LegoSet.class,set.getId()));    
     }
-    
+    */
     // UPDATE tests 
     
    @Test

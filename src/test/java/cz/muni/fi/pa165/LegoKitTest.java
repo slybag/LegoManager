@@ -74,8 +74,8 @@ public class LegoKitTest extends BaseTest{
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void addLegoAgeRestrictionNullTest(){
-        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, null, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
+    public void addLegoNegativeRestricitonAgeTest(){
+        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, -10, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
@@ -93,7 +93,7 @@ public class LegoKitTest extends BaseTest{
     
     @Test(expected = IllegalArgumentException.class)
     public void addLegoSetsNullTest(){
-        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, null, new HashSet<Category>(), new ArrayList<LegoPiece>(), null);
+        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, 0, new HashSet<Category>(), new ArrayList<LegoPiece>(), null);
         legoKitDao.addLegoKit(legoKit);
     }
 
@@ -258,7 +258,7 @@ public class LegoKitTest extends BaseTest{
         legoKitDao.deleteLegoKit(stored2);
     }
     
-    private LegoKit createLegoKit(String name, BigDecimal price, Integer ageRestriction, Set<Category> categories, List<LegoPiece> legoPieces, List<LegoSet> legoSets){
+    private LegoKit createLegoKit(String name, BigDecimal price, int ageRestriction, Set<Category> categories, List<LegoPiece> legoPieces, List<LegoSet> legoSets){
         LegoKit kit = new LegoKit();
         kit.setName(name);
         kit.setPrice(price);
