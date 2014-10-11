@@ -3,10 +3,12 @@ package cz.muni.fi.pa165.legomanager.entity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,11 +22,13 @@ import javax.persistence.ManyToMany;
  * @author 
  */
 @Entity
+@Table(name="LegoSet")
 public class LegoPiece implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
         
+    @Column
     private String color;
     
     @ManyToMany(mappedBy="legoPieces")

@@ -15,6 +15,7 @@ import javax.persistence.PersistenceUnit;
 import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
@@ -89,11 +90,12 @@ public class LegoPieceImplTest extends BaseTest {
         legoPieceDao.addLegoPiece(legoPiece1);
         Long id = legoPiece1.getId();
         
-        LegoPiece legoPiece = em.createQuery("SELECT l FROM LegoPiece l where id =  ?", LegoPiece.class)
-                .setParameter(1, id)
+        LegoPiece legoPiece = em.find(LegoPiece.class, id);
+        /*legoPiece = em.createQuery("SELECT l FROM LegoPiece l where l.id =  :var", LegoPiece.class)
+                .setParameter(":var", id)
                 .getSingleResult();
-
-        Assert.assertEquals(legoPiece.getColor(), "Red");
+        */
+        Assert.assertEquals("Red", legoPiece.getColor());
     }
 
     @Test
@@ -132,19 +134,20 @@ public class LegoPieceImplTest extends BaseTest {
         legoPieceDao.addLegoPiece(legoPiece1);
         LegoPiece stored = legoPieceDao.findLegoPieceById(legoPiece1.getId());
         
-        
-        List<LegoPiece> legoPieces = em.createQuery("SELECT l FROM LegoPiece l", LegoPiece.class).getResultList();
-        int sizeBefore = legoPieces.size();
         //OK
         try {
             legoPieceDao.deleteLegoPiece(stored);
         } catch (Exception ex) {
             fail ("Exception thrown: " + ex.getMessage());
         }
-        legoPieces = em.createQuery("SELECT l FROM LegoPiece l", LegoPiece.class).getResultList();
-        int sizeAfter = legoPieces.size();
         
-        assertEquals(sizeBefore - 1, sizeAfter);
+        // check if its still there
+        try {            
+            legoPieceDao.findLegoPieceById(stored.getId());
+            fail ("No Exception thrown: ");
+        } catch (Exception ex){
+            
+        }
         
         //with null
         try {

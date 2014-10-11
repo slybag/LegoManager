@@ -68,7 +68,8 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
         if(legoPiece == null){
             error = "lego piece is null";
         }else if(legoPiece.getId() == null){
-            error = "lego piece id is null";
+            //error = "lego piece id is null";
+            error = "";
         }else if(legoPiece.getColor() == null){
             error = "lego piece color is null";
         }else if(legoPiece.getKits() == null){
