@@ -3,12 +3,12 @@ package cz.muni.fi.pa165.legomanager.entity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,17 +22,20 @@ import javax.persistence.Table;
  * @author 
  */
 @Entity
-@Table(name="LegoSet")
 public class LegoPiece implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-        
-    @Column
-    private String color;
     
-    @ManyToMany(mappedBy="legoPieces")
-    private List<LegoKit> kits;
+    @Enumerated(EnumType.STRING)
+    private PetColor color;
+	
+    public enum PetColor{
+	BLACK,WHITE,RED,BLUE,YELLOW,PURPLE,GREEN,VIOLET,GREY
+    }
+    
+    @ManyToMany
+    private List<LegoKit> legoKits;
 
     public Long getId() {
         return id;
@@ -42,28 +45,28 @@ public class LegoPiece implements Serializable {
         this.id = id;
     }
 
-    public String getColor() {
+    public PetColor getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(PetColor color) {
         this.color = color;
     }
 
-    public List<LegoKit> getKits() {
-        return kits;
+    public List<LegoKit> getLegoKits() {
+        return legoKits;
     }
 
-    public void setKits(List<LegoKit> kits) {
-        this.kits = kits;
+    public void setLegoKits(List<LegoKit> legoKits) {
+        this.legoKits = legoKits;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.color);
-        hash = 17 * hash + Objects.hashCode(this.kits);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.color);
+        hash = 37 * hash + Objects.hashCode(this.legoKits);
         return hash;
     }
 
@@ -79,13 +82,12 @@ public class LegoPiece implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.color, other.color)) {
+        if (this.color != other.color) {
             return false;
         }
-        if (!Objects.equals(this.kits, other.kits)) {
+        if (!Objects.equals(this.legoKits, other.legoKits)) {
             return false;
         }
         return true;
     }
-    
 }

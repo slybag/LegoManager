@@ -7,10 +7,13 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.legomanager.CategoryDao;
 import cz.muni.fi.pa165.legomanager.LegoPieceDao;
+import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import org.junit.After;
 import org.junit.Assert;
@@ -31,18 +34,15 @@ public class LegoPieceImplTest extends BaseTest {
     @Autowired
     LegoPieceDao legoPieceDao;
 
-    @PersistenceUnit
-    public EntityManagerFactory emf;
+    @PersistenceContext
     EntityManager em;
 
     @Before
     public void setup() {
-        em = emf.createEntityManager();
     }
 
     @After
     public void close() {
-        em.close();
     }
 
     @Test
@@ -77,11 +77,21 @@ public class LegoPieceImplTest extends BaseTest {
     public void getAllLegoPiecesTest() {
         List<LegoPiece> legoPieces = em.createQuery("SELECT l FROM LegoPiece l", LegoPiece.class).getResultList();
         int sizeBefore = legoPieces.size();
-        legoPieceDao.addLegoPiece(createLegoPiece("Red"));
-        legoPieceDao.addLegoPiece(createLegoPiece("Green"));
-        legoPieceDao.addLegoPiece(createLegoPiece("Blue"));       
+
+        LegoPiece piece1 = createLegoPiece("Red");
+        LegoPiece piece2 = createLegoPiece("Green");
+        LegoPiece piece3 = createLegoPiece("Blue");
+        legoPieceDao.addLegoPiece(piece1);
+        legoPieceDao.addLegoPiece(piece2);
+        legoPieceDao.addLegoPiece(piece3);       
+
+        legoPieces = em.createQuery("SELECT l FROM LegoPiece l", LegoPiece.class).getResultList();
+        int sizeAfter = legoPieces.size();
+        Assert.assertEquals(sizeBefore + 3, sizeAfter);
         
-        Assert.assertEquals(legoPieces.size(), sizeBefore + 3);
+        assertDeepEquals(legoPieces.get(sizeAfter-3), piece1);
+        assertDeepEquals(legoPieces.get(sizeAfter-2), piece2);
+        assertDeepEquals(legoPieces.get(sizeAfter-1), piece3);
     }
 
     @Test
@@ -177,6 +187,7 @@ public class LegoPieceImplTest extends BaseTest {
     private LegoPiece createLegoPiece(String color) {
         LegoPiece newPiece = new LegoPiece();
         newPiece.setColor(color);
+        newPiece.setKits(new ArrayList<LegoKit>());
         
         return newPiece;
     }
