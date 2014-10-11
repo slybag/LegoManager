@@ -6,16 +6,19 @@
 package cz.muni.fi.pa165.legomanager;
 
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
  *
- * @author Petr
+ * @author Petr Konecny
  */
+
 @Repository
 public class LegoKitDaoImpl implements LegoKitDao{
     
@@ -31,23 +34,10 @@ public class LegoKitDaoImpl implements LegoKitDao{
     }
     
     @Override
+    @Transactional
     public void updateLegoKit(LegoKit kit) {
-        if (kit == null) {
-            throw new IllegalArgumentException("Kit argument is null");
-        } else if (kit.getName() == null) {
-            throw new IllegalArgumentException("Kit name wasn't set");
-        } else if (kit.getPrice() == null) {
-            throw new IllegalArgumentException("Price argument is null");
-        } else if (kit.getLegoPieces() == null){
-            throw new IllegalArgumentException("Lego pieces argument is null");
-        } else if (kit.getCategories()== null){
-            throw new IllegalArgumentException("Categories argument is null");
-        } else if (kit.getLegoSets()== null){
-            throw new IllegalArgumentException("Lego sets argument is null");
-        } else if (kit.getPrice().intValue() <= 0) {
-            throw new IllegalArgumentException("Price must be greater than 0");
-        } else if (kit.getAgeRestriction()<= 0) {
-            throw new IllegalArgumentException("Age restriciton must be greater than 0");
+        if (!isValidLegoKit(kit)) {
+            throw new IllegalArgumentException("Not a valid lego kit");
         } else if(em.find(LegoKit.class, kit.getId()) == null) {
             throw new LegoDaoException("Kit is not in database");
         }     
@@ -55,6 +45,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
     }
 
     @Override
+    @Transactional
     public void deleteLegoKit(LegoKit kit) {
         if (kit == null) {
             throw new IllegalArgumentException("Kit argument is null");
@@ -67,25 +58,12 @@ public class LegoKitDaoImpl implements LegoKitDao{
    }
 
     @Override
+    @Transactional
     public void addLegoKit(LegoKit kit) {
-        if (kit == null) {
-            throw new IllegalArgumentException("Kit argument is null");
-        } else if (kit.getName() == null) {
-            throw new IllegalArgumentException("Kit name wasn't set");
-        } else if (kit.getPrice() == null) {
-            throw new IllegalArgumentException("Price argument is null");
-        } else if (kit.getLegoPieces() == null){
-            throw new IllegalArgumentException("Lego pieces argument is null");
-        } else if (kit.getCategories()== null){
-            throw new IllegalArgumentException("Categories argument is null");
-        } else if (kit.getLegoSets()== null){
-            throw new IllegalArgumentException("Lego sets argument is null");
-        } else if (kit.getPrice().intValue() < 0){
-            throw new IllegalArgumentException("Price can't be negative number");
-        } else if (kit.getAgeRestriction()< 0) {
-            throw new IllegalArgumentException("Age restriciton can't be negative nuber");
-        } else if (em.find(LegoKit.class,kit.getId()) != null){
-            throw new LegoDaoException("Kit already in database");
+        if (!isValidLegoKit(kit)) {
+            throw new IllegalArgumentException("Not a valid lego kit");
+        } else if (kit.getId() != null){
+            throw new LegoDaoException("Kit id is already set, has to be generated");
         }
         em.persist(kit);
     }
@@ -94,7 +72,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
     public LegoKit findLegoKitById(Long id) {
         
         if(id == null) {
-            throw new IllegalArgumentException("Id is null.");
+            throw new IllegalArgumentException("Id parameter is null.");
         }
         LegoKit kitToReturn = em.find(LegoKit.class, id);       
         if(kitToReturn == null){
@@ -102,4 +80,16 @@ public class LegoKitDaoImpl implements LegoKitDao{
         }       
         return em.find(LegoKit.class, id);
     }   
+    
+     private boolean isValidLegoKit(LegoKit legoKit) { 
+        if (legoKit == null ||
+                legoKit.getCategories() == null || 
+                legoKit.getLegoPieces() == null ||
+                legoKit.getLegoSets()== null ||
+                legoKit.getName() == null || 
+                legoKit.getPrice() == null ||
+                legoKit.getAgeRestriction() < 0 ||
+                legoKit.getPrice().compareTo(BigDecimal.ZERO) == -1 ) return false;        
+        return true;
+    }
 }
