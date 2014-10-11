@@ -30,7 +30,7 @@ public class LegoKit implements Serializable {
     
     private BigDecimal price;
     
-    private int ageRestriction;
+    private Integer ageRestriction;
     
     private String name;
     
@@ -74,14 +74,14 @@ public class LegoKit implements Serializable {
     /**
      * @return the ageRestriction
      */
-    public int getAgeRestriction() {
+    public Integer getAgeRestriction() {
         return ageRestriction;
     }
 
     /**
      * @param ageRestriction the ageRestriction to set
      */
-    public void setAgeRestriction(int ageRestriction) {
+    public void setAgeRestriction(Integer ageRestriction) {
         this.ageRestriction = ageRestriction;
     }
 

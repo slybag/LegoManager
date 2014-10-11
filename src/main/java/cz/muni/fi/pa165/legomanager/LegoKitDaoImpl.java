@@ -86,6 +86,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
                 legoKit.getLegoSets()== null ||
                 legoKit.getName() == null || 
                 legoKit.getPrice() == null ||
+                legoKit.getAgeRestriction() == null ||
                 legoKit.getAgeRestriction() < 0 ||
                 legoKit.getPrice().compareTo(BigDecimal.ZERO) == -1 ) return false;        
         return true;

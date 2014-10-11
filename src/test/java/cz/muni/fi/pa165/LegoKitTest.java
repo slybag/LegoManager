@@ -74,8 +74,8 @@ public class LegoKitTest extends BaseTest{
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void addLegoNegativeRestricitonAgeTest(){
-        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, -10, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
+    public void addLegoRestrictionTestNull(){
+        LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, null , new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
@@ -168,7 +168,7 @@ public class LegoKitTest extends BaseTest{
         try{
             legoKitDao.updateLegoKit(legoKit1);
             LegoKit updated = legoKitDao.findLegoKitById(legoKit1.getId());
-            assertEquals(updated.getAgeRestriction(), 42);
+            assertEquals(updated.getAgeRestriction(), new Integer(42));
         } catch (Exception ex){
             fail("Updating age restriction throws exception " + ex);
         }
@@ -258,7 +258,7 @@ public class LegoKitTest extends BaseTest{
         legoKitDao.deleteLegoKit(stored2);
     }
     
-    private LegoKit createLegoKit(String name, BigDecimal price, int ageRestriction, Set<Category> categories, List<LegoPiece> legoPieces, List<LegoSet> legoSets){
+    private LegoKit createLegoKit(String name, BigDecimal price, Integer ageRestriction, Set<Category> categories, List<LegoPiece> legoPieces, List<LegoSet> legoSets){
         LegoKit kit = new LegoKit();
         kit.setName(name);
         kit.setPrice(price);
