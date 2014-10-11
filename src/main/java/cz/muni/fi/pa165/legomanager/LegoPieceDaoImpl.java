@@ -9,11 +9,13 @@ import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Tomas
  */
+@Repository
 public class LegoPieceDaoImpl implements LegoPieceDao {
     @PersistenceContext
     EntityManager entityManager;

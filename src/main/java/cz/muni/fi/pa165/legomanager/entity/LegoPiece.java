@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.legomanager.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.persistence.ManyToMany;
  * @author 
  */
 @Entity
-public class LegoPiece {
+public class LegoPiece implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
