@@ -38,6 +38,10 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
 
     @Override
     public void deleteLegoPiece(LegoPiece legoPiece) throws LegoDaoException {
+        LegoPiece setToFind = entityManager.find(LegoPiece.class, legoPiece.getId());
+        if(setToFind == null) {
+            throw new LegoDaoException("Kit is not in database");
+        }
         try{
             entityManager.remove(legoPiece);
         }catch(IllegalArgumentException ex){
