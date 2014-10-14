@@ -63,10 +63,8 @@ public class LegoPiece implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.color);
-        hash = 37 * hash + Objects.hashCode(this.legoKits);
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -80,12 +78,6 @@ public class LegoPiece implements Serializable {
         }
         final LegoPiece other = (LegoPiece) obj;
         if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (this.color != other.color) {
-            return false;
-        }
-        if (!Objects.equals(this.legoKits, other.legoKits)) {
             return false;
         }
         return true;
