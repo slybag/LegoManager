@@ -34,7 +34,6 @@ public class LegoKitDaoImpl implements LegoKitDao{
     }
     
     @Override
-    @Transactional
     public void updateLegoKit(LegoKit kit) {
         if (!isValidLegoKit(kit)) {
             throw new IllegalArgumentException("Not a valid lego kit");
@@ -45,7 +44,6 @@ public class LegoKitDaoImpl implements LegoKitDao{
     }
 
     @Override
-    @Transactional
     public void deleteLegoKit(LegoKit kit) {
         if (kit == null) {
             throw new IllegalArgumentException("Kit argument is null");
@@ -58,7 +56,6 @@ public class LegoKitDaoImpl implements LegoKitDao{
    }
 
     @Override
-    @Transactional
     public void addLegoKit(LegoKit kit) {
         if (!isValidLegoKit(kit)) {
             throw new IllegalArgumentException("Not a valid lego kit");
