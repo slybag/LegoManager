@@ -7,8 +7,8 @@ package cz.muni.fi.pa165.legomanager.transferobjects;
 
 /**
  *
- * @author Tomas
+ * @author Michal Rais
  */
 public class LegoSetTO {
-    
+       
 }
