@@ -19,6 +19,7 @@ public class EntityDTOTransformer {
             return null;
         }else{
             LegoPieceTO piece = new LegoPieceTO();
+            piece.setId(legoPiece.getId());
             piece.setColor(legoPiece.getColor());
             piece.setLegoKits(legoKitListConvert(legoPiece.getLegoKits()));
             return piece;
@@ -29,7 +30,8 @@ public class EntityDTOTransformer {
         if(legoPiece == null){
             return null;
         }else{
-            LegoPiece piece = new LegoPiece();
+            LegoPiece piece = new LegoPiece();            
+            piece.setId(legoPiece.getId());
             piece.setColor(legoPiece.getColor());
             piece.setLegoKits(legoKitListTOConvert(legoPiece.getLegoKits()));
             return piece;
