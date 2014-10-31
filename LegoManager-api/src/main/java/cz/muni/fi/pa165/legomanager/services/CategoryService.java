@@ -19,7 +19,7 @@ public interface CategoryService {
      * Finds all categories
      * @return list of all categories
      */
-    public List<LegoKitTO> getAllCategories() ;
+    public List<CategoryTO> getAllCategories() ;
     
     /**
      * Update category
