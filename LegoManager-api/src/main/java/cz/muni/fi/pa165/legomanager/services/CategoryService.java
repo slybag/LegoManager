@@ -6,7 +6,6 @@
 package cz.muni.fi.pa165.legomanager.services;
 
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
-import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import java.util.List;
 
 /**
@@ -45,5 +44,5 @@ public interface CategoryService {
      * @param id of wanted category
      * @return category with specified id
      */
-    public LegoKitTO getCategory (Long id);
+    public CategoryTO getCategory (Long id);
 }
