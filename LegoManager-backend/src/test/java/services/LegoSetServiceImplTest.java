@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package services;
 
-import cz.muni.fi.pa165.legomanager.LegoKitDao;
+import cz.muni.fi.pa165.BaseTest;
+import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.LegoSetDao;
-import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import cz.muni.fi.pa165.legomanager.services.LegoSetService;
-import cz.muni.fi.pa165.legomanager.services.impl.LegoKitServiceImpl;
-import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import static org.mockito.Matchers.anyObject;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
@@ -29,11 +28,10 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataRetrievalFailureException;
 
 /**
  *
- * @author Petr
+ * @author Petr Konecny
  * 
  */
 public class LegoSetServiceImplTest extends BaseTest {
@@ -48,36 +46,56 @@ public class LegoSetServiceImplTest extends BaseTest {
     @Autowired 
     DozerBeanMapper mapper;
     
+    LegoSet set;
+    LegoSetTO setTO;
+    
     @Before
     public void setUpMock(){
         MockitoAnnotations.initMocks(this);
+        set = map(getValidSet());
+        setTO = getValidSet();
     }
           
     @Test
     public void testCreate(){
-        LegoSetTO expected = getValidSet();
-        setService.createLegoSet(expected);
-        verify(legoSetDao).addLegoSet(map(expected));       
+        setService.createLegoSet(setTO);
+        verify(legoSetDao).addLegoSet(set);       
     }
     
     @Test(expected=DataAccessException.class)
     public void testCreateWithException(){
-        doThrow(Exception.class).when(legoSetDao).addLegoSet(null);
-        setService.createLegoSet(null);
+        doThrow(LegoDaoException.class).when(legoSetDao).addLegoSet(set);
+        setService.createLegoSet(setTO);
+        doThrow(IllegalArgumentException.class).when(legoSetDao).addLegoSet(set);
+        setService.createLegoSet(setTO);
     }
     
     @Test
     public void testUpdate(){
-        LegoSetTO expected = getValidSet();
-        setService.updateLegoSet(expected);
-        verify(legoSetDao).updateLegoSet(map(expected));
+        setService.updateLegoSet(setTO);
+        verify(legoSetDao).updateLegoSet(set);
+    }
+    
+    @Test(expected=DataAccessException.class)
+    public void testupdateWithException(){
+        doThrow(LegoDaoException.class).when(legoSetDao).updateLegoSet(set);
+        setService.updateLegoSet(setTO);
+        doThrow(IllegalArgumentException.class).when(legoSetDao).updateLegoSet(set);
+        setService.updateLegoSet(setTO);
     }
     
     @Test
     public void testRemove(){
-        LegoSetTO set = getValidSet();
-        setService.removeLegoSet(set);
-        verify(legoSetDao).deleteLegoSet(map(set));
+        setService.removeLegoSet(setTO);
+        verify(legoSetDao).deleteLegoSet(set);
+    }
+    
+    @Test(expected=DataAccessException.class)
+    public void testRemoveWithException(){
+        doThrow(LegoDaoException.class).when(legoSetDao).deleteLegoSet(set);
+        setService.removeLegoSet(setTO);
+        doThrow(IllegalArgumentException.class).when(legoSetDao).deleteLegoSet(set);
+        setService.removeLegoSet(setTO);
     }
     
     @Test
@@ -87,15 +105,34 @@ public class LegoSetServiceImplTest extends BaseTest {
         LegoSetTO actual = setService.getLegoSet(-1L);
         assertDeepEquals(expected,actual);
     }
+    
+    @Test(expected=DataAccessException.class)
+    public void getWithException(){
+        doThrow(LegoDaoException.class).when(legoSetDao).findLegoSetById(-1L);
+        setService.getLegoSet(-1L);
+        doThrow(IllegalArgumentException.class).when(legoSetDao).findLegoSetById(-1L);
+        setService.getLegoSet(-1L);
+    }
        
+    @Test
     public void testGetAll(){
         
-        List expected = new ArrayList();
-        expected.add(getValidSet());
-        expected.add(getValidSet());
+        List expected  = new ArrayList<>();
+        expected.add(setTO);
+        expected.add(setTO);
         when(legoSetDao.getAllLegoSets()).thenReturn(map(expected));
-
+        List actual = setService.getAllLegoSets();
+        assertDeepEquals(expected,actual);
     }
+    
+    @Test(expected=DataAccessException.class)
+    public void getAllWithException(){
+        doThrow(LegoDaoException.class).when(legoSetDao).getAllLegoSets();
+        setService.getAllLegoSets();
+        doThrow(IllegalArgumentException.class).when(legoSetDao).getAllLegoSets();
+        setService.getAllLegoSets();
+    }
+    
            
     public static LegoSetTO getValidSet(){
         
@@ -120,12 +157,20 @@ public class LegoSetServiceImplTest extends BaseTest {
         return list;
     }
     
-       private void assertDeepEquals(LegoSetTO set1, LegoSetTO set2){
-        assertEquals(set1.getId(), set2.getId());
-        assertEquals(set1.getPrice(), set2.getPrice());
-        assertEquals(set1.getName(), set2.getName());
-        assertEquals(set1.getCategories(), set2.getCategories());
-        assertEquals(set1.getLegoKits(),set2.getLegoKits());
+    private void assertDeepEquals(LegoSetTO set1, LegoSetTO set2){
+     assertEquals(set1.getId(), set2.getId());
+     assertEquals(set1.getPrice(), set2.getPrice());
+     assertEquals(set1.getName(), set2.getName());
+     assertEquals(set1.getCategories(), set2.getCategories());
+     assertEquals(set1.getLegoKits(),set2.getLegoKits());
+    }
+       
+    private void assertDeepEquals(List<LegoSetTO> set1,List<LegoSetTO> set2){
+        for (int i = 0; i < set1.size(); i++){
+            LegoSetTO fromFirst = set1.get(i);
+            LegoSetTO fromSecond = set2.get(i);
+            assertDeepEquals(fromFirst,fromSecond);
+        }
     }
             
 }
