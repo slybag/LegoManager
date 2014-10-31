@@ -13,8 +13,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doThrow;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -31,13 +33,16 @@ public class LegoKitServiceImplTest extends BaseTest {
     private LegoKitDao legoKitDao;
     
     @Before
-    public void setUp(){
+    public void setUpMock(){
         MockitoAnnotations.initMocks(this);
+        
     }
     
     @Test
     public void testCreate(){
         LegoKitTO legoKitTO = new LegoKitTO();
+        legoKitTO.setName("Star Wars");
+        legoKitTO.setAgeRestriction(-1);
         kitService.createLegoKit(legoKitTO);
     }
 

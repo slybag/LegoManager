@@ -16,6 +16,6 @@ public interface LegoSetService {
     public void createLegoSet(LegoSetTO legoSet);
     public void updateLegoSet(LegoSetTO legoSet);
     public void removeLegoSet(LegoSetTO legoSet);
-    public LegoSetTO getLegoSet(LegoSetTO legoSet);
+    public LegoSetTO getLegoSet(Long id);
     public List<LegoSetTO> getAllLegoSets();
 }

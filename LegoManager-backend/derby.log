@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Oct 30 17:40:04 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.7.1.1 - (1040133): instance a816c00e-0149-61ed-a2a3-000003866368 
-on database directory memory:C:\Users\Petr\Documents\NetBeansProjects\LegoManager\LegoManager-backend\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@3c291fc2 
+Thu Oct 30 21:03:57 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.7.1.1 - (1040133): instance a816c00e-0149-62a8-4c46-0000038da7f0 
+on database directory memory:C:\Users\Petr\Documents\NetBeansProjects\LegoManager\LegoManager-backend\unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@7132c515 
 Loaded from file:/C:/Users/Petr/.m2/repository/org/apache/derby/derby/10.7.1.1/derby-10.7.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_45-b18
