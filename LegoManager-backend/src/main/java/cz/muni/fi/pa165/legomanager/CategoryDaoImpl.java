@@ -30,8 +30,7 @@ public class CategoryDaoImpl implements CategoryDao{
         return entityManager.createQuery("SELECT c FROM Category c", Category.class).getResultList();
     }
 
-    @Override 
-    @Transactional
+    @Override
     public void updateCategory(Category category) {
         if (category == null){
             throw new IllegalArgumentException("Category is null");
@@ -50,7 +49,6 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override   
-    @Transactional
     public void deleteCategory(Category category) throws IllegalArgumentException {
         if (category == null){
             throw new IllegalArgumentException("Category is null");
@@ -68,7 +66,6 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override 
-    @Transactional
     public void addCategory(Category category) {
         if (category == null){
             throw new IllegalArgumentException("Category is null");
