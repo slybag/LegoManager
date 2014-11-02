@@ -138,7 +138,7 @@ public class LegoKitTO {
     /**
      * @return the legoPieces
      */
-    public List<LegoPieceTO> getPegoPieceTOs() {
+    public List<LegoPieceTO> getLegoPieceTOs() {
         return legoPieces;
     }
 

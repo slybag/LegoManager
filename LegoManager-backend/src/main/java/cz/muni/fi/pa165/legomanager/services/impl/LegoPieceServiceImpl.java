@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.legomanager.services.impl;
 
+import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import java.util.List;
@@ -12,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cz.muni.fi.pa165.legomanager.LegoPieceDao;
-import cz.muni.fi.pa165.legomanager.entity.EntityDTOTransformer;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.ArrayList;
+import org.dozer.DozerBeanMapper;
+import org.dozer.MappingException;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.RecoverableDataAccessException;
 
 /**
  *
@@ -27,6 +30,9 @@ public class LegoPieceServiceImpl implements LegoPieceService{
 
     @Autowired
     LegoPieceDao legoPieceDao;
+    
+    @Autowired
+    DozerBeanMapper mapper;
 
     public void setLegoPieceDAO(LegoPieceDao legoPieceDao) {
         this.legoPieceDao = legoPieceDao;
@@ -35,40 +41,59 @@ public class LegoPieceServiceImpl implements LegoPieceService{
     @Override
     @Transactional
     public void createLegoPiece(LegoPieceTO legoPiece) throws DataAccessException {
-        LegoPiece legoPieceEntity = EntityDTOTransformer.legoPieceTOConvert(legoPiece);
-        legoPieceDao.addLegoPiece(legoPieceEntity);
+        try{
+            legoPieceDao.addLegoPiece(mapper.map(legoPiece, LegoPiece.class));
+        }catch(IllegalArgumentException | LegoDaoException | MappingException ex){
+            throw new RecoverableDataAccessException("Error while creating lego piece", ex);
+        }
     }
 
     @Override
     @Transactional
     public void updateLegoPiece(LegoPieceTO legoPiece) throws DataAccessException {
-        LegoPiece legoPieceEntity = EntityDTOTransformer.legoPieceTOConvert(legoPiece);
-        legoPieceDao.updateLegoPiece(legoPieceEntity);
+        try{
+            legoPieceDao.updateLegoPiece(mapper.map(legoPiece, LegoPiece.class));
+        }catch(IllegalArgumentException | LegoDaoException | MappingException ex){
+            throw new RecoverableDataAccessException("Error while updating lego piece", ex);
+        }
     }
 
     @Override
     @Transactional
     public void removeLegoPiece(LegoPieceTO legoPiece) throws DataAccessException {
-        LegoPiece legoPieceEntity = EntityDTOTransformer.legoPieceTOConvert(legoPiece);
-        legoPieceDao.deleteLegoPiece(legoPieceEntity);
+        try{
+            legoPieceDao.deleteLegoPiece(mapper.map(legoPiece, LegoPiece.class));
+        }catch(IllegalArgumentException | LegoDaoException | MappingException ex){
+            throw new RecoverableDataAccessException("Error while deleting lego piece", ex);
+        }
     }
 
     @Override
     @Transactional
     public LegoPieceTO getLegoPiece(Long id) throws DataAccessException {
-        return EntityDTOTransformer.legoPieceConvert(legoPieceDao.findLegoPieceById(id));
+        LegoPieceTO legoPiece;
+        try{
+            legoPiece = mapper.map(legoPieceDao.findLegoPieceById(id), LegoPieceTO.class);
+        }catch(IllegalArgumentException | LegoDaoException | MappingException ex){
+            throw new RecoverableDataAccessException("Error while retrieving lego piece", ex);
+        }
+        return legoPiece;
     }
 
     @Override
     @Transactional
     public List<LegoPieceTO> getAllLegoPieces() throws DataAccessException {
-        List<LegoPieceTO> legoPiecesTO = new ArrayList<>();
-        List<LegoPiece> legoPieces = legoPieceDao.getAllLegoPieces();
-        for(LegoPiece lp : legoPieces){
-            LegoPieceTO legoPieceTO = EntityDTOTransformer.legoPieceConvert(lp);
-            legoPiecesTO.add(legoPieceTO);
+        List<LegoPieceTO> legoPieceTOs;
+        try {
+            List<LegoPiece> legoPieces = legoPieceDao.getAllLegoPieces();
+            legoPieceTOs = new ArrayList<>();
+            for (LegoPiece piece : legoPieces) {
+                legoPieceTOs.add(mapper.map(piece, LegoPieceTO.class));
+            }
+        } catch (IllegalArgumentException | LegoDaoException | MappingException ex) {
+            throw new RecoverableDataAccessException("Error while retrieving data", ex);
         }
-        return legoPiecesTO;
+        return legoPieceTOs;
     }
     
 }
