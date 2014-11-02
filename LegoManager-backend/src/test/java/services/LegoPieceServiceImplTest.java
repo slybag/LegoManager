@@ -8,8 +8,6 @@ package services;
 import cz.muni.fi.pa165.BaseTest;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.LegoPieceDao;
-import cz.muni.fi.pa165.legomanager.entity.EntityDTOTransformer;
-import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.services.impl.LegoPieceServiceImpl;
 import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;
@@ -24,10 +22,9 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.stub;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -35,84 +32,163 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Martin Laštovička
  */
-public class LegoPieceServiceImplTest extends BaseTest{
-    
+public class LegoPieceServiceImplTest extends BaseTest {
+
     @InjectMocks
     private LegoPieceServiceImpl legoPieceService;
-    
+
     @Mock
     private LegoPieceDao legoPieceDao;
-    
+
     @Autowired
     DozerBeanMapper mapper;
-    
+
     private LegoPieceTO legoPiece1;
-    
+
     @Before
-    public void setUp() throws Exception{
-        MockitoAnnotations.initMocks(this);  
-        
+    public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
+
         legoPiece1 = createLegoPiece(PieceColor.BLACK);
         legoPiece1.setId(1L);
-        when(legoPieceDao.findLegoPieceById(legoPiece1.getId()))
-                .thenReturn(mapper.map(legoPiece1, LegoPiece.class));
-        
-        
-        doThrow(DataAccessException.class).when(legoPieceDao).addLegoPiece(null);
-        doThrow(DataAccessException.class).when(legoPieceDao).addLegoPiece(mapper.map(createLegoPiece(null), LegoPiece.class));
+
     }
-    
+
     @Test
-    public void findLegoPieceByIdTest() {
-        LegoPieceTO piece = legoPieceService.getLegoPiece(legoPiece1.getId());
-        
-        assertEquals(legoPiece1.getId(), piece.getId());
-        assertEquals(legoPiece1.getColor(), piece.getColor());
-//        assertEquals(legoPiece1.getLegoKits(), piece.getLegoKits());
+    public void getLegoPieceTest() {
+        try {
+            when(legoPieceDao.findLegoPieceById(legoPiece1.getId()))
+                    .thenReturn(mapper.map(legoPiece1, LegoPiece.class));
+            LegoPieceTO piece = legoPieceService.getLegoPiece(legoPiece1.getId());
+            verify(legoPieceDao).findLegoPieceById(legoPiece1.getId());
+            
+            assertDeepEquals(legoPiece1, piece);
+            
+        } catch (Exception ex) {
+            fail("Exception thrown: " + ex.getMessage());
+        }
     }
-    
+
+    @Test
+    public void getLegoPieceTestException() {
+        try {
+            doThrow(LegoDaoException.class).when(legoPieceDao).findLegoPieceById(legoPiece1.getId());
+
+            legoPieceService.getLegoPiece(legoPiece1.getId());
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
+        }
+    }
+
     @Test
     public void addLegoPieceTest() {
         try {
             legoPieceService.createLegoPiece(legoPiece1);
-        } catch (Exception e) {
-            fail("Exception thrown" + e.getMessage());
+            verify(legoPieceDao).addLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
+        } catch (Exception ex) {
+            fail("Exception thrown: " + ex.getMessage());
         }
-
-        LegoPieceTO piece = legoPieceService.getLegoPiece(legoPiece1.getId());
-        assertEquals(legoPiece1.getId(), piece.getId());
-        assertEquals(legoPiece1.getColor(), piece.getColor());
-//        assertEquals(legoPiece1.getLegoKits(), piece.getLegoKits());
     }
 
     @Test
-    public void addLegoPieceTestNullPiece() {
+    public void addLegoPieceTestException() {
         try {
+            doThrow(LegoDaoException.class).when(legoPieceDao).addLegoPiece(null);
+
             legoPieceService.createLegoPiece(null);
-            fail("No exception thrown");
-        } catch(DataAccessException ex){
-            // if you choose Spring for implementation make sure that DataAccessException 
-            // or its subclass is thrown in case of any exception on a persistence layer
-        }catch(Exception ex){
-            fail("Bad exception throwed" + ex);
-        }catch(Throwable t){
-            
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
+        }
+
+        try {
+            doThrow(DataAccessException.class).when(legoPieceDao).addLegoPiece(mapper.map(createLegoPiece(null), LegoPiece.class));
+
+            legoPieceService.createLegoPiece(null);
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
+        }
+    }
+
+    @Test
+    public void updateLegoPieceTest() {
+        try {
+            legoPieceService.updateLegoPiece(legoPiece1);
+            verify(legoPieceDao).updateLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
+        } catch (Exception ex) {
+            fail("Exception thrown: " + ex.getMessage());
+        }
+    }
+
+    @Test
+    public void updateLegoPieceTestException() {
+        try {
+            doThrow(LegoDaoException.class).when(legoPieceDao)
+                    .updateLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
+
+            legoPieceService.updateLegoPiece(legoPiece1);
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
+        }
+    }
+
+    @Test
+    public void removeLegoPieceTest() {
+        try {
+            legoPieceService.removeLegoPiece(legoPiece1);
+            verify(legoPieceDao).deleteLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
+        } catch (Exception ex) {
+            fail("Exception thrown: " + ex.getMessage());
+        }
+    }
+
+    @Test
+    public void removeLegoPieceTestException() {
+        try {
+            doThrow(LegoDaoException.class).when(legoPieceDao)
+                    .deleteLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
+
+            legoPieceService.removeLegoPiece(legoPiece1);
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
         }
     }
     
     @Test
-    public void addLegoPieceTestNullColor() {
-        LegoPieceTO legoPieceNullColor = createLegoPiece(null);
+    public void getAllLegoPiecesTest() {
         try {
-            legoPieceService.createLegoPiece(legoPieceNullColor);
-            fail("No exception thrown");
-        } catch(DataAccessException ex){
-            // if you choose Spring for implementation make sure that DataAccessException 
-            // or its subclass is thrown in case of any exception on a persistence layer
-        }catch(Exception ex){
-            fail("Bad exception throwed" + ex);
-        }catch(Throwable t){
-            
+            legoPieceService.getAllLegoPieces();
+            verify(legoPieceDao).getAllLegoPieces();
+        } catch (Exception ex) {
+            fail("Exception thrown: " + ex.getMessage());
+        }
+    }
+
+    @Test
+    public void getAllLegoPiecesTestException() {
+        try {
+            doThrow(LegoDaoException.class).when(legoPieceDao).getAllLegoPieces();
+
+            legoPieceService.getAllLegoPieces();
+            fail("No exception thrown.");
+        } catch (DataAccessException ex) {
+            // OK
+        } catch (Exception ex) {
+            fail("Bad exception throwed: " + ex);
         }
     }
     
@@ -120,10 +196,10 @@ public class LegoPieceServiceImplTest extends BaseTest{
         LegoPieceTO newPiece = new LegoPieceTO();
         newPiece.setColor(pieceColor);
         newPiece.setLegoKits(new ArrayList<LegoKitTO>());
-        
+
         return newPiece;
     }
-    
+
     private void assertDeepEquals(LegoPieceTO piece1, LegoPieceTO piece2) {
         assertEquals(piece1.getId(), piece2.getId());
         assertEquals(piece1.getColor(), piece2.getColor());
