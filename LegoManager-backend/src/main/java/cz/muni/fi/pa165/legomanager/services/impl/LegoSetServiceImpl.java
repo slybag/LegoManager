@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class LegoSetServiceImpl implements LegoSetService {
 
     @Autowired
     LegoSetDao legoSetDao;
-    
+
     @Autowired
     DozerBeanMapper mapper;
 
@@ -37,36 +38,67 @@ public class LegoSetServiceImpl implements LegoSetService {
     public void setMapper(DozerBeanMapper mapper) {
         this.mapper = mapper;
     }
-        
-    
+
     @Override
+    @Transactional
     public void createLegoSet(LegoSetTO legoSet) {
-        legoSetDao.addLegoSet(mapper.map(legoSet, LegoSet.class));
+        try {
+            legoSetDao.addLegoSet(mapper.map(legoSet, LegoSet.class));
+        } catch (Exception ex) {
+            throw new DataAccessException("createLegoSetEXception") {
+            };
+        }
     }
 
     @Override
+    @Transactional
     public void updateLegoSet(LegoSetTO legoSet) {
-        legoSetDao.updateLegoSet(mapper.map(legoSet, LegoSet.class));
+        try {
+            legoSetDao.updateLegoSet(mapper.map(legoSet, LegoSet.class));
+        } catch (Exception ex) {
+            throw new DataAccessException("updateLegoSet") {
+            };
+        }
     }
 
     @Override
+    @Transactional
     public void removeLegoSet(LegoSetTO legoSet) {
-        legoSetDao.deleteLegoSet(mapper.map(legoSet, LegoSet.class));
+        try {
+            legoSetDao.deleteLegoSet(mapper.map(legoSet, LegoSet.class));
+        } catch (Exception ex) {
+            throw new DataAccessException("removeLegoSet") {
+            };
+        }
     }
 
     @Override
+    @Transactional
     public LegoSetTO getLegoSet(Long id) {
-        return mapper.map(legoSetDao.findLegoSetById(id), LegoSetTO.class);
+        LegoSetTO legoSet = null;
+        try {
+            legoSet = mapper.map(legoSetDao.findLegoSetById(id), LegoSetTO.class);
+        } catch (Exception ex) {
+            throw new DataAccessException("getLegoSet") {
+            };
+        }
+
+        return legoSet;
     }
 
     @Override
+    @Transactional
     public List<LegoSetTO> getAllLegoSets() {
-        List<LegoSet> legoSets = legoSetDao.getAllLegoSets();
         List<LegoSetTO> legoSetsTO = new ArrayList<>();
-        for(LegoSet set : legoSets){
-            legoSetsTO.add(mapper.map(set, LegoSetTO.class));
+        try {
+            List<LegoSet> legoSets = legoSetDao.getAllLegoSets();
+            for (LegoSet set : legoSets) {
+                legoSetsTO.add(mapper.map(set, LegoSetTO.class));
+            }
+        } catch (Exception ex) {
+            throw  new DataAccessException("getAllLegoSets") {};
         }
         return legoSetsTO;
     }
-    
+
 }
