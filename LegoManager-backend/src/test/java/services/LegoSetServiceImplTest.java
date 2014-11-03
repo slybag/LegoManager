@@ -20,10 +20,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.anyObject;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,6 @@ import org.springframework.dao.DataAccessException;
 public class LegoSetServiceImplTest extends BaseTest {
     
     @InjectMocks
-    @Autowired
     private LegoSetService setService;
     
     @Mock
@@ -50,7 +50,7 @@ public class LegoSetServiceImplTest extends BaseTest {
     LegoSetTO setTO;
     
     @Before
-    public void setUpMock(){
+    public void setUp(){
         MockitoAnnotations.initMocks(this);
         set = map(getValidSet());
         setTO = getValidSet();
@@ -59,7 +59,8 @@ public class LegoSetServiceImplTest extends BaseTest {
     @Test
     public void testCreate(){
         setService.createLegoSet(setTO);
-        verify(legoSetDao).addLegoSet(set);       
+        verify(legoSetDao, times(1)).addLegoSet(set);
+        verifyNoMoreInteractions(legoSetDao);     
     }
     
     @Test(expected=DataAccessException.class)
@@ -73,7 +74,8 @@ public class LegoSetServiceImplTest extends BaseTest {
     @Test
     public void testUpdate(){
         setService.updateLegoSet(setTO);
-        verify(legoSetDao).updateLegoSet(set);
+        verify(legoSetDao, times(1)).updateLegoSet(set);
+        verifyNoMoreInteractions(legoSetDao);     
     }
     
     @Test(expected=DataAccessException.class)
@@ -87,7 +89,8 @@ public class LegoSetServiceImplTest extends BaseTest {
     @Test
     public void testRemove(){
         setService.removeLegoSet(setTO);
-        verify(legoSetDao).deleteLegoSet(set);
+        verify(legoSetDao, times(1)).deleteLegoSet(set);
+        verifyNoMoreInteractions(legoSetDao);     
     }
     
     @Test(expected=DataAccessException.class)
@@ -102,7 +105,9 @@ public class LegoSetServiceImplTest extends BaseTest {
     public void testGet(){
         LegoSetTO expected = getValidSet();
         when(legoSetDao.findLegoSetById(-1L)).thenReturn(map(expected));
+        verify(legoSetDao, times(1)).findLegoSetById(-1L);
         LegoSetTO actual = setService.getLegoSet(-1L);
+        verifyNoMoreInteractions(legoSetDao);     
         assertDeepEquals(expected,actual);
     }
     
@@ -121,7 +126,9 @@ public class LegoSetServiceImplTest extends BaseTest {
         expected.add(setTO);
         expected.add(setTO);
         when(legoSetDao.getAllLegoSets()).thenReturn(map(expected));
+        verify(legoSetDao, times(1)).getAllLegoSets();
         List actual = setService.getAllLegoSets();
+        verifyNoMoreInteractions(legoSetDao);     
         assertDeepEquals(expected,actual);
     }
     
