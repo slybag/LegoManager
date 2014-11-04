@@ -33,6 +33,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     DozerBeanMapper mapper;
 
+    public void setCategoryDao(CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
+    }
+
+    public void setMapper(DozerBeanMapper mapper) {
+        this.mapper = mapper;
+    }
+    
+    
+    
     @Override
     @Transactional
     public List<CategoryTO> getAllCategories() {

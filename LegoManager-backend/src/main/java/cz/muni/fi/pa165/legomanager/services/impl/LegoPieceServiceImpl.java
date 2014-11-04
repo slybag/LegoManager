@@ -34,9 +34,15 @@ public class LegoPieceServiceImpl implements LegoPieceService{
     @Autowired
     DozerBeanMapper mapper;
 
-    public void setLegoPieceDAO(LegoPieceDao legoPieceDao) {
+    public void setLegoPieceDao(LegoPieceDao legoPieceDao) {
         this.legoPieceDao = legoPieceDao;
     }
+
+    public void setMapper(DozerBeanMapper mapper) {
+        this.mapper = mapper;
+    }
+    
+    
     
     @Override
     @Transactional

@@ -32,9 +32,10 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Martin Laštovička
  */
-public class LegoPieceServiceImplTest extends BaseTest {
+public class LegoPieceServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
+    @Autowired
     private LegoPieceServiceImpl legoPieceService;
 
     @Mock
