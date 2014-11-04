@@ -91,14 +91,14 @@ public class LegoKitTO {
     /**
      * @return the legoSets
      */
-    public List<LegoSetTO> getLegoSetTOs() {
+    public List<LegoSetTO> getLegoSets() {
         return legoSets;
     }
 
     /**
      * @param legoSets the legoSets to set
      */
-    public void setLegoSetTOs(List<LegoSetTO> legoSets) {
+    public void setLegoSets(List<LegoSetTO> legoSets) {
         this.legoSets = legoSets;
     }
     
@@ -138,7 +138,7 @@ public class LegoKitTO {
     /**
      * @return the legoPieces
      */
-    public List<LegoPieceTO> getLegoPieceTOs() {
+    public List<LegoPieceTO> getLegoPieces() {
         return legoPieces;
     }
 

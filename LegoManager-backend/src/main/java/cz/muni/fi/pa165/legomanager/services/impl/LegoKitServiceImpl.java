@@ -22,78 +22,78 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Petr Konecny
  */
-
 @Service
 @Transactional
-public class LegoKitServiceImpl implements LegoKitService{
-    
+public class LegoKitServiceImpl implements LegoKitService {
+
     @Autowired
     LegoKitDao legoKitDao;
-    
     @Autowired
     DozerBeanMapper mapper;
-    
-            
+
     @Override
     public List<LegoKitTO> getAllLegoKits() {
-        
+
         List<LegoKit> legoKits;
-        try{
-         legoKits = legoKitDao.getAllLegoKits();
-        }catch(IllegalArgumentException | LegoDaoException ex){
-            throw new RecoverableDataAccessException("error while retrieving data",ex) ;
+        try {
+            legoKits = legoKitDao.getAllLegoKits();
+        } catch (Exception ex) {
+            throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
         List<LegoKitTO> legoKitsTO = new ArrayList<>();
-        for(LegoKit kit : legoKits){
+        for (LegoKit kit : legoKits) {
             legoKitsTO.add(mapper.map(kit, LegoKitTO.class));
         }
-        return legoKitsTO;       
+        return legoKitsTO;
     }
 
     @Override
     public void updateLegoKit(LegoKitTO legoKit) {
+
         
-        LegoKit kit  = mapper.map(legoKit, LegoKit.class);
-        try{
+        try {
+            LegoKit kit = mapper.map(legoKit, LegoKit.class);
             legoKitDao.updateLegoKit(kit);
-        }catch (IllegalArgumentException | LegoDaoException ex){
-            throw new RecoverableDataAccessException("error while retrieving data",ex) ;
+        } catch (Exception ex) {
+            throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
     }
 
     @Override
     public void deleteLegoKit(LegoKitTO legoKit) {
-    
-        LegoKit kit = mapper.map(legoKit, LegoKit.class);
-        try{
-        legoKitDao.deleteLegoKit(kit);
-        }catch (IllegalArgumentException | LegoDaoException ex){
-            throw new RecoverableDataAccessException("error while retrieving data",ex) ;
+
+
+        try {
+            LegoKit kit = mapper.map(legoKit, LegoKit.class);
+            legoKitDao.deleteLegoKit(kit);
+        } catch (Exception ex) {
+            throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
     }
 
     @Override
     public void createLegoKit(LegoKitTO legoKit) {
-        
-        LegoKit kit = mapper.map(legoKit, LegoKit.class);
-        try{
-        legoKitDao.addLegoKit(kit);
-        }catch (IllegalArgumentException | LegoDaoException ex){
-            throw new RecoverableDataAccessException("error while retrieving data",ex) ;
+
+
+        try {
+            LegoKit kit = mapper.map(legoKit, LegoKit.class);
+            legoKitDao.addLegoKit(kit);
+        } catch (Exception ex) {
+            throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
     }
 
     @Override
     public LegoKitTO getLegoKit(Long id) {
-        
-        LegoKit kit;
-        try{
-           kit = legoKitDao.findLegoKitById(id);
-        }catch(IllegalArgumentException | LegoDaoException ex){
-            throw new RecoverableDataAccessException("error while retrieving data",ex) ;
+
+        LegoKitTO kit;
+        try {
+            kit = mapper.map(legoKitDao.findLegoKitById(id), LegoKitTO.class);
+        } catch (Exception ex) {
+            throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
-        
-        return mapper.map(kit,LegoKitTO.class);        
+        return kit;
+
     }
 
     public void setLegoKitDao(LegoKitDao legoKitDao) {
@@ -103,5 +103,4 @@ public class LegoKitServiceImpl implements LegoKitService{
     public void setMapper(DozerBeanMapper mapper) {
         this.mapper = mapper;
     }
-    
 }

@@ -32,7 +32,8 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Michal
  */
-public class CategoryServiceImplTest extends BaseTest {
+public class CategoryServiceImplTest extends BaseServiceTest {
+    @Autowired
     @InjectMocks
     private CategoryServiceImpl categoryService;
     

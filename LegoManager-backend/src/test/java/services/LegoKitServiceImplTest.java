@@ -35,8 +35,9 @@ import org.springframework.dao.DataAccessException;
  *
  * @author Tomas
  */
-public class LegoKitServiceImplTest extends BaseTest {
-   @InjectMocks
+public class LegoKitServiceImplTest extends BaseServiceTest {
+    @Autowired
+    @InjectMocks
     private LegoKitServiceImpl legoKitService;
 
     @Mock
@@ -174,7 +175,7 @@ public class LegoKitServiceImplTest extends BaseTest {
         newKit.setName(name);
         newKit.setCategories(new HashSet<CategoryTO>());
         newKit.setLegoPieces(new ArrayList<LegoPieceTO>());
-        newKit.setLegoSetTOs(new ArrayList<LegoSetTO>());
+        newKit.setLegoSets(new ArrayList<LegoSetTO>());
 
         return newKit;
     }
@@ -185,7 +186,7 @@ public class LegoKitServiceImplTest extends BaseTest {
         assertEquals(piece1.getAgeRestriction(), piece2.getAgeRestriction());
         assertEquals(piece1.getName(), piece2.getName());
         assertEquals(piece1.getCategories(), piece2.getCategories());
-        assertEquals(piece1.getLegoPieceTOs(), piece2.getLegoPieceTOs());
-        assertEquals(piece1.getLegoSetTOs(), piece2.getLegoSetTOs());
+        assertEquals(piece1.getLegoPieces(), piece2.getLegoPieces());
+        assertEquals(piece1.getLegoSets(), piece2.getLegoSets());
     }
 }
