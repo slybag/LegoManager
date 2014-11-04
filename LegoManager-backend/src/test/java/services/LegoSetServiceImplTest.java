@@ -5,7 +5,6 @@
  */
 package services;
 
-import cz.muni.fi.pa165.BaseTest;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -35,7 +34,8 @@ import org.springframework.dao.DataAccessException;
  * @author Petr Konecny
  * 
  */
-public class LegoSetServiceImplTest extends BaseTest  {
+
+public class LegoSetServiceImplTest extends BaseServiceTest{
     
     @Autowired
     @InjectMocks
