@@ -5,6 +5,7 @@
  */
 package services;
 
+import cz.muni.fi.pa165.BaseTest;
 import cz.muni.fi.pa165.legomanager.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -33,14 +35,16 @@ import org.springframework.dao.DataAccessException;
  * @author Petr Konecny
  * 
  */
-public class LegoSetServiceImplTest  {
+public class LegoSetServiceImplTest extends BaseTest  {
     
+    @Autowired
     @InjectMocks
     private LegoSetServiceImpl setService;
     
     @Mock
     private LegoSetDao legoSetDao;
     
+    @Autowired
     DozerBeanMapper mapper;
     
     LegoSet set;
@@ -49,9 +53,6 @@ public class LegoSetServiceImplTest  {
     
     @Before
     public void setUp(){
-        setService = new LegoSetServiceImpl();
-        setService.setMapper(new DozerBeanMapper());
-        mapper = new DozerBeanMapper();
         set = map(getValidSet());
         setTO = getValidSet();
         MockitoAnnotations.initMocks(this);
