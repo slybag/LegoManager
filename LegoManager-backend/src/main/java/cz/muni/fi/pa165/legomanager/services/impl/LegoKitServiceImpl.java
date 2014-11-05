@@ -51,7 +51,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         try {
             legoKitDao.updateLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
-            throw new RecoverableDataAccessException("error while retrieving data", ex);
+            throw new RecoverableDataAccessException("error while updating lego kit", ex);
         }
     }
 
@@ -61,7 +61,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         try {
             legoKitDao.deleteLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
-            throw new RecoverableDataAccessException("error while retrieving data", ex);
+            throw new RecoverableDataAccessException("error while deleting lego kit", ex);
         }
     }
 
@@ -71,7 +71,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         try {
             legoKitDao.addLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
-            throw new RecoverableDataAccessException("error while retrieving data", ex);
+            throw new RecoverableDataAccessException("error while creating lego kit", ex);
         }
     }
 
@@ -82,7 +82,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         try {
             legoKit = mapper.map(legoKitDao.findLegoKitById(id), LegoKitTO.class);
         } catch (Exception ex) {
-            throw new RecoverableDataAccessException("error while retrieving data", ex);
+            throw new RecoverableDataAccessException("error while retrieving lego kit", ex);
         }
         return legoKit;
     }
