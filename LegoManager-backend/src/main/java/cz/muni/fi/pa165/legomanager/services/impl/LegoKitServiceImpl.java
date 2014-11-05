@@ -33,27 +33,23 @@ public class LegoKitServiceImpl implements LegoKitService {
 
     @Override
     public List<LegoKitTO> getAllLegoKits() {
-
-        List<LegoKit> legoKits;
+        
+        List<LegoKitTO> legoKitsTO = new ArrayList<>();
         try {
-            legoKits = legoKitDao.getAllLegoKits();
+            for (LegoKit kit : legoKitDao.getAllLegoKits()) {
+                legoKitsTO.add(mapper.map(kit, LegoKitTO.class));
+            }
         } catch (Exception ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
-        }
-        List<LegoKitTO> legoKitsTO = new ArrayList<>();
-        for (LegoKit kit : legoKits) {
-            legoKitsTO.add(mapper.map(kit, LegoKitTO.class));
         }
         return legoKitsTO;
     }
 
     @Override
     public void updateLegoKit(LegoKitTO legoKit) {
-
         
         try {
-            LegoKit kit = mapper.map(legoKit, LegoKit.class);
-            legoKitDao.updateLegoKit(kit);
+            legoKitDao.updateLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
@@ -62,10 +58,8 @@ public class LegoKitServiceImpl implements LegoKitService {
     @Override
     public void deleteLegoKit(LegoKitTO legoKit) {
 
-
         try {
-            LegoKit kit = mapper.map(legoKit, LegoKit.class);
-            legoKitDao.deleteLegoKit(kit);
+            legoKitDao.deleteLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
@@ -74,10 +68,8 @@ public class LegoKitServiceImpl implements LegoKitService {
     @Override
     public void createLegoKit(LegoKitTO legoKit) {
 
-
         try {
-            LegoKit kit = mapper.map(legoKit, LegoKit.class);
-            legoKitDao.addLegoKit(kit);
+            legoKitDao.addLegoKit(mapper.map(legoKit, LegoKit.class));
         } catch (Exception ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
@@ -85,15 +77,14 @@ public class LegoKitServiceImpl implements LegoKitService {
 
     @Override
     public LegoKitTO getLegoKit(Long id) {
-
-        LegoKitTO kit;
+        
+        LegoKitTO legoKit;
         try {
-            kit = mapper.map(legoKitDao.findLegoKitById(id), LegoKitTO.class);
+            legoKit = mapper.map(legoKitDao.findLegoKitById(id), LegoKitTO.class);
         } catch (Exception ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
-        return kit;
-
+        return legoKit;
     }
 
     public void setLegoKitDao(LegoKitDao legoKitDao) {
