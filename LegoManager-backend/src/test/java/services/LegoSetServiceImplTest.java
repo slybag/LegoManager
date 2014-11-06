@@ -96,6 +96,17 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         setService.updateLegoSet(setTO);
     }
     
+    @Test(expected=DataAccessException.class)
+    public void updateWithNull(){
+        doThrow(IllegalArgumentException.class).when(legoSetDao).updateLegoSet(null);
+        setService.updateLegoSet(null);
+    }
+    
+    @Test
+    public void test(){
+        mapper.map(new LegoSetTO(),LegoSet.class);
+    }
+    
     @Test
     public void testRemove(){
         setService.removeLegoSet(setTO);
@@ -115,6 +126,12 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         setService.removeLegoSet(setTO);
     }
     
+    @Test(expected=DataAccessException.class)
+    public void removeWithNull(){
+        doThrow(IllegalArgumentException.class).when(legoSetDao).deleteLegoSet(null);
+        setService.removeLegoSet(null);
+    }
+    
     @Test
     public void testGet(){
         LegoSetTO expected = getValidSet();
@@ -129,6 +146,12 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
     public void getWithExceptionDao(){
         doThrow(LegoDaoException.class).when(legoSetDao).findLegoSetById(-1L);
         setService.getLegoSet(-1L);
+    }
+    
+    @Test(expected=DataAccessException.class)
+    public void getWithNull(){
+        doThrow(IllegalArgumentException.class).when(legoSetDao).findLegoSetById(null);
+        setService.getLegoSet(null);
     }
     
     @Test(expected=DataAccessException.class)

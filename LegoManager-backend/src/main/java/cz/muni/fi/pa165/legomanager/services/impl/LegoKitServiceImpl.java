@@ -13,6 +13,7 @@ import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
+import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.RecoverableDataAccessException;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class LegoKitServiceImpl implements LegoKitService {
             for (LegoKit kit : legoKitDao.getAllLegoKits()) {
                 legoKitsTO.add(mapper.map(kit, LegoKitTO.class));
             }
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException | LegoDaoException | MappingException ex) {
             throw new RecoverableDataAccessException("error while retrieving data", ex);
         }
         return legoKitsTO;
@@ -50,7 +51,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         
         try {
             legoKitDao.updateLegoKit(mapper.map(legoKit, LegoKit.class));
-        } catch (Exception ex) {
+        } catch (MappingException | IllegalArgumentException | LegoDaoException ex) {
             throw new RecoverableDataAccessException("error while updating lego kit", ex);
         }
     }
@@ -60,7 +61,7 @@ public class LegoKitServiceImpl implements LegoKitService {
 
         try {
             legoKitDao.deleteLegoKit(mapper.map(legoKit, LegoKit.class));
-        } catch (Exception ex) {
+        } catch (MappingException | IllegalArgumentException | LegoDaoException ex) {
             throw new RecoverableDataAccessException("error while deleting lego kit", ex);
         }
     }
@@ -70,7 +71,7 @@ public class LegoKitServiceImpl implements LegoKitService {
 
         try {
             legoKitDao.addLegoKit(mapper.map(legoKit, LegoKit.class));
-        } catch (Exception ex) {
+        } catch (MappingException | IllegalArgumentException | LegoDaoException ex) {
             throw new RecoverableDataAccessException("error while creating lego kit", ex);
         }
     }
@@ -81,7 +82,7 @@ public class LegoKitServiceImpl implements LegoKitService {
         LegoKitTO legoKit;
         try {
             legoKit = mapper.map(legoKitDao.findLegoKitById(id), LegoKitTO.class);
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException | LegoDaoException | MappingException ex) {
             throw new RecoverableDataAccessException("error while retrieving lego kit", ex);
         }
         return legoKit;
