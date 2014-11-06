@@ -103,11 +103,6 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
     }
     
     @Test
-    public void test(){
-        mapper.map(new LegoSetTO(),LegoSet.class);
-    }
-    
-    @Test
     public void testRemove(){
         setService.removeLegoSet(setTO);
         verify(legoSetDao, times(1)).deleteLegoSet(set);
