@@ -45,11 +45,11 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
     private LegoSetDao legoSetDao;
     
     @Autowired
-    DozerBeanMapper mapper;
+    private DozerBeanMapper mapper;
     
-    LegoSet set;
+    private LegoSet set;
     
-    LegoSetTO setTO;
+    private LegoSetTO setTO;
     
     @Before
     public void setUp(){

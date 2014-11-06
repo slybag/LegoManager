@@ -41,7 +41,7 @@ public class CategoryServiceImplTest extends BaseServiceTest {
     private CategoryDao categoryDao;
     
     @Autowired
-    DozerBeanMapper mapper;
+    private DozerBeanMapper mapper;
     
     private CategoryTO category;
     

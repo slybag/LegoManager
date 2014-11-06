@@ -44,7 +44,7 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
     private LegoKitDao legoKitDao;
 
     @Autowired
-    DozerBeanMapper mapper;
+    private DozerBeanMapper mapper;
 
     private LegoKitTO legoKit;
 

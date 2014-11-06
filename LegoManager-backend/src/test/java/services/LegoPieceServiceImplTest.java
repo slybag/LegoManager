@@ -42,7 +42,7 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
     private LegoPieceDao legoPieceDao;
 
     @Autowired
-    DozerBeanMapper mapper;
+    private DozerBeanMapper mapper;
 
     private LegoPieceTO legoPiece1;
 
