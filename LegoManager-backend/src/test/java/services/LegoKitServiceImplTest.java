@@ -88,36 +88,13 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
         }
     }
 
+    
     @Test (expected = DataAccessException.class)
     public void addLegoKitNullTestException() {
         doThrow(LegoDaoException.class).when(legoKitDao).addLegoKit(null);
         legoKitService.createLegoKit(null);
     }
     
-    @Test (expected = DataAccessException.class)
-    public void addLegoKitAllNullTestException() {
-        doThrow(DataAccessException.class).when(legoKitDao).addLegoKit(mapper.map(createLegoKit(null, null, null), LegoKit.class));
-        legoKitService.createLegoKit(null);
-    }
-    
-    @Test (expected = DataAccessException.class)
-    public void addLegoKitPriceNullTestException() {
-        doThrow(DataAccessException.class).when(legoKitDao).addLegoKit(mapper.map(createLegoKit(null, 16, "Star Wars: Death Star"), LegoKit.class));
-        legoKitService.createLegoKit(null);
-    }
-    
-    @Test (expected = DataAccessException.class)
-    public void addLegoKitAgeCategoryNullTestException() {
-        doThrow(DataAccessException.class).when(legoKitDao).addLegoKit(mapper.map(createLegoKit(BigDecimal.TEN, null, "Star Wars: Death Star"), LegoKit.class));
-        legoKitService.createLegoKit(null);
-    }
-    
-    @Test (expected = DataAccessException.class)
-    public void addLegoKitNameNullTestException() {
-        doThrow(DataAccessException.class).when(legoKitDao).addLegoKit(mapper.map(createLegoKit(BigDecimal.TEN, 16, null), LegoKit.class));
-        legoKitService.createLegoKit(null);
-    }
-
     @Test
     public void updateLegoKitTest() {
         try {

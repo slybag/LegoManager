@@ -97,20 +97,9 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
     @Test
     public void addLegoPieceTestException() {
         try {
-            doThrow(LegoDaoException.class).when(legoPieceDao).addLegoPiece(null);
+            doThrow(LegoDaoException.class).when(legoPieceDao).addLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
 
-            legoPieceService.createLegoPiece(null);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-
-        try {
-            doThrow(DataAccessException.class).when(legoPieceDao).addLegoPiece(mapper.map(createLegoPiece(null), LegoPiece.class));
-
-            legoPieceService.createLegoPiece(null);
+            legoPieceService.createLegoPiece(legoPiece1);
             fail("No exception thrown.");
         } catch (DataAccessException ex) {
             // OK

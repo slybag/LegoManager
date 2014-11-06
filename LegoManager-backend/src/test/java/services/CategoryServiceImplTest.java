@@ -44,7 +44,7 @@ public class CategoryServiceImplTest extends BaseServiceTest {
     private DozerBeanMapper mapper;
     
     private CategoryTO category;
-    
+        
     @Before    
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -95,20 +95,9 @@ public class CategoryServiceImplTest extends BaseServiceTest {
     @Test
     public void addCategoryTestException() {
         try {
-            doThrow(LegoDaoException.class).when(categoryDao).addCategory(null);
-
-            categoryService.createCategory(null);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-
-        try {
-            doThrow(DataAccessException.class).when(categoryDao).addCategory(mapper.map(createCategory(null, null), Category.class));
-
-            categoryService.createCategory(null);
+            doThrow(LegoDaoException.class).when(categoryDao).addCategory(mapper.map(category, Category.class));
+            
+            categoryService.createCategory(category);
             fail("No exception thrown.");
         } catch (DataAccessException ex) {
             // OK
