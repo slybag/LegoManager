@@ -5,14 +5,14 @@
  */
 package cz.muni.fi.pa165.legomanager.services.impl;
 
-import cz.muni.fi.pa165.legomanager.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import cz.muni.fi.pa165.legomanager.LegoPieceDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.ArrayList;
 import org.dozer.DozerBeanMapper;

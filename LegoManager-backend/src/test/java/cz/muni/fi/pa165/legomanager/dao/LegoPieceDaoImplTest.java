@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.LegoPieceDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;
@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Martin Laštovička
  */
-public class LegoPieceImplTest extends BaseTest {
+public class LegoPieceDaoImplTest extends BaseDaoTest {
 
     @Autowired
     LegoPieceDao legoPieceDao;

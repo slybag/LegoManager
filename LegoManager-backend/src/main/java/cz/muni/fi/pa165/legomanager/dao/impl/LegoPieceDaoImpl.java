@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.legomanager;
+package cz.muni.fi.pa165.legomanager.dao.impl;
 
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.List;
 import javax.persistence.EntityManager;

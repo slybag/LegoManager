@@ -5,10 +5,10 @@
  */
 package services;
 
-import cz.muni.fi.pa165.legomanager.CategoryDao;
-import cz.muni.fi.pa165.legomanager.LegoKitDao;
-import cz.muni.fi.pa165.legomanager.LegoPieceDao;
-import cz.muni.fi.pa165.legomanager.LegoSetDao;
+import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import org.dozer.DozerBeanMapper;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +27,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 public abstract class BaseServiceTest {
     
     @Configuration
-    @ComponentScan("cz.muni.fi.pa165.legomanager.services.impl")
+    @ComponentScan("cz.muni.fi.pa165.legomanager.services")
     static class ServiceTestContext {
     
         // This will declare the unused bean and inject with null overriding @Autowired.
@@ -54,9 +54,5 @@ public abstract class BaseServiceTest {
             return null;
         }
 
-        @Bean
-        DozerBeanMapper mapper(){
-            return new DozerBeanMapper();
-        }
     }
 }

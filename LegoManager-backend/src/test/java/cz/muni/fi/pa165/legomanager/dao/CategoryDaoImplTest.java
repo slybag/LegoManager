@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.CategoryDao;
-import cz.muni.fi.pa165.legomanager.CategoryDaoImpl;
+import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
+import cz.muni.fi.pa165.legomanager.dao.impl.CategoryDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Michal
  */
-public class CategoryImplTest extends BaseTest {
+public class CategoryDaoImplTest extends BaseDaoTest {
 
     @Autowired
     CategoryDao categoryDao;

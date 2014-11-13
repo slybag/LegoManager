@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package cz.muni.fi.pa165.legomanager.dao;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
-import cz.muni.fi.pa165.legomanager.LegoDaoException;
-import cz.muni.fi.pa165.legomanager.LegoSetDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.math.BigDecimal;
@@ -32,7 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Petr Konecny
  */
 
-public class LegoSetImplTest extends BaseTest {
+public class LegoSetDaoImplTest extends BaseDaoTest {
   
    @Autowired
    LegoSetDao legoSetDao;
@@ -98,18 +98,7 @@ public class LegoSetImplTest extends BaseTest {
         legoSetDao.addLegoSet(set);
        
     }
-    
-    /*
-    @Test(expected=LegoDaoException.class)
-    public void testCreateWithSameId(){ 
-    
-        LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
-        legoSetDao.addLegoSet(set);
-        legoSetDao.addLegoSet(em.find(LegoSet.class,set.getId()));    
-    }
-    */
-    // UPDATE tests 
-    
+      
    @Test
     public void testUpdateSet(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());

@@ -5,9 +5,8 @@
  */
 package services;
 
-import cz.muni.fi.pa165.BaseTest;
-import cz.muni.fi.pa165.legomanager.LegoDaoException;
-import cz.muni.fi.pa165.legomanager.LegoPieceDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.services.impl.LegoPieceServiceImpl;
 import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;

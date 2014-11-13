@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package cz.muni.fi.pa165.legomanager.dao;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/resources/testApplicationContext.xml")
 @Transactional 
-public abstract class BaseTest {
+public abstract class BaseDaoTest {
     
 }

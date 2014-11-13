@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.legomanager;
+package cz.muni.fi.pa165.legomanager.dao.impl;
 
+import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import java.util.List;
 import javax.persistence.EntityManager;

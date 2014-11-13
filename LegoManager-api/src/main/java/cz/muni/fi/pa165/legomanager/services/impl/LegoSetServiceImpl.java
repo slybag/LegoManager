@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pa165.legomanager.services.impl;
 
-import cz.muni.fi.pa165.legomanager.LegoSetDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import cz.muni.fi.pa165.legomanager.services.LegoSetService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;

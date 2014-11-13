@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165;
+package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
-import cz.muni.fi.pa165.legomanager.LegoKitDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Tomas
  */
-public class LegoKitTest extends BaseTest{
+public class LegoKitDaoImplTest extends BaseDaoTest{
     
     @Autowired
     LegoKitDao legoKitDao;

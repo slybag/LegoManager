@@ -5,8 +5,8 @@
  */
 package cz.muni.fi.pa165.legomanager.services.impl;
 
-import cz.muni.fi.pa165.legomanager.LegoDaoException;
-import cz.muni.fi.pa165.legomanager.LegoKitDao;
+import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
+import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.services.LegoKitService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
