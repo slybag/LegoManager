@@ -6,7 +6,6 @@
 package cz.muni.fi.pa165.legomanager.dao;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -26,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -53,13 +53,13 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
             
     }
        
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNullArgument(){
       
          legoSetDao.addLegoSet(null);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNullPrice(){
                 
          LegoSet set = createLegoSet("Star Wars",null,new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -67,7 +67,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNullName(){
 
         LegoSet set = createLegoSet(null,new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -75,7 +75,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
       
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNullCategories(){
 
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),null);
@@ -83,7 +83,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
       
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNullKits(){
 
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),null,new HashSet<Category>());
@@ -91,7 +91,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
       
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testCreateSetWithNegativePrice(){ 
         
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(-10),new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -109,12 +109,12 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         assertTrue(setFromDatabase.getName().equals(set.getName()));
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testUpdateSetWithNull(){
         legoSetDao.updateLegoSet(null);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testUpdateSetWithNullName(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
@@ -122,7 +122,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         legoSetDao.updateLegoSet(set);   
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testUpdateSetWithNullPrice(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
@@ -130,7 +130,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         legoSetDao.updateLegoSet(set);   
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testUpdateSetWithNullKits(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
@@ -138,7 +138,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         legoSetDao.updateLegoSet(set);   
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testUpdateSetWithNulCategories(){
         LegoSet set = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.addLegoSet(set);
@@ -163,12 +163,12 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         assertDeepEquals(set,setFromDb);
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testFindSetByIdNull(){
         LegoSet setFromDb = legoSetDao.findLegoSetById(null);
     }
     
-    @Test(expected=LegoDaoException.class)
+    @Test(expected=DataAccessException.class)
     public void testDeleteSet(){
         LegoSet set1 = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         LegoSet set2 = createLegoSet("Cast;e",new BigDecimal(100),new ArrayList<LegoKit>(),new HashSet<Category>());
@@ -186,12 +186,12 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
         legoSetDao.findLegoSetById(set1.getId());  
     }
     
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=DataAccessException.class)
     public void testDeleteSetNull(){
         legoSetDao.deleteLegoSet(null);  
     }
     
-    @Test(expected=LegoDaoException.class)
+    @Test(expected=DataAccessException.class)
     public void testDeleteNonExistingSet(){
         LegoSet set1 = createLegoSet("Star Wars",new BigDecimal(10),new ArrayList<LegoKit>(),new HashSet<Category>());
         legoSetDao.deleteLegoSet(set1);

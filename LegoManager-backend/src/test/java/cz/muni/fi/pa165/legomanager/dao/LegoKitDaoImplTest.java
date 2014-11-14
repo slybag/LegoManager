@@ -5,9 +5,7 @@
  */
 package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
-import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
@@ -25,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -56,42 +55,42 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         assertEquals(sizeBefore + 1, sizeAfter);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoNullTest(){
         legoKitDao.addLegoKit(null);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoNameNullTest(){
         LegoKit legoKit = createLegoKit(null, BigDecimal.valueOf(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoPriceNullTest(){
         LegoKit legoKit = createLegoKit("StarWars Death Star", null, 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoRestrictionTestNull(){
         LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, null , new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoCategoriesNullTest(){
         LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, 12, null, new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoPiecesNullTest(){
         LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, 12, new HashSet<Category>(), null, new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void addLegoSetsNullTest(){
         LegoKit legoKit = createLegoKit("StarWars Death Star", BigDecimal.TEN, 0, new HashSet<Category>(), new ArrayList<LegoPiece>(), null);
         legoKitDao.addLegoKit(legoKit);
@@ -174,7 +173,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         }
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -182,7 +181,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         legoKitDao.updateLegoKit(null);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitNameNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -190,7 +189,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         legoKitDao.updateLegoKit(legoKit1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitPriceNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -198,7 +197,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         legoKitDao.updateLegoKit(legoKit1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitCategoriesNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -206,7 +205,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         legoKitDao.updateLegoKit(legoKit1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitPiecesNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -214,7 +213,7 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         legoKitDao.updateLegoKit(legoKit1);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void updateLegoKitSetsNullTest(){
         LegoKit legoKit1 = createLegoKit("Pokemon Charizard", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit1);
@@ -243,12 +242,12 @@ public class LegoKitDaoImplTest extends BaseDaoTest{
         assertEquals(sizeBefore - 1, sizeAfter);
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = DataAccessException.class)
     public void deleteLegoKitNullTest(){
         legoKitDao.deleteLegoKit(null);
     }
     
-    @Test(expected = LegoDaoException.class)
+    @Test(expected = DataAccessException.class)
     public void deleteLegoKitNotExistTest(){
         LegoKit legoKit2 = createLegoKit("StarWars Death Star", new BigDecimal(42), 12, new HashSet<Category>(), new ArrayList<LegoPiece>(), new ArrayList<LegoSet>());
         legoKitDao.addLegoKit(legoKit2);

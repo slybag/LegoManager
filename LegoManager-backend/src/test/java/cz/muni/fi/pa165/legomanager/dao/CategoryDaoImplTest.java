@@ -147,11 +147,8 @@ public class CategoryDaoImplTest extends BaseDaoTest {
         categoryDao.addCategory(category3);
         categoryDao.deleteCategory(category3);
         
-        try {            
-            categoryDao.findCategoryById(category3.getId());
-            fail ("No exception thrown");
-        } catch (Exception ex) {
-        }        
+        if(categoryDao.findCategoryById(category3.getId())!= null) fail ("Entry was not deleted");
+    
     }
     
     @Test 
@@ -178,6 +175,8 @@ public class CategoryDaoImplTest extends BaseDaoTest {
         Category category = new Category();
         category.setName(name);
         category.setDescription(description);
+        category.setLegoKits(new ArrayList());
+        category.setLegoSets(new ArrayList());
         
         return category;
     }

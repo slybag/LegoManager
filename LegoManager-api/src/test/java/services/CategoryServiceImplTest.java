@@ -6,13 +6,13 @@
 package services;
 
 import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import cz.muni.fi.pa165.legomanager.services.impl.CategoryServiceImpl;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import java.util.ArrayList;
+import javax.persistence.PersistenceException;
 import org.dozer.DozerBeanMapper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -68,20 +68,6 @@ public class CategoryServiceImplTest extends BaseServiceTest {
     }
     
     @Test
-    public void getCategoryTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(categoryDao).findCategoryById(category.getId());
-
-            categoryService.getCategory(category.getId());
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-    
-    @Test
     public void addCategoryTest() {
         try {
             categoryService.createCategory(category);
@@ -90,21 +76,7 @@ public class CategoryServiceImplTest extends BaseServiceTest {
             fail("Exception thrown: " + ex.getMessage());
         }
     }
-    
-    @Test
-    public void addCategoryTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(categoryDao).addCategory(mapper.map(category, Category.class));
-            
-            categoryService.createCategory(category);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-    
+      
     @Test
     public void updateCategoryTest() {
         try {
@@ -114,22 +86,7 @@ public class CategoryServiceImplTest extends BaseServiceTest {
             fail("Exception thrown: " + ex.getMessage());
         }
     }
-    
-    @Test
-    public void updateCategoryTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(categoryDao)
-                    .updateCategory(mapper.map(category, Category.class));
-
-            categoryService.updateCategory(category);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-    
+        
     @Test
     public void removeCategoryTest() {
         try {
@@ -141,41 +98,12 @@ public class CategoryServiceImplTest extends BaseServiceTest {
     }
     
     @Test
-    public void removeCategoryTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(categoryDao)
-                    .deleteCategory(mapper.map(category, Category.class));
-
-            categoryService.deleteCategory(category);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-    
-    @Test
     public void getAllCategoriesTest() {
         try {
             categoryService.getAllCategories();
             verify(categoryDao).getAllCategories();
         } catch (Exception ex) {
             fail("Exception thrown: " + ex.getMessage());
-        }
-    }
-    
-    @Test
-    public void getAllCategoriesTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(categoryDao).getAllCategories();
-
-            categoryService.getAllCategories();
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
         }
     }
     

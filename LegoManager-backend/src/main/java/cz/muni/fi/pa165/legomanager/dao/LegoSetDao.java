@@ -17,41 +17,32 @@ public interface LegoSetDao {
     /**
      * Finds all lego sets
      * @return list of all lego sets
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public List<LegoSet> getAllLegoSets() throws IllegalArgumentException,LegoDaoException;
+    public List<LegoSet> getAllLegoSets();
     
     /**
      * Update lego set
      * @param legoSet to be updated
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public void updateLegoSet(LegoSet legoSet) throws IllegalArgumentException,LegoDaoException;
+    public void updateLegoSet(LegoSet legoSet);
     
     /**
      * Remove lego set
      * @param legoSet to be deleted
      * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public void deleteLegoSet(LegoSet legoSet) throws IllegalArgumentException,LegoDaoException;
+    public void deleteLegoSet(LegoSet legoSet);
     
     /**
      * Add new lego set
      * @param legoSet to be added   
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException 
      */
-    public void addLegoSet(LegoSet legoSet) throws IllegalArgumentException,LegoDaoException;
+    public void addLegoSet(LegoSet legoSet);
     
     /**
      * Find lego set by id
      * @param id of wanted lego set
      * @return lego set with specified id
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException 
      */
-    public LegoSet findLegoSetById (Long id) throws IllegalArgumentException,LegoDaoException;
+    public LegoSet findLegoSetById (Long id);
 }

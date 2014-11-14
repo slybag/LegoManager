@@ -137,12 +137,10 @@ public class LegoPieceDaoImplTest extends BaseDaoTest {
         }
         
         // check if its still there
-        try {            
-            legoPieceDao.findLegoPieceById(stored.getId());
-            fail ("No Exception thrown: ");
-        } catch (Exception ex){            
-        }
+            if(legoPieceDao.findLegoPieceById(stored.getId())!= null) fail ("Entry was not deleted");
+        
     }
+
     @Test
     public void deleteLegoPieceTestNullPiece() {
         //with null

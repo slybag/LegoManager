@@ -5,12 +5,12 @@
  */
 package cz.muni.fi.pa165.legomanager.dao.impl;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,20 +25,20 @@ public class LegoSetDaoImpl implements LegoSetDao {
     EntityManager entityManager;
     
     @Override
-    public List<LegoSet> getAllLegoSets() throws IllegalArgumentException, LegoDaoException{
+    public List<LegoSet> getAllLegoSets() {
         return entityManager.createQuery("SELECT s FROM LegoSet s", LegoSet.class).getResultList();
     }
 
     @Override
-    public void updateLegoSet(LegoSet legoSet) throws IllegalArgumentException {
+    public void updateLegoSet(LegoSet legoSet) {
         if (legoSet == null || !isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.merge(legoSet);
     }
 
     @Override
-    public void deleteLegoSet(LegoSet legoSet) throws IllegalArgumentException, LegoDaoException {
+    public void deleteLegoSet(LegoSet legoSet) {
         if (legoSet == null) throw new IllegalArgumentException();
-        if (legoSet.getId() == null) throw new LegoDaoException();
+        if (legoSet.getId() == null) throw new PersistenceException();
         
         LegoSet setToDelete = entityManager.merge(legoSet);
         
@@ -46,15 +46,15 @@ public class LegoSetDaoImpl implements LegoSetDao {
     }
 
     @Override
-    public void addLegoSet(LegoSet legoSet) throws IllegalArgumentException {
+    public void addLegoSet(LegoSet legoSet) {
         if (legoSet == null || !isValidLegoSet(legoSet)) throw new IllegalArgumentException();
         entityManager.persist(legoSet);
     }
 
     @Override
-    public LegoSet findLegoSetById(Long id) throws LegoDaoException {
+    public LegoSet findLegoSetById(Long id) {
         LegoSet setToFind = entityManager.find(LegoSet.class, id);
-        if (setToFind == null) throw new LegoDaoException("Lego Set with id: " + id + " is not in DB");
+        if (setToFind == null) throw new PersistenceException("Lego Set with id: " + id + " is not in DB");
         
         return setToFind;
     }

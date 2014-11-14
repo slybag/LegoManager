@@ -5,7 +5,6 @@
  */
 package services;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.services.impl.LegoKitServiceImpl;
@@ -16,6 +15,7 @@ import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
+import javax.persistence.PersistenceException;
 import org.dozer.DozerBeanMapper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -71,12 +71,6 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
         }
     }
 
-    @Test (expected = DataAccessException.class)
-    public void getLegoKitTestException() {
-        doThrow(LegoDaoException.class).when(legoKitDao).findLegoKitById(legoKit.getId());
-        legoKitService.getLegoKit(legoKit.getId());
-    }
-
     @Test
     public void addLegoKitTest() {
         try {
@@ -88,9 +82,9 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
     }
 
     
-    @Test (expected = DataAccessException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addLegoKitNullTestException() {
-        doThrow(LegoDaoException.class).when(legoKitDao).addLegoKit(null);
+        doThrow(Exception.class).when(legoKitDao).addLegoKit(null);
         legoKitService.createLegoKit(null);
     }
     
@@ -104,13 +98,6 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
         }
     }
 
-    @Test (expected = DataAccessException.class)
-    public void updateLegoKitTestException() {
-        doThrow(LegoDaoException.class).when(legoKitDao)
-                .updateLegoKit(mapper.map(legoKit, LegoKit.class));
-        legoKitService.updateLegoKit(legoKit);
-    }
-
     @Test
     public void deleteLegoKitTest() {
         try {
@@ -119,13 +106,6 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
         } catch (Exception ex) {
             fail("Exception thrown: " + ex.getMessage());
         }
-    }
-
-    @Test (expected = DataAccessException.class)
-    public void deleteLegoKitTestException() {
-        doThrow(LegoDaoException.class).when(legoKitDao)
-                .deleteLegoKit(mapper.map(legoKit, LegoKit.class));
-        legoKitService.deleteLegoKit(legoKit);
     }
     
     @Test
@@ -136,12 +116,6 @@ public class LegoKitServiceImplTest extends BaseServiceTest {
         } catch (Exception ex) {
             fail("Exception thrown: " + ex.getMessage());
         }
-    }
-
-    @Test (expected = DataAccessException.class)
-    public void getAllLegoKitsTestException() {
-        doThrow(LegoDaoException.class).when(legoKitDao).getAllLegoKits();
-        legoKitService.getAllLegoKits();
     }
     
     private LegoKitTO createLegoKit(BigDecimal price, Integer ageRestriction, String name) {

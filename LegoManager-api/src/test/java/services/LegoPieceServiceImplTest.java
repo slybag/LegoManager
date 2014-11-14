@@ -5,7 +5,6 @@
  */
 package services;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.services.impl.LegoPieceServiceImpl;
@@ -20,12 +19,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -70,40 +67,12 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    public void getLegoPieceTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(legoPieceDao).findLegoPieceById(legoPiece1.getId());
-
-            legoPieceService.getLegoPiece(legoPiece1.getId());
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-
-    @Test
     public void addLegoPieceTest() {
         try {
             legoPieceService.createLegoPiece(legoPiece1);
             verify(legoPieceDao).addLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
         } catch (Exception ex) {
             fail("Exception thrown: " + ex.getMessage());
-        }
-    }
-
-    @Test
-    public void addLegoPieceTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(legoPieceDao).addLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
-
-            legoPieceService.createLegoPiece(legoPiece1);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
         }
     }
 
@@ -118,42 +87,12 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
     }
 
     @Test
-    public void updateLegoPieceTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(legoPieceDao)
-                    .updateLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
-
-            legoPieceService.updateLegoPiece(legoPiece1);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-
-    @Test
     public void removeLegoPieceTest() {
         try {
             legoPieceService.removeLegoPiece(legoPiece1);
             verify(legoPieceDao).deleteLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
         } catch (Exception ex) {
             fail("Exception thrown: " + ex.getMessage());
-        }
-    }
-
-    @Test
-    public void removeLegoPieceTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(legoPieceDao)
-                    .deleteLegoPiece(mapper.map(legoPiece1, LegoPiece.class));
-
-            legoPieceService.removeLegoPiece(legoPiece1);
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
         }
     }
     
@@ -166,21 +105,7 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
             fail("Exception thrown: " + ex.getMessage());
         }
     }
-
-    @Test
-    public void getAllLegoPiecesTestException() {
-        try {
-            doThrow(LegoDaoException.class).when(legoPieceDao).getAllLegoPieces();
-
-            legoPieceService.getAllLegoPieces();
-            fail("No exception thrown.");
-        } catch (DataAccessException ex) {
-            // OK
-        } catch (Exception ex) {
-            fail("Bad exception throwed: " + ex);
-        }
-    }
-    
+   
     private LegoPieceTO createLegoPiece(PieceColor pieceColor) {
         LegoPieceTO newPiece = new LegoPieceTO();
         newPiece.setColor(pieceColor);

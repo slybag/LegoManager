@@ -5,15 +5,14 @@
  */
 package cz.muni.fi.pa165.legomanager.dao.impl;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -40,19 +39,17 @@ public class LegoKitDaoImpl implements LegoKitDao{
         if (!isValidLegoKit(kit)) {
             throw new IllegalArgumentException("Not a valid lego kit");
         } else if(em.find(LegoKit.class, kit.getId()) == null) {
-            throw new LegoDaoException("Kit is not in database");
+            throw new PersistenceException("Kit is not in database");
         }     
         em.merge(kit);
     }
 
     @Override
     public void deleteLegoKit(LegoKit kit) {
-        if (kit == null) {
-            throw new IllegalArgumentException("Kit argument is null");
-        }else if(kit.getId() == null){
-            throw new IllegalArgumentException("Kit id was not specified");
-        }else if(em.find(LegoKit.class, kit.getId()) == null) {
-            throw new LegoDaoException("Kit is not in database");
+        if (!isValidLegoKit(kit)) {
+            throw new IllegalArgumentException("Not a valid lego kit");
+        } else if(em.find(LegoKit.class, kit.getId()) == null) {
+            throw new PersistenceException("Kit is not in database");
         }
         em.remove(kit);
    }
@@ -70,11 +67,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
         
         if(id == null) {
             throw new IllegalArgumentException("Id parameter is null.");
-        }
-        LegoKit kitToReturn = em.find(LegoKit.class, id);       
-        if(kitToReturn == null){
-            throw new LegoDaoException("Kit is not in the database");
-        }       
+        }     
         return em.find(LegoKit.class, id);
     }   
     

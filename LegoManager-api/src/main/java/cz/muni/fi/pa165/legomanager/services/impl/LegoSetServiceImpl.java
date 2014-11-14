@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,61 +41,41 @@ public class LegoSetServiceImpl implements LegoSetService {
     @Override
     @Transactional
     public void createLegoSet(LegoSetTO legoSet) {
-        try {
-            legoSetDao.addLegoSet(mapper.map(legoSet, LegoSet.class));
-        } catch (Exception ex) {
-            throw new DataAccessException("createLegoSetEXception") {
-            };
-        }
+        if(legoSet==null) throw new IllegalArgumentException();
+        legoSetDao.addLegoSet(mapper.map(legoSet, LegoSet.class));
+               
     }
 
     @Override
     @Transactional
     public void updateLegoSet(LegoSetTO legoSet) {
-        try {
-            legoSetDao.updateLegoSet(mapper.map(legoSet, LegoSet.class));
-        } catch (Exception ex) {
-            throw new DataAccessException("updateLegoSet") {
-            };
-        }
+        if(legoSet==null) throw new IllegalArgumentException();
+        legoSetDao.updateLegoSet(mapper.map(legoSet, LegoSet.class));
+        
     }
 
     @Override
     @Transactional
     public void removeLegoSet(LegoSetTO legoSet) {
-        try {
-            legoSetDao.deleteLegoSet(mapper.map(legoSet, LegoSet.class));
-        } catch (Exception ex) {
-            throw new DataAccessException("removeLegoSet") {
-            };
-        }
+        if(legoSet==null) throw new IllegalArgumentException();
+        legoSetDao.deleteLegoSet(mapper.map(legoSet, LegoSet.class));
+        
     }
 
     @Override
     @Transactional
     public LegoSetTO getLegoSet(Long id) {
-        LegoSetTO legoSet = null;
-        try {
-            legoSet = mapper.map(legoSetDao.findLegoSetById(id), LegoSetTO.class);
-        } catch (Exception ex) {
-            throw new DataAccessException("getLegoSet") {
-            };
-        }
-
-        return legoSet;
+        if(id == null) throw new IllegalArgumentException();
+        return mapper.map(legoSetDao.findLegoSetById(id), LegoSetTO.class);      
     }
 
     @Override
     @Transactional
     public List<LegoSetTO> getAllLegoSets() {
         List<LegoSetTO> legoSetsTO = new ArrayList<>();
-        try {
-            List<LegoSet> legoSets = legoSetDao.getAllLegoSets();
-            for (LegoSet set : legoSets) {
-                legoSetsTO.add(mapper.map(set, LegoSetTO.class));
-            }
-        } catch (Exception ex) {
-            throw  new DataAccessException("getAllLegoSets") {};
+        List<LegoSet> legoSets = legoSetDao.getAllLegoSets();
+        for (LegoSet set : legoSets) {
+            legoSetsTO.add(mapper.map(set, LegoSetTO.class));
         }
         return legoSetsTO;
     }

@@ -19,41 +19,31 @@ public interface CategoryDao {
     /**
      * Finds all categories
      * @return list of all categories
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public List<Category> getAllCategories() throws IllegalArgumentException,LegoDaoException;
+    public List<Category> getAllCategories() ;
     
     /**
      * Update category
      * @param category to be updated
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public void updateCategory(Category category) throws IllegalArgumentException,LegoDaoException;
+    public void updateCategory(Category category) ;
     
     /**
      * Remove category
      * @param category to be deleted
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException
      */
-    public void deleteCategory(Category category) throws IllegalArgumentException,LegoDaoException;
+    public void deleteCategory(Category category) ;
     
     /**
      * Add new category
      * @param category to be added   
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException 
      */
-    public void addCategory(Category category) throws IllegalArgumentException,LegoDaoException;
+    public void addCategory(Category category) ;
     
     /**
      * Find category by id
      * @param id of wanted category
      * @return category with specified id
-     * @throws IllegalArgumentException
-     * @throws LegoDaoException 
      */
-    public Category findCategoryById (Long id) throws IllegalArgumentException,LegoDaoException;   
+    public Category findCategoryById (Long id) ;   
 }

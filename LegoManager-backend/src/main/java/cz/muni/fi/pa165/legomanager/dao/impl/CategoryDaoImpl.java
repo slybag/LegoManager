@@ -7,14 +7,12 @@
 package cz.muni.fi.pa165.legomanager.dao.impl;
 
 import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 /**
  *
  * @author Martin Laštovička
@@ -34,15 +32,10 @@ public class CategoryDaoImpl implements CategoryDao{
 
     @Override
     public void updateCategory(Category category) {
-        if (category == null){
-            throw new IllegalArgumentException("Category is null");
-        }
-        if (category.getName() == null) {
-            throw new IllegalArgumentException("Category name is null");
-        }
+        if (!isValidCategory(category)) throw new IllegalArgumentException("Not a valid category");
         Category cat = entityManager.find(Category.class, category.getId());
         if (cat == null) {
-            throw new LegoDaoException("Category not found in database");
+            throw new PersistenceException("Category not found in database");
         } else {
             entityManager.merge(category);
             entityManager.flush();
@@ -51,29 +44,24 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override   
-    public void deleteCategory(Category category) throws IllegalArgumentException {
-        if (category == null){
-            throw new IllegalArgumentException("Category is null");
-        }
-        if (category.getId() == null) {
-            throw new IllegalArgumentException("Category Id is null");
+    public void deleteCategory(Category category) {
+        if (!isValidCategory(category)){
+            throw new IllegalArgumentException("Not valid category");
         }
         Category cat = entityManager.find(Category.class, category.getId());
         if (cat == null) {
-            throw new LegoDaoException("Category not found in database");
-        } else {
-            entityManager.remove(cat);
-            entityManager.flush();
-        }
+            throw new PersistenceException("Category not found in database");
+        } 
+        
+        entityManager.remove(cat);
+        entityManager.flush();
+        
     }
 
     @Override 
     public void addCategory(Category category) {
-        if (category == null){
-            throw new IllegalArgumentException("Category is null");
-        }
-        if (category.getName() == null) {
-            throw new IllegalArgumentException("Category name is null");
+        if (!isValidCategory(category)){
+            throw new IllegalArgumentException("Not valid category");
         }
         entityManager.persist(category);
         entityManager.flush();
@@ -85,9 +73,17 @@ public class CategoryDaoImpl implements CategoryDao{
             throw new IllegalArgumentException("Id is null");
         }
         
-        Category categoryToFind = entityManager.find(Category.class, id);
-        if (categoryToFind == null) throw new IllegalArgumentException();
-        
+        Category categoryToFind = entityManager.find(Category.class, id);      
         return categoryToFind;
+    }
+    
+    public boolean isValidCategory(Category category){
+        if (category == null ||
+                category.getLegoKits() == null ||
+                category.getLegoSets()== null ||
+                category.getName() == null ) return false;        
+        return true;
+        
+    
     }
 }

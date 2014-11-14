@@ -5,12 +5,12 @@
  */
 package cz.muni.fi.pa165.legomanager.dao.impl;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -28,45 +28,42 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
     }
 
     @Override
-    public void updateLegoPiece(LegoPiece legoPiece) throws IllegalArgumentException, LegoDaoException {
+    public void updateLegoPiece(LegoPiece legoPiece) {
         String error = isValidLegoPiece(legoPiece);
         if (error.length() != 0) throw new IllegalArgumentException(error);
         try{
             entityManager.merge(legoPiece);
         }catch(IllegalArgumentException ex){
-            throw new LegoDaoException(ex);
+            throw new PersistenceException(ex);
         }
     }
 
     @Override
-    public void deleteLegoPiece(LegoPiece legoPiece) throws LegoDaoException {
+    public void deleteLegoPiece(LegoPiece legoPiece) {
         LegoPiece setToFind = entityManager.find(LegoPiece.class, legoPiece.getId());
         if(setToFind == null) {
-            throw new LegoDaoException("Kit is not in database");
+            throw new PersistenceException("Kit is not in database");
         }
         try{
             entityManager.remove(legoPiece);
         }catch(IllegalArgumentException ex){
-            throw new LegoDaoException(ex);
+            throw new PersistenceException(ex);
         }
     }
 
     @Override
-    public void addLegoPiece(LegoPiece legoPiece) throws IllegalArgumentException {
+    public void addLegoPiece(LegoPiece legoPiece) {
         String error = isValidLegoPiece(legoPiece);
         if (error.length() != 0) throw new IllegalArgumentException(error);
         entityManager.persist(legoPiece);
     }
 
     @Override
-    public LegoPiece findLegoPieceById(Long id) throws IllegalArgumentException, LegoDaoException {
+    public LegoPiece findLegoPieceById(Long id) {
         if(id == null){
             throw new IllegalArgumentException("given LegoPiece id is null");
         }
-        LegoPiece setToFind = entityManager.find(LegoPiece.class, id);
-        if (setToFind == null) throw new LegoDaoException("Lego Piece with id: " + id + " is not in DB");
-        
-        return setToFind;
+        return entityManager.find(LegoPiece.class, id);        
     }
     
     private String isValidLegoPiece(LegoPiece legoPiece) {

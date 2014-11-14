@@ -5,7 +5,6 @@
  */
 package services;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoDaoException;
 import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import cz.muni.fi.pa165.legomanager.services.impl.LegoSetServiceImpl;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -65,40 +63,16 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         verifyNoMoreInteractions(legoSetDao);     
     }
     
-    @Test(expected=DataAccessException.class)
-    public void testCreateWithExceptionDao(){
-        doThrow(LegoDaoException.class).when(legoSetDao).addLegoSet(set);
-        setService.createLegoSet(setTO);
-    }
-    
-    @Test(expected=DataAccessException.class)
-    public void testCreateWithExceptionArg(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).addLegoSet(set);
-        setService.createLegoSet(setTO);
-    }
-    
     @Test
     public void testUpdate(){
         setService.updateLegoSet(setTO);
         verify(legoSetDao, times(1)).updateLegoSet(set);
         verifyNoMoreInteractions(legoSetDao);     
     }
-      
-    @Test(expected=DataAccessException.class)
-    public void testupdateWithExceptionDao(){
-        doThrow(LegoDaoException.class).when(legoSetDao).updateLegoSet(set);
-        setService.updateLegoSet(setTO);
-    }
     
-    @Test(expected=DataAccessException.class)
-    public void testupdateWithExceptionArg(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).updateLegoSet(set);
-        setService.updateLegoSet(setTO);
-    }
-    
-    @Test(expected=DataAccessException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void updateWithNull(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).updateLegoSet(null);
+        doThrow(Exception.class).when(legoSetDao).updateLegoSet(null);
         setService.updateLegoSet(null);
     }
     
@@ -108,22 +82,10 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         verify(legoSetDao, times(1)).deleteLegoSet(set);
         verifyNoMoreInteractions(legoSetDao);     
     }
-    
-    @Test(expected=DataAccessException.class)
-    public void testRemoveWithExceptionDao(){
-        doThrow(LegoDaoException.class).when(legoSetDao).deleteLegoSet(set);
-        setService.removeLegoSet(setTO);
-    }
-    
-    @Test(expected=DataAccessException.class)
-    public void testRemoveWithExceptionArg(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).deleteLegoSet(set);
-        setService.removeLegoSet(setTO);
-    }
-    
-    @Test(expected=DataAccessException.class)
+       
+    @Test(expected=IllegalArgumentException.class)
     public void removeWithNull(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).deleteLegoSet(null);
+        doThrow(Exception.class).when(legoSetDao).deleteLegoSet(null);
         setService.removeLegoSet(null);
     }
     
@@ -137,24 +99,12 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         assertDeepEquals(expected,actual);
     }
     
-    @Test(expected=DataAccessException.class)
-    public void getWithExceptionDao(){
-        doThrow(LegoDaoException.class).when(legoSetDao).findLegoSetById(-1L);
-        setService.getLegoSet(-1L);
-    }
-    
-    @Test(expected=DataAccessException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void getWithNull(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).findLegoSetById(null);
+        doThrow(Exception.class).when(legoSetDao).findLegoSetById(null);
         setService.getLegoSet(null);
     }
-    
-    @Test(expected=DataAccessException.class)
-    public void getWithExceptionArg(){
-        doThrow(IllegalArgumentException.class).when(legoSetDao).findLegoSetById(-1L);
-        setService.getLegoSet(-1L);
-    }
-       
+
     @Test
     public void testGetAll(){
         
@@ -167,19 +117,7 @@ public class LegoSetServiceImplTest extends BaseServiceTest{
         verifyNoMoreInteractions(legoSetDao);     
         assertDeepEquals(expected,actual);
     }
-    
-    @Test(expected=DataAccessException.class)
-    public void getAllWithExceptionDao(){
-        doThrow(LegoDaoException.class).when(legoSetDao).getAllLegoSets();
-        setService.getAllLegoSets();
-    }
-    
-    @Test(expected=DataAccessException.class)
-    public void getAllWithExceptionArg(){ 
-        doThrow(IllegalArgumentException.class).when(legoSetDao).getAllLegoSets();
-        setService.getAllLegoSets();
-    }
-            
+               
     public static LegoSetTO getValidSet(){
         
         LegoSetTO set = new LegoSetTO();
