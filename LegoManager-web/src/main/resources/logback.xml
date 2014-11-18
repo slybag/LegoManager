@@ -1,0 +1,18 @@
+<configuration>
+    <contextName>lego</contextName>
+    <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="APP"/>
+    </root>
+    <logger name="org.apache.log4j.xml" level="info"/>
+    <logger name="net.sourceforge.stripes.util.ResolverUtil" level="warn"/>
+    <logger name="net.sourceforge.stripes" level="info"/>
+    <logger name="org.hibernate" level="warn"/>
+    <logger name="org.springframework" level="warn"/>
+    <logger name="org.springframework.web.context.ContextLoader" level="info"/>
+    <logger name="cz" level="debug"/>
+</configuration>
