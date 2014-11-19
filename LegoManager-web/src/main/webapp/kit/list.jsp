@@ -6,7 +6,6 @@
 <s:layout-render name="/layout.jsp" titlekey="kit.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" var="actionBean"/>
-        <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" var="actionBeanSet"/>
 
         <p><f:message key="kit.list.allkits"/></p>
 
@@ -38,8 +37,7 @@
 
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
             <fieldkit><legend><f:message key="kit.list.newkit"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="add">Vytvořit novou knihu</s:submit>
+                <s:submit name="edit">Vytvořit novou knihu</s:submit>
             </fieldkit>
         </s:form>
     </s:layout-component>

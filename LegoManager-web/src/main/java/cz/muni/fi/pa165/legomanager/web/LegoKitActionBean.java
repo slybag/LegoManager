@@ -4,7 +4,10 @@
  */
 package cz.muni.fi.pa165.legomanager.web;
 
+import cz.muni.fi.pa165.legomanager.services.CategoryService;
 import cz.muni.fi.pa165.legomanager.services.LegoKitService;
+import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
+import cz.muni.fi.pa165.legomanager.services.LegoSetService;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
@@ -14,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -43,7 +47,22 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     @SpringBean
     protected LegoKitService legoKitService;
     
+    @SpringBean
+    protected LegoSetService legoSetService;
+    
+    @SpringBean
+    protected LegoPieceService legoPieceService;
+    
+    @SpringBean
+    protected CategoryService categoryService;
+    
+    private List<LegoSetTO> legoSets;
+    
     private List<LegoKitTO> legoKits;
+    
+    private List<CategoryTO> categories;
+    
+    private List<LegoPieceTO> legoPieces;
     
     @ValidateNestedProperties(value = {            
             @Validate(on = {"add", "save"}, field = "name", required = true),
@@ -65,6 +84,9 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     }
        
     public Resolution add() {
+        legoSets = legoSetService.getAllLegoSets();
+        legoKits = legoKitService.getAllLegoKits();
+        legoPieces = legoPieceService.getAllLegoPieces();
         log.debug("add() lego kit={}", legoKitTO);
         legoKitService.createLegoKit(legoKitTO);
         getContext().getMessages().add(new LocalizableMessage("kit.add.message", escapeHTML(legoKitTO.getName())));
@@ -87,6 +109,10 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     }
     
      public Resolution edit() {
+        legoSets = legoSetService.getAllLegoSets();
+        legoKits = legoKitService.getAllLegoKits();
+        categories = categoryService.getAllCategories();
+        legoPieces = legoPieceService.getAllLegoPieces();
         log.debug("edit() kit={}", legoKitTO);
         return new ForwardResolution("/kit/edit.jsp");
     }
@@ -108,5 +134,19 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     public void kitLegoKitTO(LegoKitTO legoKitTO) {
         this.legoKitTO = legoKitTO;
     }
+
+    public List<LegoSetTO> getLegoSets() {
+        return legoSets;
+    }
+
+    public List<CategoryTO> getCategories() {
+        return categories;
+    }
+
+    public List<LegoPieceTO> getLegoPieces() {
+        return legoPieces;
+    }
+    
+    
      
 }
