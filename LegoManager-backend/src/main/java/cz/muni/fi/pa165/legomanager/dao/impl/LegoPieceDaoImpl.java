@@ -24,7 +24,7 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
     
     @Override
     public List<LegoPiece> getAllLegoPieces(){
-        return entityManager.createQuery("SELECT p FROM LegoPiece P", LegoPiece.class).getResultList();
+        return entityManager.createQuery("SELECT l FROM LegoPiece l", LegoPiece.class).getResultList();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
     public void deleteLegoPiece(LegoPiece legoPiece) {
         LegoPiece setToFind = entityManager.find(LegoPiece.class, legoPiece.getId());
         if(setToFind == null) {
-            throw new PersistenceException("Kit is not in database");
+            throw new PersistenceException("Piece is not in database");
         }
         try{
             entityManager.remove(legoPiece);
