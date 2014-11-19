@@ -24,9 +24,9 @@ public class LegoPieceDaoImpl implements LegoPieceDao {
     
     @Override
     public List<LegoPiece> getAllLegoPieces(){
-        return entityManager.createQuery("SELECT Q FROM LegoPiece Q", LegoPiece.class).getResultList();
+        return entityManager.createQuery("Select p from LegoPiece p", LegoPiece.class).getResultList();
     }
-
+    
     @Override
     public void updateLegoPiece(LegoPiece legoPiece) {
         String error = isValidLegoPiece(legoPiece);
