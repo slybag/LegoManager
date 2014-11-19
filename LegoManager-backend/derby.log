@@ -1,0 +1,8 @@
+----------------------------------------------------------------
+Wed Nov 19 18:37:45 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.7.1.1 - (1040133): instance a816c00e-0149-c921-a5bd-00000baaa0f8 
+on database directory memory:/home/xhruso/NetBeansProjects/LegoManager/LegoManager-backend/unit-testing-jpa  with class loader sun.misc.Launcher$AppClassLoader@3b6cdbb8 
+Loaded from file:/tmp/maven-repo-xhruso/org/apache/derby/derby/10.7.1.1/derby-10.7.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_25-b15
+Database Class Loader started - derby.database.classpath=''

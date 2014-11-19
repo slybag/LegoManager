@@ -21,13 +21,13 @@
                 <tr>
                     <td>${piece.id}</td>
                     <td><c:out value="${piece.color}"/></td>
-                    <th><c:forEach items="legoPieces.legoKits" var="kit"><span>kit.name</span></c:forEach></th>
-                    <td>
-                     <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/>edit</s:link>
-                    </td>
-                    <td>
+                    <th><c:forEach items="piece.legoKits" var="kit"><span>kit.name</span></c:forEach></th>
+                        <td>
+                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/>edit</s:link>
+                        </td>
+                        <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
-                            <s:hidden name="piece.id" value="${piece.id}"/>
+                            <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
                             <s:submit name="delete"><f:message key="piece.list.delete"/></s:submit>
                         </s:form>
                     </td>
@@ -39,7 +39,7 @@
             <fieldset><legend><f:message key="piece.list.newpiece"/></legend>
                 <%@include file="form.jsp"%>
                 <s:submit name="add"><f:message key="piece.create.newpiece"/></s:submit>
-            </fieldset>
+                </fieldset>
         </s:form>
     </s:layout-component>
 </s:layout-render>

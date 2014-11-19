@@ -5,7 +5,9 @@
 package cz.muni.fi.pa165.legomanager.web;
 
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
+import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
+import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -27,11 +29,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author Tomas
  */
-@UrlBinding("/piece/{$event}/{piece.id}")
+@UrlBinding("/piece/{$event}/{piece.id}/")
 public class LegoPieceActionBean extends BaseActionBean implements ValidationErrorHandler {
 
 
-    final static Logger log = LoggerFactory.getLogger(LegoSetActionBean.class);
+    final static Logger log = LoggerFactory.getLogger(LegoPieceActionBean.class);
     
     @SpringBean
     protected LegoPieceService legoPieceService;
@@ -73,6 +75,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     
     public Resolution add() {
         log.debug("add() lego piece={}", legoPieceTO);
+        legoPieceTO.setLegoKits(new ArrayList<LegoKitTO>());
         legoPieceService.createLegoPiece(legoPieceTO);
         getContext().getMessages().add(new LocalizableMessage("piece.add.message", escapeHTML(legoPieceTO.getColor().toString())));
         return new RedirectResolution(this.getClass(), "list");

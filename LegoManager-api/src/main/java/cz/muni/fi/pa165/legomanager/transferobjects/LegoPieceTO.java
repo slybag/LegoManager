@@ -64,4 +64,9 @@ public class LegoPieceTO {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "LegoPieceTO{" + "id=" + id + ", color=" + color + ", legoKits=" + legoKits + '}';
+    }
 }
