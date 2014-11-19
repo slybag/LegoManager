@@ -7,6 +7,9 @@
 
        <ul>
            <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean"><f:message key="index.sets.link"/></s:link></li>
+           <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean"><f:message key="index.kits.link"/></s:link></li>
+           <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.PopulateActionBean">Populate tables for testing</s:link></li>
+
        </ul>
 
     </s:layout-component>

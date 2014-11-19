@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * It does rollback after each test method
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration("file:src/main/resources/testApplicationContext.xml")
+@ContextConfiguration("file:src/main/resources/jpa-inmemory.xml")
 @Transactional 
 public abstract class BaseDaoTest {
     
