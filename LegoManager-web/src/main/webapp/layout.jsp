@@ -11,7 +11,8 @@
   <s:layout-component name="header"/>
 </head>
 <body>
-   <h1><f:message key="${titlekey}"/></h1>
+    <s:errors/>
+    <h1><f:message key="${titlekey}"/></h1>
 
    <div id="content">
        <s:messages/>

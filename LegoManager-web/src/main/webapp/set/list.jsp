@@ -27,7 +27,7 @@
                     </td>
                     <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
-                            <s:hidden name="set.id" value="${set.id}"/>
+                            <s:hidden name="legoSetTO.id" value="${set.id}"/>
                             <s:submit name="delete"><f:message key="set.list.delete"/></s:submit>
                         </s:form>
                     </td>

@@ -5,8 +5,12 @@
 package cz.muni.fi.pa165.legomanager.web;
 
 import cz.muni.fi.pa165.legomanager.services.LegoSetService;
+import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
+import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import static cz.muni.fi.pa165.legomanager.web.BaseActionBean.escapeHTML;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -23,13 +27,12 @@ import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author xrais
  */
-@UrlBinding("/set/{$event}/{set.id}")
+@UrlBinding("/set/{$event}/{set.id}/")
 public class LegoSetActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     final static Logger log = LoggerFactory.getLogger(LegoSetActionBean.class);
@@ -41,7 +44,7 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
 
     @DefaultHandler
     public Resolution list() {
-        log.debug("list()");
+        log.debug("list()");        
         legoSets = legoSetService.getAllLegoSets();
         return new ForwardResolution("/set/list.jsp");
     
@@ -63,6 +66,7 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
             @Validate(on = {"add", "save"}, field = "price", required = true, minvalue = 1)
     })
     private LegoSetTO legoSetTO;
+    
 
     public LegoSetTO getLegoSetTO() {
         return legoSetTO;
@@ -72,17 +76,20 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
         this.legoSetTO = legoSetTO;
     }        
     
+    
     public Resolution add() {
         log.debug("add() lego set={}", legoSetTO);
+        legoSetTO.setCategories(new HashSet<CategoryTO>());
+        legoSetTO.setLegoKits(new ArrayList<LegoKitTO>());        
         legoSetService.createLegoSet(legoSetTO);
-        getContext().getMessages().add(new LocalizableMessage("set.add.message", escapeHTML(legoSetTO.getName())));
+        getContext().getMessages().add(new LocalizableMessage("set.add.message", escapeHTML(legoSetTO.getName()), escapeHTML(legoSetTO.getPrice().toString())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
     public Resolution delete() {
         log.debug("delete({})", legoSetTO.getId());
-        legoSetTO = legoSetService.getLegoSet(legoSetTO.getId());
-        legoSetService.removeLegoSet(legoSetTO);
+        LegoSetTO legoSetTOtoDelete = legoSetService.getLegoSet(legoSetTO.getId());
+        legoSetService.removeLegoSet(legoSetTOtoDelete);
         getContext().getMessages().add(new LocalizableMessage("set.delete.message", escapeHTML(legoSetTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
