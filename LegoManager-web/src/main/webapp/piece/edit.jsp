@@ -7,7 +7,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" var="actionBean"/>
 
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
-            <s:hidden name="piece.id"/>
+            <s:hidden name="legoPieces.id"/>
             <fieldset><legend><f:message key="piece.edit.edit"/></legend>
                 <%@include file="form.jsp"%>
                 <s:submit name="save"><f:message key="piece.edit.save"/></s:submit>

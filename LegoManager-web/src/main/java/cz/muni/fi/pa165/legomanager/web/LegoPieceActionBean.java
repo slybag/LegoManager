@@ -42,6 +42,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     public Resolution list() {
         log.debug("list()");
         legoPieces = legoPieceService.getAllLegoPieces();
+        log.debug("legoPieces.size=" + legoPieces.size());
         return new ForwardResolution("/piece/list.jsp");
     
     }
