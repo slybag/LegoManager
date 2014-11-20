@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Petr Konecny
  */
-@UrlBinding("/kit/{$event}/{kit.id}")
+@UrlBinding("/kit/{$event}/{kit.id}/")
 public class LegoKitActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     
@@ -64,6 +64,12 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     
     private List<LegoPieceTO> legoPieces;
     
+    private List<Long> pieceIDs;
+    
+    private List<Long> categoryIDs;
+    
+    private List<Long> setIDs;
+    
     @ValidateNestedProperties(value = {            
             @Validate(on = {"add", "save"}, field = "name", required = true),
             @Validate(on = {"add", "save"}, field = "price", required = true, minvalue = 1)
@@ -73,6 +79,9 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     @DefaultHandler
     public Resolution list() {
         log.debug("list()");
+        legoSets = legoSetService.getAllLegoSets();
+        categories = categoryService.getAllCategories();
+        legoPieces = legoPieceService.getAllLegoPieces();
         legoKits = legoKitService.getAllLegoKits();
         return new ForwardResolution("/kit/list.jsp");
     }
@@ -84,9 +93,6 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     }
        
     public Resolution add() {
-        legoSets = legoSetService.getAllLegoSets();
-        legoKits = legoKitService.getAllLegoKits();
-        legoPieces = legoPieceService.getAllLegoPieces();
         log.debug("add() lego kit={}", legoKitTO);
         legoKitService.createLegoKit(legoKitTO);
         getContext().getMessages().add(new LocalizableMessage("kit.add.message", escapeHTML(legoKitTO.getName())));
@@ -109,16 +115,56 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     }
     
      public Resolution edit() {
+        pieceIDs = new ArrayList<Long>();
+        categoryIDs = new ArrayList<Long>();
+        setIDs = new ArrayList<Long>();
+        
         legoSets = legoSetService.getAllLegoSets();
         legoKits = legoKitService.getAllLegoKits();
         categories = categoryService.getAllCategories();
         legoPieces = legoPieceService.getAllLegoPieces();
+        
+        for(LegoPieceTO piece : legoKitTO.getLegoPieces()){
+            pieceIDs.add(piece.getId());
+        }
+        for(CategoryTO category : legoKitTO.getCategories()){
+            categoryIDs.add(category.getId());
+        }
+        for(LegoSetTO set : legoKitTO.getLegoSets()){
+            setIDs.add(set.getId());
+        }
         log.debug("edit() kit={}", legoKitTO);
         return new ForwardResolution("/kit/edit.jsp");
     }
     
+    
     public Resolution save() {
-        log.debug("save() kit={}", legoKitTO);
+        log.debug("save() kit={} pieceIDs={} categoryIDs={} setIDs{}", legoKitTO, pieceIDs,categoryIDs,setIDs);
+        List<LegoPieceTO> pieceList = new ArrayList<LegoPieceTO>();
+        List<LegoSetTO> setList = new ArrayList<LegoSetTO>();
+        Set<CategoryTO> categoryList = new HashSet<CategoryTO>();
+        
+        if(pieceIDs != null){
+            for(Long id : pieceIDs){
+                pieceList.add(legoPieceService.getLegoPiece(id));
+            }
+        }
+        
+        if(categoryIDs != null){
+            for(Long id: categoryIDs){
+                categoryList.add(categoryService.getCategory(id));
+            }
+        }
+        
+        if(setIDs != null) {
+            for(Long id: setIDs){
+                setList.add(legoSetService.getLegoSet(id));
+            }
+        }
+        
+        legoKitTO.setLegoPieces(pieceList);
+        legoKitTO.setCategories(categoryList);
+        legoKitTO.setLegoSets(setList);
         legoKitService.updateLegoKit(legoKitTO);
         return new RedirectResolution(this.getClass(), "list");
     } 
@@ -131,6 +177,10 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
         return legoKitTO;
     }
 
+    public void setLegoKitTO(LegoKitTO legoKitTO) {
+        this.legoKitTO = legoKitTO;
+    }
+   
     public void kitLegoKitTO(LegoKitTO legoKitTO) {
         this.legoKitTO = legoKitTO;
     }
@@ -146,6 +196,35 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     public List<LegoPieceTO> getLegoPieces() {
         return legoPieces;
     }
+
+    public List<Long> getPieceIDs() {
+        return pieceIDs;
+    }
+
+    public void setPieceIDs(List<Long> pieceIDs) {
+        this.pieceIDs = pieceIDs;
+    }
+
+    public List<Long> getCategoryIDs() {
+        return categoryIDs;
+    }
+
+    public void setCategoryIDs(List<Long> categoryIDs) {
+        this.categoryIDs = categoryIDs;
+    }
+
+    public List<Long> getSetIDs() {
+        return setIDs;
+    }
+
+    public void setSetIDs(List<Long> setIDs) {
+        this.setIDs = setIDs;
+    }
+    
+    
+    
+    
+    
     
     
      

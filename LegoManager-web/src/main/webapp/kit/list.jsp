@@ -27,7 +27,7 @@
                     </td>
                     <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
-                            <s:hidden name="kit.id" value="${kit.id}"/>
+                            <s:hidden name="legoKitTO.id" value="${kit.id}"/>
                             <s:submit name="delete"><f:message key="kit.list.delete"/></s:submit>
                         </s:form>
                     </td>
@@ -36,9 +36,10 @@
         </table>
 
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
-            <fieldkit><legend><f:message key="kit.list.newkit"/></legend>
-                <s:submit name="edit">Vytvořit novou knihu</s:submit>
-            </fieldkit>
+            <fieldset><legend><f:message key="kit.list.newpiece"/></legend>
+                <%@include file="form.jsp"%>
+                <s:submit name="add"><f:message key="kit.create.newpiece"/></s:submit>
+                </fieldset>
         </s:form>
     </s:layout-component>
 </s:layout-render>

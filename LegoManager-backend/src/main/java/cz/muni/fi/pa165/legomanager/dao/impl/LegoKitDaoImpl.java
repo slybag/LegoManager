@@ -51,7 +51,7 @@ public class LegoKitDaoImpl implements LegoKitDao{
         } else if(em.find(LegoKit.class, kit.getId()) == null) {
             throw new PersistenceException("Kit is not in database");
         }
-        em.remove(kit);
+        em.remove(em.merge(kit));
    }
 
     @Override
