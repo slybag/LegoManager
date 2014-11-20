@@ -94,6 +94,32 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
        
     public Resolution add() {
         log.debug("add() lego kit={}", legoKitTO);
+        List<LegoPieceTO> pieceList = new ArrayList<LegoPieceTO>();
+        List<LegoSetTO> setList = new ArrayList<LegoSetTO>();
+        Set<CategoryTO> categoryList = new HashSet<CategoryTO>();
+        
+        if(pieceIDs != null){
+            for(Long id : pieceIDs){
+                pieceList.add(legoPieceService.getLegoPiece(id));
+            }
+        }
+        
+        if(categoryIDs != null){
+            for(Long id: categoryIDs){
+                categoryList.add(categoryService.getCategory(id));
+            }
+        }
+        
+        if(setIDs != null) {
+            for(Long id: setIDs){
+                setList.add(legoSetService.getLegoSet(id));
+            }
+        }
+        
+        legoKitTO.setLegoPieces(pieceList);
+        legoKitTO.setCategories(categoryList);
+        legoKitTO.setLegoSets(setList);
+        log.debug("save() before update category count={} sets count ={}",legoKitTO.getCategories().size(),legoKitTO.getLegoSets().size());
         legoKitService.createLegoKit(legoKitTO);
         getContext().getMessages().add(new LocalizableMessage("kit.add.message", escapeHTML(legoKitTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
@@ -165,6 +191,7 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
         legoKitTO.setLegoPieces(pieceList);
         legoKitTO.setCategories(categoryList);
         legoKitTO.setLegoSets(setList);
+        log.debug("save() before update category count={} sets count ={}",legoKitTO.getCategories().size(),legoKitTO.getLegoSets().size());
         legoKitService.updateLegoKit(legoKitTO);
         return new RedirectResolution(this.getClass(), "list");
     } 

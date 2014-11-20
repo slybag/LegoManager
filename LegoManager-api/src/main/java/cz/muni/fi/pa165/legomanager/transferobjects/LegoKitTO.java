@@ -148,5 +148,12 @@ public class LegoKitTO {
     public void setLegoPieces(List<LegoPieceTO> legoPieces) {
         this.legoPieces = legoPieces;
     }
+
+    @Override
+    public String toString() {
+        return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + ", categories=" + categories + ", legoSets=" + legoSets + ", legoPieces=" + legoPieces + '}';
+    }
+    
+    
     
 }
