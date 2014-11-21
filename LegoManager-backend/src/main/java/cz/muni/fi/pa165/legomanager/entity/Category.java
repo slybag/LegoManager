@@ -35,7 +35,7 @@ public class Category implements Serializable {
     @Column
     private String description;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="categories")
     private List<LegoKit> legoKits;
     
     @ManyToMany

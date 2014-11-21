@@ -31,7 +31,7 @@ public class LegoPiece implements Serializable {
     @Enumerated(EnumType.STRING)
     private PieceColor color;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="legoPieces")
     private List<LegoKit> legoKits;
 
     public Long getId() {
