@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author xrais
  */
-@UrlBinding("/category/{$event}/{category.id}")
+@UrlBinding("/category/{$event}/{category.id}/")
 public class CategoryActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     final static Logger log = LoggerFactory.getLogger(LegoPieceActionBean.class);
@@ -67,14 +67,22 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
     })
     private CategoryTO categoryTO;
 
+    public CategoryService getCategoryService() {
+        return categoryService;
+    }
+
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
     public CategoryTO getCategoryTO() {
         return categoryTO;
     }
 
-    public void setSategoryTO(CategoryTO categoryTO) {
+    public void setCategoryTO(CategoryTO categoryTO) {
         this.categoryTO = categoryTO;
-    }        
-    
+    }
+
     public Resolution add() {
         log.debug("add() category={}", categoryTO);
         categoryTO.setLegoKits(new ArrayList<LegoKitTO>());
@@ -85,15 +93,15 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
     }
     
     public Resolution delete() {
-        log.debug("delete({})", categoryTO.getId());
-        categoryTO = categoryService.getCategory(categoryTO.getId());
-        categoryService.deleteCategory(categoryTO);
+        //log.debug("delete({})", categoryTO.getId());
+        CategoryTO categoryTOdelete = categoryService.getCategory(categoryTO.getId());
+        categoryService.deleteCategory(categoryTOdelete);
         getContext().getMessages().add(new LocalizableMessage("category.delete.message", escapeHTML(categoryTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
-    public void loadLegoSetFromDatabase() {
+    public void loadCategoryFromDatabase() {
         String ids = getContext().getRequest().getParameter("category.id");
         if (ids == null) return;
         categoryTO = categoryService.getCategory(Long.parseLong(ids));        

@@ -2,11 +2,11 @@
 <s:errors/>
 <table>
     <tr>
-        <th><s:label for="c1" name="category.name"/></th>
-        <td><s:text id="c1" name="categoryTO.name"/></td>
+        <th><s:label for="s1" name="category.name"/></th>
+        <td><s:text id="s1" name="categoryTO.name"/></td>
     </tr>
     <tr>
-        <th><s:label for="c2" name="category.description"/></th>
-        <td><s:text id="c2" name="categoryTO.description"/></td>
+        <th><s:label for="s2" name="category.description"/></th>
+        <td><s:text id="s2" name="categoryTO.description"/></td>
     </tr> 
 </table>
