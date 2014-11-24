@@ -97,11 +97,18 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
         }
         
         if (kitIDs != null) {
-            for (Long id : setIDs) {
+            for (Long id : kitIDs) {
                 kitList.add(facade.getLegoKitById(id));
             }
         }
-        facade.create(categoryTO);
+        CategoryTO categoryToAdd = new CategoryTO();
+        categoryToAdd.setId(categoryTO.getId());
+        categoryToAdd.setName(categoryTO.getName());
+        categoryToAdd.setDescription(categoryTO.getDescription());
+        categoryToAdd.setLegoKits(kitList);
+        categoryToAdd.setLegoSets(setList);
+        
+        facade.create(categoryToAdd);
         getContext().getMessages().add(new LocalizableMessage("category.add.message", escapeHTML(categoryTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
@@ -109,8 +116,9 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
     public Resolution delete() {
         //log.debug("delete({})", categoryTO.getId());
         CategoryTO categoryTOdelete = facade.getCategoryById(categoryTO.getId());
+        String name = new String(categoryTOdelete.getName());
         facade.delete(categoryTOdelete);
-        getContext().getMessages().add(new LocalizableMessage("category.delete.message", escapeHTML(categoryTO.getName())));
+        getContext().getMessages().add(new LocalizableMessage("category.delete.message", name));//escapeHTML(categoryTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
     

@@ -8,7 +8,7 @@
 
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean">
             <s:hidden name="category.id"/>
-            <fieldset><legend><f:message key="category.edit.edit"/></legend>
+            <fieldset><legend><f:message key="category.edit.subtitle"/></legend>
                 <%@include file="form.jsp"%>
                 <s:submit name="save"><f:message key="category.edit.save"/></s:submit>
             </fieldset>
