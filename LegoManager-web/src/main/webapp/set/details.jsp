@@ -5,13 +5,10 @@
 <s:layout-render name="/layout.jsp" titlekey="set.edit.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" var="actionBean"/>
-        <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
-            <s:hidden name="set.id"/>
+
             <fieldset><legend><f:message key="set.edit.edit"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="set.edit.save"/></s:submit>
-                </fieldset>
-        </s:form>
+                <%@include file="show.jsp"%>
+            </fieldset>
 
     </s:layout-component>
 </s:layout-render>

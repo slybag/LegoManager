@@ -14,8 +14,6 @@
                 <th>id</th>
                 <th><f:message key="category.name"/></th>
                 <th><f:message key="category.description"/></th>
-                <th><f:message key="category.kits"/></th>
-                <th><f:message key="category.sets"/></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -24,16 +22,17 @@
                     <td>${category.id}</td>
                     <td><c:out value="${category.name}"/></td>
                     <td><c:out value="${category.description}"/></td>
-                    <th><c:forEach items="category.legoKits" var="kit"><span>kit.name</span></c:forEach></th>
-                    <th><c:forEach items="category.legoSets" var="set"><span>set.name</span></c:forEach></th>
-                        <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" event="edit"><s:param name="category.id" value="${category.id}"/>edit</s:link>
-                        </td>
-                        <td>
-                        <s:form beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean">
-                            <s:hidden name="categoryTO.id" value="${category.id}"/>
-                            <s:submit name="delete"><f:message key="category.list.delete"/></s:submit>
-                        </s:form>
+                    <td>
+                    <s:link beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" event="edit"><s:param name="category.id" value="${category.id}"/>edit</s:link>
+                    </td>
+                    <td>
+                    <s:link beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" event="details"><s:param name="category.id" value="${category.id}"/>details</s:link>
+                    </td>
+                    <td>
+                    <s:form beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean">
+                        <s:hidden name="categoryTO.id" value="${category.id}"/>
+                        <s:submit name="delete"><f:message key="category.list.delete"/></s:submit>
+                    </s:form>
                     </td>
                 </tr>
             </c:forEach>

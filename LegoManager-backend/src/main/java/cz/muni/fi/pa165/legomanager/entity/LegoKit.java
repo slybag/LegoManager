@@ -34,10 +34,10 @@ public class LegoKit implements Serializable {
     
     private String name;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="legoKits")
     private Set<Category> categories;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="legoKits")
     private List<LegoSet> legoSets;
 
     @ManyToMany

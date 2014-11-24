@@ -1,15 +1,15 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <s:errors/>
 <table>
     <tr>
-        <th><s:label for="s1" name="category.name"/></th>
-        <td><s:text id="s1" name="categoryTO.name"/></td>
+        Name: ${actionBean.categoryTO.name}
     </tr>
     <tr>
-        <th><s:label for="s2" name="category.description"/></th>
-        <td><s:text id="s2" name="categoryTO.description"/></td>
-    </tr> 
+        Price: ${actionBean.categoryTO.description}
+    </tr>
 </table>
+
 <table class="basic">
     <tr>
         <th>id</th>
@@ -18,7 +18,7 @@
 <th></th>
 <th></th>
 </tr>
-<c:forEach items="${actionBean.legoSets}" var="set">
+<c:forEach items="${actionBean.categoryTO.legoSets}" var="set">
     <tr>
         <td><s:checkbox name="setIDs" value="${set.id}" checked="setIDs"/></td>
         <td>${set.id}</td>
@@ -37,13 +37,13 @@
 <th></th>
 <th></th>
 </tr>
-<c:forEach items="${actionBean.legoKits}" var="kit">
+<c:forEach items="${actionBean.categoryTO.legoKits}" var="kit">
     <tr>
         <td><s:checkbox name="kitIDs" value="${kit.id}" checked="kitIDs"/></td>
         <td>${kit.id}</td>           
         <td><c:out value="${kit.name}"/></td>
-    <td><c:out value="${kit.price}"/></td>
-    <td><c:out value="${kit.ageRestriction}"/></td>
+        <td><c:out value="${kit.price}"/></td>
+        <td><c:out value="${kit.ageRestriction}"/></td>
     </tr>
 </c:forEach>
 </table>

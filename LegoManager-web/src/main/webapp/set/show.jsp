@@ -1,17 +1,15 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <s:errors/>
 <table>
     <tr>
-        <th><s:label for="s1" name="set.name"/></th>
-        <td><s:text id="s1" name="legoSetTO.name"/></td>
+        Name: ${actionBean.legoSetTO.name}
     </tr>
     <tr>
-        <th><s:label for="s2" name="set.price"/></th>
-        <td><s:text id="s2" name="legoSetTO.price" size="4"/></td>
-    </tr>    
+        Price: ${actionBean.legoSetTO.price}
+    </tr>
 </table>
+
 <table class="basic">
     <tr>
         <th></th>
@@ -22,7 +20,7 @@
 <th></th>
 <th></th>
 </tr>
-<c:forEach items="${actionBean.legoKits}" var="kit">
+<c:forEach items="${actionBean.categoryTO.legoKits}" var="kit">
     <tr>
         <td><s:checkbox name="kitIDs" value="${kit.id}" checked="kitIDs"/></td>
         <td>${kit.id}</td>           

@@ -13,7 +13,6 @@
             <tr>
                 <th>id</th>
                 <th><f:message key="piece.color"/></th>
-                <th><f:message key="piece.kits"/></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -21,15 +20,17 @@
                 <tr>
                     <td>${piece.id}</td>
                     <td><c:out value="${piece.color}"/></td>
-                    <th><c:forEach items="piece.legoKits" var="kit"><span>kit.name</span></c:forEach></th>
-                        <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/>edit</s:link>
-                        </td>
-                        <td>
-                        <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
-                            <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
-                            <s:submit name="delete"><f:message key="piece.list.delete"/></s:submit>
-                        </s:form>
+                    <td>
+                    <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/>edit</s:link>
+                    </td>
+                    <td>
+                    <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="details"><s:param name="piece.id" value="${piece.id}"/>details</s:link>
+                    </td>
+                    <td>
+                    <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
+                        <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
+                        <s:submit name="delete"><f:message key="piece.list.delete"/></s:submit>
+                    </s:form>
                     </td>
                 </tr>
             </c:forEach>

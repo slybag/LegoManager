@@ -26,6 +26,9 @@
                      <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="edit"><s:param name="kit.id" value="${kit.id}"/>edit</s:link>
                     </td>
                     <td>
+                     <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="details"><s:param name="kit.id" value="${kit.id}"/>details</s:link>
+                    </td>
+                    <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
                             <s:hidden name="legoKitTO.id" value="${kit.id}"/>
                             <s:submit name="delete"><f:message key="kit.list.delete"/></s:submit>

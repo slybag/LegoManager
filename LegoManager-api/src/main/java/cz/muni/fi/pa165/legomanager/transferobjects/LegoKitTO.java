@@ -5,8 +5,6 @@ package cz.muni.fi.pa165.legomanager.transferobjects;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -17,21 +15,15 @@ import java.util.Set;
  * @author Petr Konecny
  */
 public class LegoKitTO {
-   
-    private Long id;
-    
-    private BigDecimal price;
-    
-    private Integer ageRestriction;
-    
-    private String name;
-    
-    private Set<CategoryTO> categories;
-    
-    private List<LegoSetTO> legoSets;
 
+    private Long id;
+    private BigDecimal price;
+    private Integer ageRestriction;
+    private String name;
+    private Set<CategoryTO> categories;
+    private List<LegoSetTO> legoSets;
     private List<LegoPieceTO> legoPieces;
-    
+
     /**
      * @return the id
      */
@@ -60,16 +52,10 @@ public class LegoKitTO {
         this.price = price;
     }
 
-    /**
-     * @return the ageRestriction
-     */
     public Integer getAgeRestriction() {
         return ageRestriction;
     }
 
-    /**
-     * @param ageRestriction the ageRestriction to set
-     */
     public void setAgeRestriction(Integer ageRestriction) {
         this.ageRestriction = ageRestriction;
     }
@@ -101,7 +87,7 @@ public class LegoKitTO {
     public void setLegoSets(List<LegoSetTO> legoSets) {
         this.legoSets = legoSets;
     }
-    
+
     /**
      * @return the name
      */
@@ -133,7 +119,7 @@ public class LegoKitTO {
         }
         final LegoKitTO other = (LegoKitTO) obj;
         return Objects.equals(this.id, other.id);
-    }   
+    }
 
     /**
      * @return the legoPieces
@@ -151,9 +137,7 @@ public class LegoKitTO {
 
     @Override
     public String toString() {
-        return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + ", categories=" + categories + ", legoSets=" + legoSets + ", legoPieces=" + legoPieces + '}';
+        //return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + ", categories=" + categories + ", legoSets=" + legoSets + ", legoPieces=" + legoPieces + '}";
+        return "fuck";
     }
-    
-    
-    
 }

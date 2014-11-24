@@ -67,6 +67,7 @@ public class LegoPieceTO {
 
     @Override
     public String toString() {
-        return "LegoPieceTO{" + "id=" + id + ", color=" + color + ", legoKits=" + legoKits + '}';
+        //return "LegoPieceTO{" + "id=" + id + ", color=" + color + ", legoKits=" + legoKits + '}';
+        return "fuck piece";
     }
 }

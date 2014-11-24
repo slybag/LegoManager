@@ -6,13 +6,9 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" var="actionBean"/>
 
-        <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
-            <s:hidden name="kit.id"/>
             <fieldset><legend><f:message key="kit.edit.edit"/></legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="kit.edit.save"/></s:submit>
-                </fieldset>
-        </s:form>
+                <%@include file="show.jsp"%>
+            </fieldset>
 
     </s:layout-component>
 </s:layout-render>

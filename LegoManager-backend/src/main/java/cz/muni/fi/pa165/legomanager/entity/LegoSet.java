@@ -30,7 +30,7 @@ public class LegoSet implements Serializable {
     @GeneratedValue
     private Long id;
     
-    @ManyToMany(mappedBy="legoSets")
+    @ManyToMany
     private List<LegoKit> legoKits;
     
     private BigDecimal price;

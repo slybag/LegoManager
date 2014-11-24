@@ -21,9 +21,12 @@
                 <tr>
                     <td>${set.id}</td>
                     <td><c:out value="${set.name}"/></td>
-                    <td><c:out value="${set.price}"/></td>                    
+                    <td><c:out value="${set.price}"/></td>  
                     <td>
                      <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="edit"><s:param name="set.id" value="${set.id}"/>edit</s:link>
+                    </td>
+                    <td>
+                     <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="details"><s:param name="set.id" value="${set.id}"/>details</s:link>
                     </td>
                     <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">

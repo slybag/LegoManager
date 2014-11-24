@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.legomanager.web;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
+import static cz.muni.fi.pa165.legomanager.web.LegoKitActionBean.log;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
@@ -89,7 +90,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
         return new RedirectResolution(this.getClass(), "list");
     }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save","details"})
     public void loadLegoSetFromDatabase() {
         String ids = getContext().getRequest().getParameter("piece.id");
         if (ids == null) return;
@@ -103,7 +104,16 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
 
     public Resolution save() {
         log.debug("save() piece={}", legoPieceTO);
+        if(legoPieceTO.getLegoKits() == null) legoPieceTO.setLegoKits(new ArrayList());
         legoPieceService.updateLegoPiece(legoPieceTO);
         return new RedirectResolution(this.getClass(), "list");
+    }
+    
+    public Resolution details(){
+        log.debug("details() kit={}", legoPieceTO);
+        log.debug("details() size={}", legoPieceTO.getLegoKits().size());
+        
+        return new ForwardResolution("/piece/details.jsp");
+        
     }
 }

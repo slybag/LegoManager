@@ -4,11 +4,12 @@
  */
 package cz.muni.fi.pa165.legomanager.web;
 
-import cz.muni.fi.pa165.legomanager.services.LegoSetService;
+import cz.muni.fi.pa165.legomanager.facades.LegoFacade;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import static cz.muni.fi.pa165.legomanager.web.BaseActionBean.escapeHTML;
+import static cz.muni.fi.pa165.legomanager.web.LegoKitActionBean.log;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,16 +37,21 @@ import org.slf4j.LoggerFactory;
 public class LegoSetActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     final static Logger log = LoggerFactory.getLogger(LegoSetActionBean.class);
-    
+        
     @SpringBean
-    protected LegoSetService legoSetService;
+    protected LegoFacade facade;
 
     private List<LegoSetTO> legoSets;
+    
+    private List<Long> kitIDs;
 
+    private List<LegoKitTO> legoKits;
+    
     @DefaultHandler
     public Resolution list() {
         log.debug("list()");        
-        legoSets = legoSetService.getAllLegoSets();
+        legoSets = facade.getAllLegoSets();
+        legoKits = facade.getAllLegoKits();
         return new ForwardResolution("/set/list.jsp");
     
     }
@@ -57,7 +63,7 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
         
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
-        legoSets = legoSetService.getAllLegoSets();
+        legoSets = facade.getAllLegoSets();
         return null;
     }
     
@@ -74,41 +80,78 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
 
     public void setLegoSetTO(LegoSetTO legoSetTO) {
         this.legoSetTO = legoSetTO;
-    }        
+    }
+    
+    public Resolution details(){
+        log.debug("details() kit={}", legoSetTO);
+        return new ForwardResolution("/set/details.jsp");
+    }
     
     
     public Resolution add() {
         log.debug("add() lego set={}", legoSetTO);
         legoSetTO.setCategories(new HashSet<CategoryTO>());
         legoSetTO.setLegoKits(new ArrayList<LegoKitTO>());        
-        legoSetService.createLegoSet(legoSetTO);
+        facade.create(legoSetTO);
         getContext().getMessages().add(new LocalizableMessage("set.add.message", escapeHTML(legoSetTO.getName()), escapeHTML(legoSetTO.getPrice().toString())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
     public Resolution delete() {
         log.debug("delete({})", legoSetTO.getId());
-        LegoSetTO legoSetTOtoDelete = legoSetService.getLegoSet(legoSetTO.getId());
-        legoSetService.removeLegoSet(legoSetTOtoDelete);
+        LegoSetTO legoSetTOtoDelete = facade.getLegoSetById(legoSetTO.getId());
+        facade.delete(legoSetTOtoDelete);
         getContext().getMessages().add(new LocalizableMessage("set.delete.message", escapeHTML(legoSetTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save" , "details"})
     public void loadLegoSetFromDatabase() {
         String ids = getContext().getRequest().getParameter("set.id");
         if (ids == null) return;
-        legoSetTO = legoSetService.getLegoSet(Long.parseLong(ids));        
+        legoSetTO = facade.getLegoSetById(Long.parseLong(ids));        
     }
     
     public Resolution edit() {
-        log.debug("edit() set={}", legoSetTO);
+        kitIDs = new ArrayList<Long>();
+
+        legoKits = facade.getAllLegoKits();
+        for (LegoKitTO kit : legoSetTO.getLegoKits()) {
+            kitIDs.add(kit.getId());
+        }
+        log.debug("edit() kit={}", legoSetTO);
         return new ForwardResolution("/set/edit.jsp");
     }
 
     public Resolution save() {
         log.debug("save() set={}", legoSetTO);
-        legoSetService.updateLegoSet(legoSetTO);
+        List<LegoKitTO> kitList = new ArrayList<LegoKitTO>();
+
+        if (kitIDs != null) {
+            for (Long id : kitIDs) {
+                kitList.add(facade.getLegoKitById(id));
+            }
+        }
+        legoSetTO.setLegoKits(kitList);
+        facade.update(legoSetTO);
         return new RedirectResolution(this.getClass(), "list");
     }
+
+    public List<Long> getKitIDs() {
+        return kitIDs;
+    }
+
+    public void setKitIDs(List<Long> kitIDs) {
+        this.kitIDs = kitIDs;
+    }
+
+    public List<LegoKitTO> getLegoKits() {
+        return legoKits;
+    }
+
+    public void setLegoKits(List<LegoKitTO> legoKits) {
+        this.legoKits = legoKits;
+    }
+    
+    
 }
