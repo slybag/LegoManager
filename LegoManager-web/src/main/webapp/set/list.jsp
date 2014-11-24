@@ -12,7 +12,7 @@
         <table class="basic">
             <tr>
                 <th>id</th>
-                <th><f:message key="set.name"/></th>
+                <th><f:message key="set.title"/></th>
                 <th><f:message key="set.price"/></th>                
                 <th></th>
                 <th></th>
