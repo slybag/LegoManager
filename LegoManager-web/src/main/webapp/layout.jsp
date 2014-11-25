@@ -5,10 +5,16 @@
 <s:layout-definition>
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
-<head>
+
+<head>  
   <title><f:message key="${titlekey}"/></title>
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.min_1.css" />
+  <script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/main.js"></script>
   <s:layout-component name="header"/>
+  
 </head>
 <body>
     <s:errors/>    

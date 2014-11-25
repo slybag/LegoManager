@@ -13,8 +13,9 @@
       <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
     </properties>
   </persistence-unit>
+  
   <persistence-unit name="pa165Unit" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>cz.muni.fi.pa165.legomanager.dao.entity.LegoPiece</class>
     <class>cz.muni.fi.pa165.legomanager.dao.entity.Category</class>
     <class>cz.muni.fi.pa165.legomanager.dao.entity.LegoKit</class>
