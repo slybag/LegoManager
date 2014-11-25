@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" var="actionBean"/>
 
         <p><f:message key="kit.list.allkits"/></p>
-
+        <button type='button' onclick='alert("create kit!");'>Create Kit</button>
         <table class="basic">
             <tr>
                 <th>id</th>

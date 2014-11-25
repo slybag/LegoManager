@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" var="actionBean"/>
 
         <p><f:message key="category.list.allcategories"/></p>
-
+        <button type='button' onclick='alert("create category!");'>Create Category</button>
         <table class="basic">
             <tr>
                 <th>id</th>

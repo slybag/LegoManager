@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" var="actionBean"/>
 
         <p><f:message key="piece.list.allpieces"/></p>
-
+        <button type='button' onclick='alert("create piece!");'>Create Piece</button>
         <table class="basic">
             <tr>
                 <th>id</th>

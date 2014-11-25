@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" var="actionBean"/>
 
         <p><f:message key="set.list.allsets"/></p>
-
+        <button type='button' onclick='alert("create set!");'>Create Set</button>
         <table class="basic">
             <tr>
                 <th>id</th>
