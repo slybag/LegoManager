@@ -137,7 +137,7 @@ public class LegoKitTO {
 
     @Override
     public String toString() {
-        //return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + ", categories=" + categories + ", legoSets=" + legoSets + ", legoPieces=" + legoPieces + '}";
-        return "fuck";
+        return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + '}';
     }
+    
 }

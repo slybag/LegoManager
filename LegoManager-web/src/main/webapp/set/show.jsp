@@ -20,9 +20,8 @@
 <th></th>
 <th></th>
 </tr>
-<c:forEach items="${actionBean.categoryTO.legoKits}" var="kit">
+<c:forEach items="${actionBean.legoSetTO.legoKits}" var="kit">
     <tr>
-        <td><s:checkbox name="kitIDs" value="${kit.id}" checked="kitIDs"/></td>
         <td>${kit.id}</td>           
         <td><c:out value="${kit.name}"/></td>
         <td><c:out value="${kit.price}"/></td>

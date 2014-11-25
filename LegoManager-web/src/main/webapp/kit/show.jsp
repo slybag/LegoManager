@@ -38,7 +38,6 @@
 </tr>
 <c:forEach items="${actionBean.legoKitTO.legoSets}" var="set">
     <tr>
-        <td><s:checkbox name="setIDs" value="${set.id}" checked="setIDs"/></td>
         <td>${set.id}</td>
         <td><c:out value="${set.name}"/></td>
     <td><c:out value="${set.price}"/></td>                   

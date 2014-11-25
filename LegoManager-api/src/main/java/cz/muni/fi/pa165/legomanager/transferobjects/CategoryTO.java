@@ -83,8 +83,7 @@ public class CategoryTO {
 
     @Override
     public String toString() {
-        return "CategoryTO{" + "id=" + id + ", name=" + name + ", description=" + description + ", legoKits=" + legoKits + ", legoSets=" + legoSets + '}';
+        return "CategoryTO{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
-    
-    
+       
 }

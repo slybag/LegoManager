@@ -101,14 +101,9 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
                 kitList.add(facade.getLegoKitById(id));
             }
         }
-        CategoryTO categoryToAdd = new CategoryTO();
-        categoryToAdd.setId(categoryTO.getId());
-        categoryToAdd.setName(categoryTO.getName());
-        categoryToAdd.setDescription(categoryTO.getDescription());
-        categoryToAdd.setLegoKits(kitList);
-        categoryToAdd.setLegoSets(setList);
-        
-        facade.create(categoryToAdd);
+        categoryTO.setLegoKits(kitList);
+        categoryTO.setLegoSets(setList);        
+        facade.create(categoryTO);
         getContext().getMessages().add(new LocalizableMessage("category.add.message", escapeHTML(categoryTO.getName())));
         return new RedirectResolution(this.getClass(), "list");
     }

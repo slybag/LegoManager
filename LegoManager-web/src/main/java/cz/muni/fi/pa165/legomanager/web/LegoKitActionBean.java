@@ -65,8 +65,6 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     public Resolution add() {
         log.debug("add() lego kit={}", legoKitTO);
         List<LegoPieceTO> pieceList = new ArrayList<LegoPieceTO>();
-        List<LegoSetTO> setList = new ArrayList<LegoSetTO>();
-        Set<CategoryTO> categoryList = new HashSet<CategoryTO>();
 
         if (pieceIDs != null) {
             for (Long id : pieceIDs) {
@@ -76,6 +74,8 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
 
 
         legoKitTO.setLegoPieces(pieceList);
+        legoKitTO.setCategories(new HashSet<CategoryTO>());
+        legoKitTO.setLegoSets(new ArrayList<LegoSetTO>());
         log.debug("save() before update category count={} sets count ={}", legoKitTO.getCategories().size(), legoKitTO.getLegoSets().size());
         facade.create(legoKitTO);
         getContext().getMessages().add(new LocalizableMessage("kit.add.message", escapeHTML(legoKitTO.getName())));

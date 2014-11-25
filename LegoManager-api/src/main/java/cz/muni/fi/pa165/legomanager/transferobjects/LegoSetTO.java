@@ -81,5 +81,11 @@ public class LegoSetTO {
             return false;
         }
         return true;
-    }        
+    }
+
+    @Override
+    public String toString() {
+        return "LegoSetTO{" + "id=" + id + ", price=" + price + ", name=" + name + '}';
+    }
+    
 }
