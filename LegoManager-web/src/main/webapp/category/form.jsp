@@ -33,7 +33,7 @@
         <th>id</th>
         <th><f:message key="kit.name"/></th>                
 <th><f:message key="kit.price"/></th>
-<th><f:message key="kit.ageRestriciton"/></th>                
+<th><f:message key="kit.ageRestriction"/></th>                
 <th></th>
 <th></th>
 </tr>
