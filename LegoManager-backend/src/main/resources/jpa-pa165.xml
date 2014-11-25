@@ -21,10 +21,13 @@
     </bean>
     
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="InMemoryUnit" />
+        <property name="persistenceUnitName" value="pa165Unit" />
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.url">jdbc:derby://localhost:1527/pa165</prop>
+                <prop key="hibernate.connection.username">pa165</prop>
+                <prop key="hibernate.connection.password">pa165</prop>
             </props>
       </property>
     </bean>   
