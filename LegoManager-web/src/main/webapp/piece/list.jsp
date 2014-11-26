@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" var="actionBean"/>
 
         <p><f:message key="piece.list.allpieces"/></p>
-        <button type='button' onclick='create();'>Create Piece</button>
+        <button class="button" type='button' onclick='create();'><f:message key="piece.create"/></button>
         <table class="basic">
             <tr>
                 <th>id</th>
@@ -21,25 +21,25 @@
                     <td>${piece.id}</td>
                     <td><c:out value="${piece.color}"/></td>
                     <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/>edit</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.edit"/></s:link>
                         </td>
                         <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="details"><s:param name="piece.id" value="${piece.id}"/>details</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="details"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.details"/></s:link>
                         </td>
                         <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
                             <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
-                            <s:submit name="delete"><f:message key="piece.list.delete"/></s:submit>
+                            <s:submit class="button" name="delete"><f:message key="piece.list.delete"/></s:submit>
                         </s:form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
-        <div id="add">
+        <div class="hidden" id="add" title="Add the piece">
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
                 <fieldset><legend><f:message key="piece.list.newpiece"/></legend>
                     <%@include file="form.jsp"%>
-                    <s:submit name="add"><f:message key="piece.create.newpiece"/></s:submit>
+                    <s:submit class="button" name="add"><f:message key="piece.create"/></s:submit>
                     </fieldset>
             </s:form>
         </div>

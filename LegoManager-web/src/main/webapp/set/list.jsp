@@ -8,7 +8,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" var="actionBean"/>
 
         <p><f:message key="set.list.allsets"/></p>
-        <button type='button' onclick='create();'>Create Set</button>
+        <button class="button" type='button' onclick='create();'><f:message key="set.create"/></button>
         <table class="basic">
             <tr>
                 <th>id</th>
@@ -23,26 +23,26 @@
                     <td><c:out value="${set.name}"/></td>
                     <td><c:out value="${set.price}"/></td>  
                     <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="edit"><s:param name="set.id" value="${set.id}"/>edit</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="edit"><s:param name="set.id" value="${set.id}"/><f:message key="set.edit"/></s:link>
                         </td>
                         <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="details"><s:param name="set.id" value="${set.id}"/>details</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean" event="details"><s:param name="set.id" value="${set.id}"/><f:message key="set.details"/></s:link>
                         </td>
                         <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
                             <s:hidden name="legoSetTO.id" value="${set.id}"/>
-                            <s:submit name="delete"><f:message key="set.list.delete"/></s:submit>
+                            <s:submit class="button" name="delete"><f:message key="set.list.delete"/></s:submit>
                         </s:form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <div id="add">
+        <div class="hidden" id="add" title="Add the set">
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
                 <fieldset><legend><f:message key="set.list.newset"/></legend>
                     <%@include file="form.jsp"%>
-                    <s:submit name="add">Vytvořit novou knihu</s:submit>
+                    <s:submit class="button" name="add"><f:message key="set.create"/></s:submit>
                     </fieldset>
             </s:form>
         </div>

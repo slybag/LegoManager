@@ -7,7 +7,7 @@
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" var="actionBean"/>
 
         <p><f:message key="kit.list.allkits"/></p>
-        <button type='button' onclick='create();'>Create Kit</button>
+        <button class="button" type='button' onclick='create();'><f:message key="kit.create"/></button>
         <table class="basic">
             <tr>
                 <th>id</th>
@@ -22,26 +22,26 @@
                     <td><c:out value="${kit.name}"/></td>
                     <td><c:out value="${kit.price}"/></td>                    
                     <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="edit"><s:param name="kit.id" value="${kit.id}"/>edit</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="edit"><s:param name="kit.id" value="${kit.id}"/><f:message key="kit.edit"/></s:link>
                         </td>
                         <td>
-                        <s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="details"><s:param name="kit.id" value="${kit.id}"/>details</s:link>
+                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" event="details"><s:param name="kit.id" value="${kit.id}"/><f:message key="kit.details"/></s:link>
                         </td>
                         <td>
                         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
                             <s:hidden name="legoKitTO.id" value="${kit.id}"/>
-                            <s:submit name="delete"><f:message key="kit.list.delete"/></s:submit>
+                            <s:submit class="button" name="delete"><f:message key="kit.list.delete"/></s:submit>
                         </s:form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
 
-        <div id="addKit" title="Add the kit">
+        <div class="hidden" id="add" title="Add the kit">
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
                 <fieldset><legend><f:message key="kit.list.newpiece"/></legend>
                     <%@include file="form.jsp"%>
-                    <s:submit name="add"><f:message key="kit.create.newpiece"/></s:submit>
+                    <s:submit class="button" name="add"><f:message key="kit.create"/></s:submit>
                     </fieldset>
             </s:form>
         </div>
