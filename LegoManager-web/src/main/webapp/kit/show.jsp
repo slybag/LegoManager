@@ -3,23 +3,20 @@
 <s:errors/>
 <table>
     <tr>
-        Name: ${actionBean.legoKitTO.name}
+        <td>Name: ${actionBean.legoKitTO.name}</td>
     </tr>
     <tr>
-        Price: ${actionBean.legoKitTO.price}
+        <td>Price: ${actionBean.legoKitTO.price}</td>
     </tr>
     <tr>
-        Age Restriction ${actionBean.legoKitTO.ageRestriction}
+        <td>Age Restriction ${actionBean.legoKitTO.ageRestriction}</td>
     </tr>
 </table>
-
+<f:message key="kit.pieces"/>
 <table class="basic">
     <tr>
-        <th></th>
         <th>id</th>
-        <th><f:message key="piece.color"/></th>                
-        <th></th>
-        <th></th>
+        <th><f:message key="piece.color"/></th>
     </tr>
     <c:forEach items="${actionBean.legoKitTO.legoPieces}" var="piece">
         <tr>
@@ -28,28 +25,26 @@
         </tr>
     </c:forEach>
 </table>
+<f:message key="kit.sets"/>
 <table class="basic">
     <tr>
         <th>id</th>
         <th><f:message key="set.name"/></th>
-<th><f:message key="set.price"/></th>                
-<th></th>
-<th></th>
+        <th><f:message key="set.price"/></th>      
 </tr>
 <c:forEach items="${actionBean.legoKitTO.legoSets}" var="set">
     <tr>
         <td>${set.id}</td>
         <td><c:out value="${set.name}"/></td>
-    <td><c:out value="${set.price}"/></td>                   
+        <td><c:out value="${set.price}"/></td>                   
     </tr>
 </c:forEach>
 </table>
+<f:message key="kit.categories"/>
 <table class="basic">
     <tr>
         <th>id</th>
         <th><f:message key="category.name"/></th>
-        <th></th>
-        <th></th>
 </tr>
 <c:forEach items="${actionBean.legoKitTO.categories}" var="category">
     <tr>

@@ -3,23 +3,20 @@
 <s:errors/>
 <table>
     <tr>
-        Name: ${actionBean.legoSetTO.name}
+        <td>Name: ${actionBean.legoSetTO.name}</td>
     </tr>
     <tr>
-        Price: ${actionBean.legoSetTO.price}
+        <td>Price: ${actionBean.legoSetTO.price}</td>
     </tr>
 </table>
-
+<f:message key="set.kits"/>
 <table class="basic">
     <tr>
-        <th></th>
         <th>id</th>
         <th><f:message key="kit.name"/></th>                
-<th><f:message key="kit.price"/></th>
-<th><f:message key="kit.ageRestriciton"/></th>                
-<th></th>
-<th></th>
-</tr>
+        <th><f:message key="kit.price"/></th>
+        <th><f:message key="kit.ageRestriction"/></th>
+    </tr>
 <c:forEach items="${actionBean.legoSetTO.legoKits}" var="kit">
     <tr>
         <td>${kit.id}</td>           

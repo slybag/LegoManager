@@ -6,7 +6,7 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" var="actionBean"/>
 
-            <fieldset><legend><f:message key="category.detail.subtitle"/></legend>
+            <fieldset><legend><f:message key="category.details"/></legend>
                 <%@include file="show.jsp"%>
             </fieldset>
 

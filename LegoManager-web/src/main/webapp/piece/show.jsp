@@ -3,22 +3,23 @@
 <s:errors/>
 <table>
     <tr>
-        Color: ${actionBean.legoPieceTO.color}
+        <td>Color: ${actionBean.legoPieceTO.color}</td>
     </tr>
 </table>
-
+<f:message key="piece.kits"/>
 <table class="basic">
     <tr>
-        <th></th>
         <th>id</th>
-        <th><f:message key="piece.color"/></th>                
-        <th></th>
-        <th></th>
+        <th><f:message key="kit.name"/></th>                
+        <th><f:message key="kit.price"/></th>
+        <th><f:message key="kit.ageRestriction"/></th>
     </tr>
-    <c:forEach items="${actionBean.legoPieceTO.legoKits}" var="kit">
-        <tr>
-            <td>${kit.id}</td>
-            <td><c:out value="${kit.name}"/></td>
-        </tr>
-    </c:forEach>
+<c:forEach items="${actionBean.legoPieceTO.legoKits}" var="kit">
+    <tr>
+        <td>${kit.id}</td>           
+        <td><c:out value="${kit.name}"/></td>
+        <td><c:out value="${kit.price}"/></td>
+        <td><c:out value="${kit.ageRestriction}"/></td>
+    </tr>
+</c:forEach>
 </table>

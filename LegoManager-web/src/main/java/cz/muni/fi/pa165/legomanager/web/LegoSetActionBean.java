@@ -100,8 +100,9 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
     public Resolution delete() {
         log.debug("delete({})", legoSetTO.getId());
         LegoSetTO legoSetTOtoDelete = facade.getLegoSetById(legoSetTO.getId());
+        String name = legoSetTOtoDelete.getName();
         facade.delete(legoSetTOtoDelete);
-        getContext().getMessages().add(new LocalizableMessage("set.delete.message", escapeHTML(legoSetTO.getName())));
+        getContext().getMessages().add(new LocalizableMessage("set.delete.message", name));
         return new RedirectResolution(this.getClass(), "list");
     }
     
