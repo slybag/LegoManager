@@ -21,7 +21,7 @@
             <s:errors/>    
 
             <div id="header">
-                <img class="header_img" src="${pageContext.request.contextPath}/img/lego-256.png" alt="Lego Logo">
+                <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">
                 <f:message key="${titlekey}"/>  
             </div>
 

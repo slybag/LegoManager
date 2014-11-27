@@ -1,5 +1,5 @@
 #header {
-    background-color:#43609C;
+    background-color:#DE000D;
     color:white;
     text-align:center;
     padding:5px;
@@ -10,7 +10,7 @@
     float: left;
     padding-right: 15px;
     padding-left: 6.3px;
-    width: 50px;
+    width: 400px;
 }
 
 #nav {
@@ -27,7 +27,7 @@
     padding:10px;    
 }
 #footer {
-    background-color:black;
+    background-color:#DE000D;
     color:white;
     clear:both;
     text-align:center;
@@ -39,16 +39,12 @@
 }
 
 .button {
-    background: #3498db;
-    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-    background-image: -o-linear-gradient(top, #3498db, #2980b9);
-    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    background: #FAED5B;
+  
     -webkit-border-radius: 26;
     -moz-border-radius: 26;
     border-radius: 26px;
-    color: #ffffff;
+    color: #4C5156;
     font-size: 10px;
     padding: 5px;
     text-decoration: none;
@@ -56,12 +52,8 @@
 }
 
 .button:hover {
-    background: #3cb0fd;
-    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    background: #DE000D;
+    color:#fff;
     text-decoration: none;
     border:0;
 }
@@ -87,12 +79,13 @@
   width: 200px;
 }
 #nav > ul > li > a {
-  font-size: 2.42em;
+  font-size: 1.8em;
+  font-family: Helvetica;
   font-weight: bold;
   display: block;
-  background: #3cb0fd;
-  color: #ffffff;
-  border-bottom: 1px solid #5e071b;
+  color: #4C5156;
+  border-color: #F4F4F4;
+  border-bottom: 1px solid #F4F4F4;
   padding-top: 9px;
   padding-bottom: 7px;
   padding-left: 6.3px;
@@ -100,7 +93,7 @@
 }
 #nav > ul > li > a:hover {
   text-decoration: none;
-  background-color: #43609C
+  background-color: #DE000D
 }
 #nav > ul > li.active {
   border-bottom: none;
@@ -129,3 +122,13 @@
 .bubble ul li{
     list-style-type: none;
 }
+
+.basic {
+    width: 500px;
+    border: solid #eeeeee;
+    text-align: center;
+        
+}
+
+tr:nth-child(even) {background: #CCC}
+tr:nth-child(odd) {background: #eeeeee}
