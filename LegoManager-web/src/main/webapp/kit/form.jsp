@@ -1,7 +1,8 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <s:errors/>
-<table>
+<table class="basic_prop_table">
+    <caption><f:message key="details.basicProperties"/></caption>
     <tr>
         <th><s:label for="s1" name="kit.name"/></th>
         <td><s:text id="s1" name="legoKitTO.name"/></td>
@@ -15,15 +16,13 @@
         <td><s:text id="s3" name="legoKitTO.ageRestriction" size="4"/></td>
     </tr>
 </table>
-<p><f:message key="set.list.allsets"/></p>
-
+<br>
 <table class="basic">
+    <caption><f:message key="set.list.allsets"/></caption>
     <tr>
         <th></th>
         <th>id</th>
         <th><f:message key="piece.color"/></th>                
-        <th></th>
-        <th></th>
     </tr>
     <c:forEach items="${actionBean.legoPieces}" var="piece">
         <tr>

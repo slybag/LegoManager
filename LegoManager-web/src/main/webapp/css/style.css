@@ -50,6 +50,16 @@
     border-radius: 16px;
 }
 
+.info .ui-dialog-titlebar {
+  background-color: #DE000D;
+  background-image: none;
+  color: #000;
+}
+
+.info .ui-widget-header {
+    background:#DE000D;
+}
+
 .hidden {
     display: none;
 }
@@ -143,9 +153,40 @@
 }
 
 .basic {
-    width: 500px;
-    border: solid #eeeeee;
+    min-width: 500px;
+    border: solid #CCC;
     text-align: center;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.basic th {
+    background-color: white;
+}
+
+.basic caption {
+    background-color: #CCC;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 7px;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.basic_prop_table caption{
+    background-color: #CCC;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 7px;
+    font-family: Helvetica;
+    font-weight: bold;    
+}
+
+.basic_prop_table {
+    min-width: 500px;
+    border: solid #CCC;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .table_container{
@@ -188,8 +229,9 @@ fieldset {
     -webkit-border-radius: 16;
     -moz-border-radius: 16;
     border-radius: 16px;
+    border: 2px solid #CCC;
     padding: 10px;  
 }
 
-tr:nth-child(even) {background: #CCC}
-tr:nth-child(odd) {background: #eeeeee}
+.basic tr:nth-child(even) {background: #CCC}
+.basic tr:nth-child(odd) {background: #eeeeee}

@@ -1,6 +1,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <s:errors/>
-<table>
+<table class="basic_prop_table">
+    <caption><f:message key="details.basicProperties"/></caption>
     <tr>
         <th><s:label for="s1" name="category.name"/></th>
         <td><s:text id="s1" name="categoryTO.name"/></td>
@@ -10,7 +11,9 @@
         <td><s:text id="s2" name="categoryTO.description"/></td>
     </tr> 
 </table>
+<br>
 <table class="basic">
+    <caption><f:message key="list.set.allsets"/></caption>
     <tr>
         <th></th>
         <th>id</th>
@@ -26,7 +29,9 @@
     </tr>
 </c:forEach>
 </table>
+<br>
 <table class="basic">
+    <caption><f:message key="list.kit.allkits"/></caption>
     <tr>
         <th></th>
         <th>id</th>

@@ -10,11 +10,12 @@
         <br>
         <br>
         <div class="table_container">
-            <p><f:message key="piece.list.allpieces"/></p>
             <table class="basic">
+                <caption><f:message key="piece.list.allpieces"/></caption>
                 <tr>
                     <th>id</th>
                     <th><f:message key="piece.color"/></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>

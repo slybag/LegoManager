@@ -8,8 +8,12 @@
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
             <s:hidden name="set.id"/>
             <fieldset><legend><f:message key="set.edit.edit"/></legend>
+                <s:submit class="button bigtext" name="save"><f:message key="set.edit.save"/></s:submit>
+                <br>
+                <br>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="set.edit.save"/></s:submit>
+                <br>
+                <s:submit class="button bigtext" name="save"><f:message key="set.edit.save"/></s:submit>
                 </fieldset>
         </s:form>
 

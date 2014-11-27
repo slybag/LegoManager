@@ -1,17 +1,20 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <s:errors/>
-<table>
+<table class="basic_prop_table">
+    <caption><f:message key="details.basicProperties"/></caption>
     <tr>
-        <td>Name: ${actionBean.categoryTO.name}</td>
+        <th><f:message key="category.name"/></th>
+        <td>${actionBean.categoryTO.name}</td>
     </tr>
     <tr>
-        <td>Description: ${actionBean.categoryTO.description}</td>
+        <th><f:message key="category.description"/></th>
+        <td>${actionBean.categoryTO.description}</td>
     </tr>
 </table>
-    
-<f:message key="category.sets"/>
+<br>
 <table class="basic">
+    <caption><f:message key="category.sets"/></caption>
     <tr>
         <th>id</th>
         <th><f:message key="set.name"/></th>
@@ -25,8 +28,9 @@
     </tr>
 </c:forEach>
 </table>
-<f:message key="category.kits"/>
+<br>
 <table class="basic">
+    <caption><f:message key="category.kits"/></caption>
     <tr>
         <th>id</th>
         <th><f:message key="kit.name"/></th>                

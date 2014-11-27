@@ -7,16 +7,17 @@
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" var="actionBean"/>
 
-        <button type='button bigtext' onclick='create();'><f:message key="category.create"/></button>
+        <button type='button' class="button bigtext" onclick='create();'><f:message key="category.create"/></button>
         <br>
         <br>
         <div class="table_container">
-            <p><f:message key="category.list.allcategories"/></p>
             <table class="basic">
+                <caption><f:message key="category.list.allcategories"/></caption>
                 <tr>
                     <th>id</th>
                     <th><f:message key="category.name"/></th>
                     <th><f:message key="category.description"/></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>

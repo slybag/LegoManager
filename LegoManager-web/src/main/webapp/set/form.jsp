@@ -1,7 +1,8 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<table>
+<table class = "basic_prop_table">
+    <caption><f:message key="details.basicProperties"/></caption>
     <tr>
         <th><s:label for="s1" name="set.name"/></th>
         <td><s:text id="s1" name="legoSetTO.name"/></td>
@@ -11,7 +12,9 @@
         <td><s:text id="s2" name="legoSetTO.price" size="4"/></td>
     </tr>    
 </table>
+<br>
 <table class="basic">
+    <caption><f:message key="kit.list.allkits"/></caption>
     <tr>
         <th></th>
         <th>id</th>

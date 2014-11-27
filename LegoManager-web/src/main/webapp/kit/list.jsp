@@ -10,12 +10,13 @@
         <br>
         <br>
         <div class="table_container">
-            <p><f:message key="kit.list.allkits"/></p>
             <table class="basic">
+                <caption><f:message key="kit.list.allkits"/></caption>
                 <tr>
                     <th>id</th>
                     <th><f:message key="kit.name"/></th>
                     <th><f:message key="kit.price"/></th>                
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>

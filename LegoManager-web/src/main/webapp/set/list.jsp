@@ -11,12 +11,13 @@
         <br>
         <br>
         <div class="table_container">
-            <p><f:message key="set.list.allsets"/></p>
             <table class="basic">
+                <caption><f:message key="set.list.allsets"/></caption>
                 <tr>
                     <th>id</th>
                     <th><f:message key="set.title"/></th>
                     <th><f:message key="set.price"/></th>                
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>

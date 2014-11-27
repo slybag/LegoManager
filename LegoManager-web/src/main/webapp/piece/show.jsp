@@ -1,13 +1,16 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <s:errors/>
-<table>
+<table class="basic_prop_table">
+    <caption><f:message key="details.basicProperties"/></caption>
     <tr>
-        <td>Color: ${actionBean.legoPieceTO.color}</td>
+        <th><f:message key="piece.color"/></th>
+        <td>${actionBean.legoPieceTO.color}</td>
     </tr>
 </table>
-<f:message key="piece.kits"/>
+<br>
 <table class="basic">
+    <caption><f:message key="piece.kits"/></caption>
     <tr>
         <th>id</th>
         <th><f:message key="kit.name"/></th>                

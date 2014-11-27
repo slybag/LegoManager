@@ -9,8 +9,12 @@
         <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
             <s:hidden name="legoPieceTO.id"/>
             <fieldset><legend><f:message key="piece.edit.edit"/></legend>
+                <s:submit class="button bigtext" name="save"><f:message key="piece.edit.save"/></s:submit>
+                <br>
+                <br>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="piece.edit.save"/></s:submit>
+                <br>
+                <s:submit class="button bigtext" name="save"><f:message key="piece.edit.save"/></s:submit>
             </fieldset>
         </s:form>
 

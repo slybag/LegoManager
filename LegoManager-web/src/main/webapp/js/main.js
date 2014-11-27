@@ -6,6 +6,7 @@ function create() {
             height: 500,
             width: 'auto',
             modal: true,
+            dialogClass: 'info'
         });
     });
 }
@@ -18,6 +19,7 @@ function showMessage() {
             height: 'auto',
             width: 'auto',
             modal: true,
+            dialogClass: 'info'
         });
     });
 }
