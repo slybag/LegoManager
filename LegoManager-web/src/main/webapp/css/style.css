@@ -1,7 +1,11 @@
+
 #header {
     background-color:#DE000D;
     color:white;
     text-align:center;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
     padding:5px;
     height: 55px;
 }
@@ -19,12 +23,21 @@
     height:300px;
     width:200px;
     float:left;
-    padding:5px; 
+    padding:10px; 
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
 }
 #content {
-    width:350px;
-    float:left;
-    padding:10px;    
+    margin-left: 210px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding:20px;
+    min-height: 500px;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    background-color: #F4F4F4;
 }
 #footer {
     background-color:#DE000D;
@@ -32,6 +45,9 @@
     clear:both;
     text-align:center;
     padding:5px; 
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
 }
 
 .hidden {
@@ -81,6 +97,9 @@
 #nav > ul > li > a {
   font-size: 1.8em;
   font-family: Helvetica;
+  -webkit-border-radius: 16;
+  -moz-border-radius: 16;
+  border-radius: 16px;
   font-weight: bold;
   display: block;
   color: #4C5156;
@@ -127,7 +146,49 @@
     width: 500px;
     border: solid #eeeeee;
     text-align: center;
-        
+}
+
+.table_container{
+    background-color:  #eeeeee;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.error_container{
+    background-color:  #FAED5B;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    border: solid #DE000D;
+    padding: 10px;
+}
+
+#title {
+    background-color: #F4F4F4;
+    width: fit-content;
+    font-family: Helvetica;
+    display: inline-block;
+    float:left;
+    color:black;
+    padding:10px;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    font-size: 1.5em;
+}
+
+.bigtext {
+    font-size: 1.5em; 
+}
+
+fieldset {
+    background-color:  #eeeeee;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    padding: 10px;  
 }
 
 tr:nth-child(even) {background: #CCC}

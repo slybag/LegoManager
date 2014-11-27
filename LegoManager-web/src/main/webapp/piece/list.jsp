@@ -6,35 +6,38 @@
 <s:layout-render name="/layout.jsp" titlekey="piece.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" var="actionBean"/>
-
-        <p><f:message key="piece.list.allpieces"/></p>
-        <button class="button" type='button' onclick='create();'><f:message key="piece.create"/></button>
-        <table class="basic">
-            <tr>
-                <th>id</th>
-                <th><f:message key="piece.color"/></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach items="${actionBean.legoPieces}" var="piece">
+        <button class="button bigtext" type='button' onclick='create();'><f:message key="piece.create"/></button>
+        <br>
+        <br>
+        <div class="table_container">
+            <p><f:message key="piece.list.allpieces"/></p>
+            <table class="basic">
                 <tr>
-                    <td>${piece.id}</td>
-                    <td><c:out value="${piece.color}"/></td>
-                    <td>
-                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.edit"/></s:link>
-                        </td>
-                        <td>
-                        <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="details"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.details"/></s:link>
-                        </td>
-                        <td>
-                        <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
-                            <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
-                            <s:submit class="button" name="delete"><f:message key="piece.list.delete"/></s:submit>
-                        </s:form>
-                    </td>
+                    <th>id</th>
+                    <th><f:message key="piece.color"/></th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${actionBean.legoPieces}" var="piece">
+                    <tr>
+                        <td>${piece.id}</td>
+                        <td><c:out value="${piece.color}"/></td>
+                        <td>
+                            <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="edit"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.edit"/></s:link>
+                            </td>
+                            <td>
+                            <s:link class="button" beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" event="details"><s:param name="piece.id" value="${piece.id}"/><f:message key="piece.details"/></s:link>
+                            </td>
+                            <td>
+                            <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
+                                <s:hidden name="legoPieceTO.id" value="${piece.id}"/>
+                                <s:submit class="button" name="delete"><f:message key="piece.list.delete"/></s:submit>
+                            </s:form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <div class="hidden" id="add" title="Add the piece">
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
                 <fieldset><legend><f:message key="piece.list.newpiece"/></legend>

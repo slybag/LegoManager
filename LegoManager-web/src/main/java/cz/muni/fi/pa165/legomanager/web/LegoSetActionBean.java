@@ -64,6 +64,7 @@ public class LegoSetActionBean extends BaseActionBean implements ValidationError
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         legoSets = facade.getAllLegoSets();
+        legoKits = facade.getAllLegoKits();
         return null;
     }
     

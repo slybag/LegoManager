@@ -18,13 +18,14 @@
 
         </head>
         <body>
-            <s:errors/>    
 
             <div id="header">
                 <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">
+                <div id="title">
                 <f:message key="${titlekey}"/>  
+                </div>
             </div>
-
+            <div>
             <div id="nav">
                 <ul><li><a href="/pa165/"><f:message key="index.home"/></a></li>
                     <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean"><f:message key="index.sets.link"/></s:link></li>
@@ -38,15 +39,15 @@
 
                 <div id="content">
                     <span class="bubble">
-                    <s:messages/>
                 </span>
                 <s:layout-component name="body"/>
+            </div>
             </div>
 
             <div id="footer" >
                 <f:message key="index.footer"/>
             </div>
-
+                <s:messages/>
 
         </body>
     </html>
