@@ -6,8 +6,9 @@
 <s:layout-render name="/layout.jsp" titlekey="piece.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean" var="actionBean"/>
+        <div class="menu_container">
         <button class="button bigtext" type='button' onclick='create();'><f:message key="piece.create"/></button>
-        <br>
+        </div>
         <br>
         <div class="table_container">
             <table class="basic">
@@ -43,6 +44,7 @@
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoPieceActionBean">
                 <fieldset><legend><f:message key="piece.list.newpiece"/></legend>
                     <%@include file="form.jsp"%>
+                    <br>
                     <s:submit class="button" name="add"><f:message key="piece.create"/></s:submit>
                     </fieldset>
             </s:form>

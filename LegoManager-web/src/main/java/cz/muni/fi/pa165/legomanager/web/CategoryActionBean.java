@@ -69,6 +69,8 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         categories = facade.getAllCategories();
+        legoKits = facade.getAllLegoKits();
+        legoSets = facade.getAllLegoSets();
         return null;
     }
     @ValidateNestedProperties(value = {

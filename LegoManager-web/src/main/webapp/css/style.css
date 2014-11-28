@@ -204,11 +204,19 @@
     padding: 10px;
 }
 
+.menu_container{
+    background-color:  #E4E4DA;
+    border-radius: 16px;
+    padding: 10px;
+}
+
 .error_container{
     background-color:  #FAED5B;
     -webkit-border-radius: 16;
     -moz-border-radius: 16;
     border-radius: 16px;
+    display: inline-block;
+    width: 474px;
     border: solid #DE000D;
     padding: 10px;
 }
@@ -229,16 +237,24 @@
 }
 
 .bigtext {
-    font-size: 1.5em; 
+    font-size: 1.4em;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 fieldset {
     background-color:  #eeeeee;
+    background-image: linear-gradient(to bottom, #E4E4DA, #F4F4F4);		
     -webkit-border-radius: 16;
     -moz-border-radius: 16;
     border-radius: 16px;
-    border: 2px solid #CCC;
+    border: none;
     padding: 10px;  
+}
+
+fieldset legend {
+    font-weight: bold;
+    font-family: Helvetica;
 }
 
 .basic tr:nth-child(even) {background: #CCC}

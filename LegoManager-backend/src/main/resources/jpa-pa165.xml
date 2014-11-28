@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
     
-    <context:component-scan base-package="cz.muni.fi.pa165"/>
+    <context:component-scan base-package="cz.muni.fi.pa165.legomanager.dao"/>
     <context:annotation-config />
     <tx:annotation-driven  proxy-target-class="true" transaction-manager="transactionManager"/> 
 

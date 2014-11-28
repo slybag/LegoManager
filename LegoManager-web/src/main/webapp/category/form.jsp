@@ -1,5 +1,9 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<div>
 <s:errors/>
+</div>
+<br>
+<br>
 <table class="basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
     <tr>

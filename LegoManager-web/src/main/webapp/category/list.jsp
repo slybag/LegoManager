@@ -6,9 +6,9 @@
 <s:layout-render name="/layout.jsp" titlekey="category.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean" var="actionBean"/>
-
+        <div class="menu_container">
         <button type='button' class="button bigtext" onclick='create();'><f:message key="category.create"/></button>
-        <br>
+        </div>
         <br>
         <div class="table_container">
             <table class="basic">
@@ -46,6 +46,7 @@
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.CategoryActionBean">
                 <fieldset><legend><f:message key="category.list.newcategory"/></legend>
                     <%@include file="form.jsp"%>
+                    <br>
                     <s:submit class="button" name="add"><f:message key="category.create"/></s:submit>
                     </fieldset>
             </s:form>

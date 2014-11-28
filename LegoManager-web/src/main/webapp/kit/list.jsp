@@ -5,9 +5,9 @@
 <s:layout-render name="/layout.jsp" titlekey="kit.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean" var="actionBean"/>
-
+        <div class="menu_container">
         <button class="button bigtext" type='button' onclick='create();'><f:message key="kit.create"/></button>
-        <br>
+        </div>
         <br>
         <div class="table_container">
             <table class="basic">
@@ -45,8 +45,9 @@
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoKitActionBean">
                 <fieldset><legend><f:message key="kit.list.newpiece"/></legend>
                     <%@include file="form.jsp"%>
+                    <br>
                     <s:submit class="button" name="add"><f:message key="kit.create"/></s:submit>
-                    </fieldset>
+                </fieldset>
             </s:form>
         </div>
     </s:layout-component>

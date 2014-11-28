@@ -1,6 +1,10 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div>
 <s:errors/>
+</div>
+<br>
+<br>
 <table class="basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
     <tr>
