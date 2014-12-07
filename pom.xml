@@ -15,5 +15,6 @@
         <module>./LegoManager-backend</module>
         <module>./LegoManager-api</module>
         <module>./LegoManager-web</module>
-  </modules>
+        <module>./LegoManager-client</module>
+    </modules>
 </project>

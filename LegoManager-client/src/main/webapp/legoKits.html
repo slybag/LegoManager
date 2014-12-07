@@ -1,0 +1,13 @@
+<table class="table movietable">
+  <h3>All Lego Kits</h3>
+  <tr>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Age Restriction</td>
+  </tr>
+  <tr ng-repeat="legoKit in legoKits">
+    <td>{{legoKit.id}}</td>
+    <td>{{legoKit.name}}</td>
+    <td>{{legoKit.ageRestriction}}</td>
+  </tr>
+</table>

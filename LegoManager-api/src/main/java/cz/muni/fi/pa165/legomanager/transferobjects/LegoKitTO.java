@@ -9,19 +9,33 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
  * @author Petr Konecny
  */
+
+@XmlRootElement
 public class LegoKitTO {
 
     private Long id;
     private BigDecimal price;
     private Integer ageRestriction;
     private String name;
+    
+    @XmlElement
+    @XmlInverseReference(mappedBy="legoKits")
     private Set<CategoryTO> categories;
+    
+    @XmlElement
+    @XmlInverseReference(mappedBy="legoKits")
     private List<LegoSetTO> legoSets;
+    
+    @XmlElement
+    @XmlInverseReference(mappedBy="legoKits")
     private List<LegoPieceTO> legoPieces;
 
     /**
