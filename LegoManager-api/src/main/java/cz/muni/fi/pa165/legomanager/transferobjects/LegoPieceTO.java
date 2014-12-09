@@ -8,15 +8,26 @@ package cz.muni.fi.pa165.legomanager.transferobjects;
 import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
  * @author Tomas
  */
+
+@XmlRootElement
 public class LegoPieceTO {
+    
+    @XmlElement
     private Long id;
+    
+    @XmlElement
     private PieceColor color;
     
+    @XmlElement
+    @XmlInverseReference(mappedBy="legoPieces")
     private List<LegoKitTO> legoKits;
 
     public Long getId() {

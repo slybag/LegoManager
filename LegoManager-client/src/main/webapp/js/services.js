@@ -4,4 +4,7 @@ angular.module('legoApp.services', []).factory('LegoKit', function($resource) {
       method: 'PUT'
     }
   });
+}).factory('LegoPiece', function($resource){
+    return $resource('http://localhost:8080/pa165/rest/legopieces/:id')
+    
 });

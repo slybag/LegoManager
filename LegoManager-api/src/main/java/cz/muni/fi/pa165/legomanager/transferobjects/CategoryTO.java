@@ -7,16 +7,27 @@ package cz.muni.fi.pa165.legomanager.transferobjects;
 
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
  * @author Martin Laštovička
  */
+
+@XmlRootElement
 public class CategoryTO {
     private Long id;
     private String name;
     private String description;
+    
+    @XmlElement
+    @XmlInverseReference(mappedBy="categories")
     private List<LegoKitTO> legoKits;
+    
+    @XmlElement
+    @XmlInverseReference(mappedBy="categories")
     private List<LegoSetTO> legoSets;
 
     public Long getId() {

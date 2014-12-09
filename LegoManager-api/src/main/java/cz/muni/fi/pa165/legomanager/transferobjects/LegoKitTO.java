@@ -17,25 +17,25 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
  *
  * @author Petr Konecny
  */
-
 @XmlRootElement
 public class LegoKitTO {
 
+    @XmlElement
     private Long id;
+    @XmlElement
     private BigDecimal price;
+    @XmlElement
     private Integer ageRestriction;
+    @XmlElement
     private String name;
-    
     @XmlElement
-    @XmlInverseReference(mappedBy="legoKits")
+    @XmlInverseReference(mappedBy = "legoKits")
     private Set<CategoryTO> categories;
-    
     @XmlElement
-    @XmlInverseReference(mappedBy="legoKits")
+    @XmlInverseReference(mappedBy = "legoKits")
     private List<LegoSetTO> legoSets;
-    
     @XmlElement
-    @XmlInverseReference(mappedBy="legoKits")
+    @XmlInverseReference(mappedBy = "legoKits")
     private List<LegoPieceTO> legoPieces;
 
     /**
@@ -153,5 +153,4 @@ public class LegoKitTO {
     public String toString() {
         return "LegoKitTO{" + "id=" + id + ", price=" + price + ", ageRestriction=" + ageRestriction + ", name=" + name + '}';
     }
-    
 }
