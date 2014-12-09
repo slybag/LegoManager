@@ -7,6 +7,7 @@ angular.module('legoApp.controllers', [])
     $scope.legoPieces = LegoPiece.query();
     $scope.legoPieceSelected = [];
     $scope.addLegoKit = function() {
+        $scope.legoKit.legoPieces = $scope.legoPieceSelected;
         $scope.legoKit.$save(function() {
             $state.go('legoKits');
         });

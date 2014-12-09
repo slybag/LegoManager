@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.legomanager.rest;
 
+import cz.muni.fi.pa165.legomanager.facades.LegoFacade;
 import cz.muni.fi.pa165.legomanager.services.LegoKitService;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
@@ -41,6 +42,10 @@ public class LegoKitResource {
 
     @Autowired
     private LegoKitService service;
+    
+    @Autowired 
+    private LegoFacade facade;
+    
     @Context
     private UriInfo context;
 
@@ -68,7 +73,14 @@ public class LegoKitResource {
         if(legoKit.getLegoSets()== null)
         legoKit.setLegoSets(new ArrayList<LegoSetTO>());
         System.err.println(legoKit.toString() + legoKit.getLegoPieces().size() +" "+ legoKit.getLegoSets().size() +" "+ legoKit.getCategories().size());
-        service.createLegoKit(legoKit);
+        System.err.println(legoKit.getLegoPieces().get(0).toString());
+//        List<LegoPieceTO> pieces = new ArrayList<LegoPieceTO>();
+//        for(LegoPieceTO piece : legoKit.getLegoPieces()){
+//            pieces.add(facade.getLegoPieceById(piece.getId()));
+//        }
+//        
+//        legoKit.setLegoPieces(pieces);
+        facade.create(legoKit);
         return Response.created(context.getAbsolutePath()).build();
     }
 
