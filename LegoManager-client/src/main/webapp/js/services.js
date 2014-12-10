@@ -7,4 +7,9 @@ angular.module('legoApp.services', []).factory('LegoKit', function($resource) {
 }).factory('LegoPiece', function($resource){
     return $resource('http://localhost:8080/pa165/rest/legopieces/:id')
     
+}).factory('Category', function ($resource) {
+    return $resource('http://localhost:8080/pa165/rest/categories/:id')
+
+}).factory('LegoSet', function ($resource) {
+    return $resource('http://localhost:8080/pa165/rest/legosets/:id')
 });

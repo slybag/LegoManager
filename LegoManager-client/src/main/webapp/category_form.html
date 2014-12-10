@@ -1,0 +1,27 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<input type="text" ng-model="category.name" class="form-control" id="name" placeholder="category name Here" >
+<input type="text" ng-model="category.description" class="form-control" id="description" placeholder="Category description">
+<label ng-repeat="legoKit in legoKits">
+    <input 
+        type="checkbox" 
+        value = "{{legoKit}}"
+        name="{{legoKit.id}}"
+        ng-checked ="legoKitSelected.indexOf(legoKit) > -1"
+        ng-click ="toggleKitSelection(legoKit)"
+    >
+    {{legoKit.name}}
+</label>
+<label ng-repeat="legoSet in legoSets">
+    <input 
+        type="checkbox" 
+        value = "{{legoSet}}"
+        name="{{legoSet.id}}"
+        ng-checked ="legoSetSelected.indexOf(legoSet) > -1"
+        ng-click ="toggleSetSelection(legoSet)"
+    >
+    {{legoSet.name}}
+</label>

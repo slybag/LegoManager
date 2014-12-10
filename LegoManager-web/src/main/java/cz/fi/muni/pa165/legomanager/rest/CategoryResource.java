@@ -61,8 +61,13 @@ public class CategoryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNewCategory(CategoryTO legoCategory) {
-        legoCategory.setLegoKits(new ArrayList<LegoKitTO>());
-        legoCategory.setLegoSets(new ArrayList<LegoSetTO>());
+
+        if (legoCategory.getLegoKits() == null) {
+            legoCategory.setLegoKits(new ArrayList<LegoKitTO>());
+        }
+        if (legoCategory.getLegoSets() == null) {
+            legoCategory.setLegoSets(new ArrayList<LegoSetTO>());
+        }
         service.createCategory(legoCategory);
         return Response.created(context.getAbsolutePath()).build();
     }
@@ -71,15 +76,15 @@ public class CategoryResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateLegoCategory(@PathParam("id") Long id, CategoryTO legoCategory){
+    public Response updateLegoCategory(@PathParam("id") Long id, CategoryTO legoCategory) {
         legoCategory.setId(id);
         service.updateCategory(legoCategory);
         return Response.created(context.getAbsolutePath()).build();
     }
-    
+
     @DELETE
     @Path("/{id}")
-    public Response deleteCategory(@PathParam("id") Long id){
+    public Response deleteCategory(@PathParam("id") Long id) {
         service.deleteCategory(service.getCategory(id));
         return Response.ok().build();
     }

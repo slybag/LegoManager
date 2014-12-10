@@ -14,6 +14,22 @@ angular.module('legoApp').config(function($stateProvider) {
         url: '/legoKits/:id/edit',
         templateUrl: 'legokit_edit.html',
         controller: 'LegoKitEditController'
+    }).state('legoSets', { // state for showing all sets
+        url: '/legoSets',
+        templateUrl: 'legoSets.html',
+        controller: 'LegoSetListController'
+    }).state('legoPieces', { // state for showing all kits
+        url: '/legoPieces',
+        templateUrl: 'legoPieces.html',
+        controller: 'LegoPieceListController'
+    }).state('categories', { // state for showing all kits
+        url: '/categories',
+        templateUrl: 'categories.html',
+        controller: 'CategoryListController'
+    }).state('newCategory', {
+        url: '/categories/new',
+        templateUrl: 'category_add.html',
+        controller: 'CategoryCreateController'
     });
     
 }).run(function($state) {
