@@ -1,0 +1,26 @@
+<table>
+    <tr>
+    <th>Lego piece color: </th>    
+    <td>{{legoPiece.color}}</td>
+    </tr>
+    <tr>
+    <th>Id: </th>
+    <td>{{legoKit.id}}</td>
+    </tr>
+</table>
+<br>
+<table>
+    <label>All kits with this piece</label>
+    <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Age restriction</th>
+    <th>price</th>
+    </tr>
+    <tr ng-repeat="legoPiece in legoPiece.legoKits" ng-model-instant>
+    <td>{{legoKit.id}}</td>
+    <td>{{legoKit.name}}</td>
+    <td>{{legoKit.ageRestriction}}</td>
+    <td>{{legoKit.price}}</td>
+    </tr>
+</table>

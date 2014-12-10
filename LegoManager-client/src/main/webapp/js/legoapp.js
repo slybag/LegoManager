@@ -22,15 +22,35 @@ angular.module('legoApp').config(function($stateProvider) {
         url: '/legoKits/:id/delete',
         templateUrl: 'legokit_delete.html',
         controller: 'LegoKitDeleteController'
-    }).state('legoSets', { // state for showing all sets
-        url: '/legoSets',
-        templateUrl: 'legoSets.html',
-        controller: 'LegoSetListController'
-    }).state('legoPieces', { // state for showing all pieces
+        
+    }).state('legoPieces', { 
         url: '/legoPieces',
         templateUrl: 'legoPieces.html',
         controller: 'LegoPieceListController'
-    }).state('categories', { // state for showing all categories
+    }).state('newLegoPiece', {
+        url: '/legoPieces/new',
+        templateUrl: 'legopiece_add.html',
+        controller: 'LegoPieceCreateController'
+    }).state('readLegoPiece', {
+        url: '/legoPieces/:id/read',
+        templateUrl: 'legopiece_read.html',
+        controller: 'LegoPieceReadController'
+    }).state('updateLegoPiece',{
+        url: '/legoPieces/:id/edit',
+        templateUrl: 'legopiece_edit.html',
+        controller: 'LegoPieceEditController'
+    }).state('deleteLegoPiece',{
+        url: '/legoPieces/:id/delete',
+        templateUrl: 'legopiece_delete.html',
+        controller: 'LegoPieceDeleteController'
+    });
+    //Jestli delame piece a kit jen tak tohle je tu navic
+    /*
+    $stateProvider.state('legoSets', { // state for showing all sets
+        url: '/legoSets',
+        templateUrl: 'legoSets.html',
+        controller: 'LegoSetListController'
+    }).state('categories', { // state for showing all kits
         url: '/categories',
         templateUrl: 'categories.html',
         controller: 'CategoryListController'
@@ -39,6 +59,7 @@ angular.module('legoApp').config(function($stateProvider) {
         templateUrl: 'category_add.html',
         controller: 'CategoryCreateController'
     });
+    */
     
 }).run(function($state) {
   $state.go('legoKits'); //make a transition to legoKit state when app starts

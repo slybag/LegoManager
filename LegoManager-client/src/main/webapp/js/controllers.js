@@ -64,14 +64,55 @@ angular.module('legoApp.controllers', []).controller('LegoKitListController', fu
         });
     };
 })
+
+
+.controller('LegoPieceListController', function($scope, $state, LegoPiece) {
+    $scope.legoPieces = LegoPiece.query(); //fetch all lego kits. Issues a GET to /api/legoKits
+})
+.controller('LegoPieceCreateController', function($scope, $state, LegoPiece) {
+    $scope.legoPiece = new LegoPiece();
+    $scope.colors = ['BLACK','WHITE','RED','BLUE','YELLOW','PURPLE','GREEN','VIOLET','GREY'];
+    $scope.addLegoPiece = function(){
+        $scope.legoPiece.$save(function() {
+            $state.go('legoPieces');
+        });
+    };
+})
+.controller('LegoPieceReadController',function($scope, $state, $stateParams, LegoPiece){
+    $scope.legoPiece = LegoPiece.get({ id: $stateParams.id },function(){ 
+        for(i=0; i<$scope.legoPiece.legoKits.length;i++){
+            $scope.selectedIds.push($scope.legoPiece.legoKits[i].id);
+        };
+    });
+    $scope.selectedIds = [];
+})
+.controller('LegoPieceEditController',function($scope, $state, $stateParams, LegoPiece){
+    $scope.colors = ['BLACK','WHITE','RED','BLUE','YELLOW','PURPLE','GREEN','VIOLET','GREY'];
+    $scope.legoPiece = LegoPiece.get({ id: $stateParams.id });
+    $scope.updateLegoPiece = function(){ 
+        $scope.legoPiece.$update(function(){
+            $state.go('legoPieces');
+        });
+    };
+})
+.controller('LegoPieceDeleteController',function($scope, $state, $stateParams, LegoPiece){
+    $scope.legoPiece = LegoPiece.get({ id: $stateParams.id });
+    $scope.deleteLegoPiece = function(){
+        console.log($scope.legoPiece);
+        $scope.legoPiece.$delete(function(){
+            $state.go('legoPieces');
+        });
+    };
+});
+
+//Jestli delame piece a kit jen tak tohle je tu navic
+/*
+angular.module('legoApp.controllers')
 .controller('LegoSetListController', function ($scope, $state, LegoSet) {
             $scope.legoSets = LegoSet.query(); //fetch all lego sets. Issues a GET to /api/legoSets
 })
-.controller('LegoPieceListController', function ($scope, $state, LegoPiece) {
-            $scope.legoPiece = LegoPiece.query(); //fetch all lego pieces. Issues a GET to /api/legoPieces
-})
 .controller('CategoryListController', function ($scope, $state, Category) {
-            $scope.categories = Category.query(); //fetch all lego categories. Issues a GET to /api/categories
+    $scope.categories = Category.query(); //fetch all lego categories. Issues a GET to /api/categories
 })
 .controller('CategoryCreateController', function ($scope, $state, Category, LegoKit, LegoSet) {
     $scope.category = new Category();
@@ -113,3 +154,4 @@ angular.module('legoApp.controllers', []).controller('LegoKitListController', fu
         }
     };
 });
+*/
