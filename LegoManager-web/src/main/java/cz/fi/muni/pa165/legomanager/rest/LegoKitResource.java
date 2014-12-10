@@ -66,20 +66,9 @@ public class LegoKitResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createNewLegoKit(LegoKitTO legoKit) {
-        if(legoKit.getCategories() == null)
-        legoKit.setCategories(new HashSet<CategoryTO>());
-        if(legoKit.getLegoPieces() == null)
-        legoKit.setLegoPieces(new ArrayList<LegoPieceTO>());
-        if(legoKit.getLegoSets()== null)
-        legoKit.setLegoSets(new ArrayList<LegoSetTO>());
-        System.err.println(legoKit.toString() + legoKit.getLegoPieces().size() +" "+ legoKit.getLegoSets().size() +" "+ legoKit.getCategories().size());
-        System.err.println(legoKit.getLegoPieces().get(0).toString());
-//        List<LegoPieceTO> pieces = new ArrayList<LegoPieceTO>();
-//        for(LegoPieceTO piece : legoKit.getLegoPieces()){
-//            pieces.add(facade.getLegoPieceById(piece.getId()));
-//        }
-//        
-//        legoKit.setLegoPieces(pieces);
+        if(legoKit.getCategories() == null) legoKit.setCategories(new HashSet<CategoryTO>());
+        if(legoKit.getLegoPieces() == null) legoKit.setLegoPieces(new ArrayList<LegoPieceTO>());
+        if(legoKit.getLegoSets()== null) legoKit.setLegoSets(new ArrayList<LegoSetTO>());
         facade.create(legoKit);
         return Response.created(context.getAbsolutePath()).build();
     }

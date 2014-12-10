@@ -1,31 +1,47 @@
-angular.module('legoApp.controllers', [])
-        .controller('LegoKitListController', function($scope, $state, LegoKit) {
+angular.module('legoApp.controllers', []).controller('LegoKitListController', function($scope, $state, LegoKit) {
     $scope.legoKits = LegoKit.query(); //fetch all lego kits. Issues a GET to /api/legoKits
-})
-        .controller('LegoKitCreateController', function($scope, $state, LegoKit, LegoPiece) {
+});
+
+angular.module('legoApp.controllers').controller('LegoKitCreateController', function($scope, $state, LegoKit, LegoPiece) {
     $scope.legoKit = new LegoKit();
-    $scope.legoPieces = LegoPiece.query();
-    $scope.legoPieceSelected = [];
+    LegoPiece.query(function(data){
+        $scope.legoPieces = data;
+    });
+    $scope.selectedIds = [];
+    $scope.legoKit.legoPieces = [];
     $scope.addLegoKit = function() {
-        $scope.legoKit.legoPieces = $scope.legoPieceSelected;
+        for(i=0; i<$scope.selectedIds.length;i++){
+            for(j=0; j<$scope.legoPieces.length;j++){
+                if($scope.selectedIds[i] === $scope.legoPieces[j].id) $scope.legoKit.legoPieces.push($scope.legoPieces[j]);
+            }; 
+        };
         $scope.legoKit.$save(function() {
             $state.go('legoKits');
         });
     };
-    $scope.togglePieceSelection = function togglePieceSelection(piece) {
-        console.log(piece);
-        console.log($scope.legoPieceSelected.length);
-        var idx = $scope.legoPieceSelected.indexOf(piece);
-        
-        // is currently selected
-        if (idx > -1) {
-            $scope.legoPieceSelected.splice(idx, 1);
-        }
+});
 
-        // is newly selected
-        else {
-            $scope.legoPieceSelected.push(piece);
-        }
-        console.log($scope.legoPieceSelected.length);
+angular.module('legoApp.controllers').controller('LegoKitEditController',function($scope, $state, $stateParams, LegoKit, LegoPiece){
+    LegoPiece.query(function(data){
+        $scope.legoPieces = data;
+    });
+
+    $scope.legoKit = LegoKit.get({ id: $stateParams.id },function(){ 
+        for(i=0; i<$scope.legoKit.legoPieces.length;i++){
+            $scope.selectedIds.push($scope.legoKit.legoPieces[i].id);
+        };
+    });
+    $scope.selectedIds = [];
+    $scope.updateLegoKit = function(){
+        $scope.legoKit.legoPieces = [];
+        for(i=0; i<$scope.selectedIds.length;i++){
+            for(j=0; j<$scope.legoPieces.length;j++){
+                if($scope.selectedIds[i] === $scope.legoPieces[j].id) $scope.legoKit.legoPieces.push($scope.legoPieces[j]);
+            }; 
+        };
+ 
+        $scope.legoKit.$update(function(){
+            $state.go('legoKits');
+        });
     };
 });

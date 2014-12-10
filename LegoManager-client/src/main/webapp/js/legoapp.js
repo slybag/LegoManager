@@ -1,5 +1,5 @@
 
-angular.module('legoApp', ['ngResource','ui.router','legoApp.services','legoApp.controllers']);
+angular.module('legoApp', ['ngResource','ui.router','legoApp.services','legoApp.controllers','checklist-model']);
 
 angular.module('legoApp').config(function($stateProvider) {
     $stateProvider.state('legoKits', { // state for showing all kits
@@ -10,6 +10,10 @@ angular.module('legoApp').config(function($stateProvider) {
         url: '/legoKits/new',
         templateUrl: 'legokit_add.html',
         controller: 'LegoKitCreateController'
+    }).state('updateLegoKit',{
+        url: '/legoKits/:id/edit',
+        templateUrl: 'legokit_edit.html',
+        controller: 'LegoKitEditController'
     });
     
 }).run(function($state) {
