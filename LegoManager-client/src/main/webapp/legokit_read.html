@@ -1,0 +1,11 @@
+<input type="text" ng-model="legoKit.name" class="form-control" id="name" placeholder="lego kit name Here" readonly><br>
+<input type="text" ng-model="legoKit.ageRestriction" class="form-control" id="ageRestriction" placeholder="Age restr here" readonly><br>
+<input type="text" ng-model="legoKit.price" class="form-control" id="price" placeholder="Price Here" readonly><br>
+Lego Pieces:<br>
+<label ng-repeat="legoPiece in legoPieces" ng-model-instant>
+    <input 
+        type="text" 
+        value="{{legoPiece.color}}"
+        readonly
+    >{{legoPiece.id}}<br>
+</label>
