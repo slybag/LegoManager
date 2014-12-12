@@ -2,8 +2,10 @@
 angular.module('legoApp', ['ngResource','ui.router','legoApp.services','legoApp.controllers','checklist-model']);
 
 angular.module('legoApp').config(function($stateProvider) {
-    $stateProvider.state('legoKits', { // state for showing all kits
-        url: '/legoKits', // state for showing all kits
+    $stateProvider.state('index', {
+        url: '/'
+    }).state('legoKits', {
+        url: '/legoKits',
         templateUrl: 'legoKits.html',
         controller: 'LegoKitListController'
     }).state('newLegoKit', {
@@ -22,7 +24,6 @@ angular.module('legoApp').config(function($stateProvider) {
         url: '/legoKits/:id/delete',
         templateUrl: 'legokit_delete.html',
         controller: 'LegoKitDeleteController'
-        
     }).state('legoPieces', { 
         url: '/legoPieces',
         templateUrl: 'legoPieces.html',
@@ -62,6 +63,6 @@ angular.module('legoApp').config(function($stateProvider) {
     */
     
 }).run(function($state) {
-  $state.go('legoKits'); //make a transition to legoKit state when app starts
+  $state.go('index'); //make a transition to legoKit state when app starts
 });
 

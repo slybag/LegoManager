@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="legoApp">
     <head>
-        <title>Start Page</title>
+        <title>LegoManager</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body>
-        <div ui-view></div>
+        <div class="menu">
+            <a href="/LegoManager-client/#/">Home</a>
+            <a href="/LegoManager-client/#/legoKits">LegoKits</a>
+            <a href="/LegoManager-client/#/legoPieces">LegoPieces</a>
+                <img class="header_img" src="img/legomanager.png" alt="Lego Logo">
+        </div>
+        <hr>
+        <div ui-view class="body_div"><p class="greetings">Hello my dearest visitor.</p></div>
         <script src="js/angular.min.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src="js/angular-ui-router.min.js"></script>

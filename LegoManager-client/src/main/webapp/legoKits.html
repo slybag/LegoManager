@@ -1,16 +1,20 @@
-<table class="table movietable">
-  <h3>All Lego Kits</h3>
+<table class="listTable">
+  <caption>All Lego Kits</caption>
   <tr>
-    <td>Id</td>
-    <td>Name</td>
-    <td>Age Restriction</td>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Age Restriction</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <tr ng-repeat="legoKit in legoKits">
     <td>{{legoKit.id}}</td>
     <td>{{legoKit.name}}</td>
     <td>{{legoKit.ageRestriction}}</td>
-    <td><a ui-sref="readLegoKit({id:legoKit.id})">Deatils</a></td>
-    <td><a ui-sref="updateLegoKit({id:legoKit.id})">Update</a></td>
-    <td><a ui-sref="deleteLegoKit({id:legoKit.id})">Delete</a></td>
+    <td><a ui-sref="readLegoKit({id:legoKit.id})" class="button">Details</a></td>
+    <td><a ui-sref="updateLegoKit({id:legoKit.id})" class="button">Update</a></td>
+    <td><a ui-sref="deleteLegoKit({id:legoKit.id})" class="button">Delete</a></td>
   </tr>
 </table>
+<a href="/LegoManager-client/#/legoKits/new" class="button">Create</a>

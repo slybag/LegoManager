@@ -1,0 +1,83 @@
+body {
+    background-color: #FAFAFA;
+}
+
+.menu {
+    background-color: #EEE;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.8em;
+    margin-right: 1.42em;
+    padding: 6.75px;
+    border-radius: 13.5px;
+}
+
+.menu a:hover {
+    background-color: red;
+}
+
+.header_img{
+    height: 1.75em;
+    float: right;
+    margin-top: 0.2em;
+}
+
+.listTable {
+    min-width: 500px;
+    border: solid #CCC;
+    text-align: center;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.listTable tr {
+    line-height: 1.5em;
+}
+
+.listTable th {
+    background-color: white;
+}
+
+.listTable caption {
+    background-color: #CCC;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 7px;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.listTable tr:nth-child(even) {background: #CCC}
+.listTable tr:nth-child(odd) {background: #eeeeee}
+
+.button {
+    background: #FAED5B;
+    background-image: linear-gradient(to bottom, #FFEB70, #FAED5B);		
+    -webkit-border-radius: 26;
+    -moz-border-radius: 26;
+    border-radius: 26px;
+    color: #4C5156;
+    font-size: 10px;
+    padding: 5px;
+    text-decoration: none;
+    border: 0;
+}
+
+.button:hover {
+    background: #DE000D;
+    background-image: linear-gradient(to bottom, #DE000D, #E76318);		
+    color: #fff;
+    text-decoration: none;
+    border: 0;
+}
+
+.greetings {
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: underline;
+}

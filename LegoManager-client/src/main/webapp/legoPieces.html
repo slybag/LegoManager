@@ -1,14 +1,18 @@
-<table class="table movietable">
-  <h3>All Lego pieces</h3>
+<table class="listTable">
+  <caption>All Lego pieces</caption>
   <tr>
-    <td>Id</td>
-    <td>Color</td>
+    <th>Id</th>
+    <th>Color</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <tr ng-repeat="legoPiece in legoPieces">
     <td>{{legoPiece.id}}</td>
     <td>{{legoPiece.color}}</td>
-    <td><a ui-sref="readLegoPiece({id:legoPiece.id})">Deatils</a></td>
-    <td><a ui-sref="updateLegoPiece({id:legoPiece.id})">Update</a></td>
-    <td><a ui-sref="deleteLegoPiece({id:legoPiece.id})">Delete</a></td>
+    <td><a ui-sref="readLegoPiece({id:legoPiece.id})" class="button">Details</a></td>
+    <td><a ui-sref="updateLegoPiece({id:legoPiece.id})" class="button">Update</a></td>
+    <td><a ui-sref="deleteLegoPiece({id:legoPiece.id})" class="button">Delete</a></td>
   </tr>
 </table>
+<a href="/LegoManager-client/#/legoPieces/new" class="button">Create</a>
