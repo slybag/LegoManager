@@ -92,6 +92,10 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
         log.debug("delete({})", legoKitTO.getId());
         legoKitTO = facade.getLegoKitById(legoKitTO.getId());
         String name = legoKitTO.getName();
+        if(!legoKitTO.getCategories().isEmpty() || !legoKitTO.getLegoPieces().isEmpty() || !legoKitTO.getLegoSets().isEmpty()){
+            getContext().getMessages().add(new LocalizableMessage("delete.cant.kit"));
+            return new RedirectResolution(this.getClass(), "list");
+        }
         facade.delete(legoKitTO);
         getContext().getMessages().add(new LocalizableMessage("kit.delete.message", name));
         return new RedirectResolution(this.getClass(), "list");

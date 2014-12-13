@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pa165.legomanager.web;
 
+import cz.muni.fi.pa165.legomanager.facades.LegoFacade;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
@@ -37,14 +38,14 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     final static Logger log = LoggerFactory.getLogger(LegoPieceActionBean.class);
     
     @SpringBean
-    protected LegoPieceService legoPieceService;
+    protected LegoFacade facade;
 
     private List<LegoPieceTO> legoPieces;
 
     @DefaultHandler
     public Resolution list() {
         log.debug("list()");
-        legoPieces = legoPieceService.getAllLegoPieces();
+        legoPieces = facade.getAllLegoPieces();
         log.debug("legoPieces.size=" + legoPieces.size());
         return new ForwardResolution("/piece/list.jsp");
     
@@ -57,7 +58,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
         
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
-        legoPieces = legoPieceService.getAllLegoPieces();
+        legoPieces = facade.getAllLegoPieces();
         return null;
     }
     
@@ -77,15 +78,19 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     public Resolution add() {
         log.debug("add() lego piece={}", legoPieceTO);
         legoPieceTO.setLegoKits(new ArrayList<LegoKitTO>());
-        legoPieceService.createLegoPiece(legoPieceTO);
+        facade.create(legoPieceTO);
         getContext().getMessages().add(new LocalizableMessage("piece.add.message", escapeHTML(legoPieceTO.getColor().toString())));
         return new RedirectResolution(this.getClass(), "list");
     }
     
     public Resolution delete() {
         log.debug("delete({})", legoPieceTO.getId());
-        legoPieceTO = legoPieceService.getLegoPiece(legoPieceTO.getId());
-        legoPieceService.removeLegoPiece(legoPieceTO);
+        legoPieceTO = facade.getLegoPieceById(legoPieceTO.getId());
+        if(!legoPieceTO.getLegoKits().isEmpty()){
+            getContext().getMessages().add(new LocalizableMessage("delete.cant.piece"));
+            return new RedirectResolution(this.getClass(), "list");
+        }
+        facade.delete(legoPieceTO);
         getContext().getMessages().add(new LocalizableMessage("piece.delete.message", escapeHTML(legoPieceTO.getColor().toString())));
         return new RedirectResolution(this.getClass(), "list");
     }
@@ -94,7 +99,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     public void loadLegoSetFromDatabase() {
         String ids = getContext().getRequest().getParameter("piece.id");
         if (ids == null) return;
-        legoPieceTO = legoPieceService.getLegoPiece(Long.parseLong(ids));        
+        legoPieceTO = facade.getLegoPieceById(Long.parseLong(ids));        
     }
     
     public Resolution edit() {
@@ -105,7 +110,7 @@ public class LegoPieceActionBean extends BaseActionBean implements ValidationErr
     public Resolution save() {
         log.debug("save() piece={}", legoPieceTO);
         if(legoPieceTO.getLegoKits() == null) legoPieceTO.setLegoKits(new ArrayList());
-        legoPieceService.updateLegoPiece(legoPieceTO);
+        facade.update(legoPieceTO);
         return new RedirectResolution(this.getClass(), "list");
     }
     

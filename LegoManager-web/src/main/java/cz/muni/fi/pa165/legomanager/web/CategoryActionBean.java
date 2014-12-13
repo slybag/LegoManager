@@ -114,8 +114,12 @@ public class CategoryActionBean extends BaseActionBean implements ValidationErro
         //log.debug("delete({})", categoryTO.getId());
         CategoryTO categoryTOdelete = facade.getCategoryById(categoryTO.getId());
         String name = new String(categoryTOdelete.getName());
+        if(!categoryTOdelete.getLegoKits().isEmpty() || !categoryTOdelete.getLegoSets().isEmpty()){
+            getContext().getMessages().add(new LocalizableMessage("delete.cant.category"));
+            return new RedirectResolution(this.getClass(), "list");
+        }
         facade.delete(categoryTOdelete);
-        getContext().getMessages().add(new LocalizableMessage("category.delete.message", name));//escapeHTML(categoryTO.getName())));
+        getContext().getMessages().add(new LocalizableMessage("category.delete.message", name));
         return new RedirectResolution(this.getClass(), "list");
     }
     

@@ -58,13 +58,19 @@ angular.module('legoApp.controllers', []).controller('LegoKitListController', fu
 .controller('LegoKitDeleteController',function($scope, $state, $stateParams, LegoKit){
     $scope.legoKit = LegoKit.get({ id: $stateParams.id });
     $scope.deleteLegoKit = function(){
-        console.log($scope.legoKit);
-        $scope.legoKit.$delete(function(){
-            $state.go('legoKits');
-        });
+        document.getElementById("errors").innerHTML = '';
+        if($scope.legoKit.legoPieces.length !== 0){
+            var node = document.createElement("h4");
+            var textnode = document.createTextNode("Cannot delete this kit because it is connected to some piece, please edit it and remove this connection");
+            node.appendChild(textnode);
+            document.getElementById("errors").appendChild(node);
+        }else{
+            $scope.legoKit.$delete(function(){
+                $state.go('legoKits');
+            });
+        }
     };
 })
-
 
 .controller('LegoPieceListController', function($scope, $state, LegoPiece) {
     $scope.legoPieces = LegoPiece.query(); //fetch all lego kits. Issues a GET to /api/legoKits
@@ -98,10 +104,17 @@ angular.module('legoApp.controllers', []).controller('LegoKitListController', fu
 .controller('LegoPieceDeleteController',function($scope, $state, $stateParams, LegoPiece){
     $scope.legoPiece = LegoPiece.get({ id: $stateParams.id });
     $scope.deleteLegoPiece = function(){
-        console.log($scope.legoPiece);
-        $scope.legoPiece.$delete(function(){
-            $state.go('legoPieces');
-        });
+        document.getElementById("errors").innerHTML = '';
+        if($scope.legoPiece.legoKits.length !== 0){
+            var node = document.createElement("h4");
+            var textnode = document.createTextNode("Cannot delete this piece because it is connected to some kit, please edit it and remove this connection");
+            node.appendChild(textnode);
+            document.getElementById("errors").appendChild(node);
+        }else{
+            $scope.legoPiece.$delete(function(){
+                $state.go('legoPieces');
+            });
+        }
     };
 });
 
