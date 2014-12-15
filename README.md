@@ -1,6 +1,6 @@
 PA165 LegoManager
 =====================
-For more info about the project please visit: <a href="">our project wiki page</a>.
+For more info about the project please visit: <a href="https://github.com/slybag/LegoManager/wiki">our project wiki page</a>.
 
 running web server
 ---------------------
