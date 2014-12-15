@@ -13,5 +13,5 @@ in LegoManager/LegoManager-client run <code>mvn tomcat7:run</code>
 project usage
 ---------------------
 * Application will be available at <a href="http://localhost:8080/pa165/">http://localhost:8080/pa165/</a>
-* REST client will be available at <a href="http://localhost:8080/LegoManager-client/#/">http://localhost:8080/LegoManager-client/#/</a>
+* REST client will be available at <a href="http://localhost:8081/LegoManager-client/#/">http://localhost:8081/LegoManager-client/#/</a>
 
