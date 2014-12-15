@@ -11,7 +11,7 @@ angular.module('legoApp.services', [])
           },
           get: {
                method: 'GET', 
-              interceptor: {responseError : showAlert}         
+              interceptor: {responseError  : showAlert}         
           },
           save: {
               method: 'POST', 
