@@ -11,7 +11,6 @@ import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Singleton;
 import javax.ws.rs.Consumes;

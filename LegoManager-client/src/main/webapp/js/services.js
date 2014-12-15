@@ -13,14 +13,3 @@ angular.module('legoApp.services', [])
         }
     });    
 });
-//Jestli delame piece a kit jen tak tohle je tu navic
-
-/*
-angular.module('legoApp.services')
-.factory('Category', function ($resource) {
-    return $resource('http://localhost:8080/pa165/rest/categories/:id')
-
-}).factory('LegoSet', function ($resource) {
-    return $resource('http://localhost:8080/pa165/rest/legosets/:id')
-});
-*/

@@ -11,16 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 /**
  *
- * @author 
+ * @author Tomas
  */
 @Entity
 public class LegoPiece implements Serializable {

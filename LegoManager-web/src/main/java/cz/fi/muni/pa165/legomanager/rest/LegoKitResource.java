@@ -11,7 +11,6 @@ import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

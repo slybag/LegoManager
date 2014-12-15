@@ -1,14 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.legomanager.web;
 
 import cz.muni.fi.pa165.legomanager.facades.LegoFacade;
-import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
-import static cz.muni.fi.pa165.legomanager.web.LegoKitActionBean.log;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;

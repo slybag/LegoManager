@@ -1,21 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.legomanager.web;
 
 import cz.muni.fi.pa165.legomanager.facades.LegoFacade;
-import cz.muni.fi.pa165.legomanager.services.CategoryService;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
-import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import static cz.muni.fi.pa165.legomanager.web.BaseActionBean.escapeHTML;
-import static cz.muni.fi.pa165.legomanager.web.LegoKitActionBean.log;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
@@ -31,7 +22,6 @@ import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *

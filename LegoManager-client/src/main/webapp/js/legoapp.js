@@ -45,23 +45,6 @@ angular.module('legoApp').config(function($stateProvider) {
         templateUrl: 'legopiece_delete.html',
         controller: 'LegoPieceDeleteController'
     });
-    //Jestli delame piece a kit jen tak tohle je tu navic
-    /*
-    $stateProvider.state('legoSets', { // state for showing all sets
-        url: '/legoSets',
-        templateUrl: 'legoSets.html',
-        controller: 'LegoSetListController'
-    }).state('categories', { // state for showing all kits
-        url: '/categories',
-        templateUrl: 'categories.html',
-        controller: 'CategoryListController'
-    }).state('newCategory', {
-        url: '/categories/new',
-        templateUrl: 'category_add.html',
-        controller: 'CategoryCreateController'
-    });
-    */
-    
 }).run(function($state) {
   $state.go('index'); //make a transition to legoKit state when app starts
 });
