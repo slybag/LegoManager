@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/context 
        http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
     
-    <context:component-scan base-package="cz.muni.fi.pa165.legomanager.dao"/>
+    <context:component-scan base-package="cz.muni.fi.pa165.legomanager.dao.impl, cz.muni.fi.pa165.legomanager.services.impl, cz.muni.fi.pa165.legomanager.facades.impl "/>
     <context:annotation-config />
     <tx:annotation-driven  proxy-target-class="true" transaction-manager="transactionManager"/> 
 
@@ -30,5 +30,11 @@
                 <prop key="hibernate.connection.password">pa165</prop>
             </props>
       </property>
-    </bean>   
+    </bean>
+    
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" >
+    </bean>
+    
+    <bean class="org.dozer.DozerBeanMapper"></bean>
+   
 </beans>

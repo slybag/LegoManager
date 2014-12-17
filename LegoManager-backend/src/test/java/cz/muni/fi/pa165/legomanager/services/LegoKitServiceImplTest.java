@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package cz.muni.fi.pa165.legomanager.services;
 
 import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
@@ -37,7 +37,7 @@ import org.springframework.dao.DataAccessException;
 public class LegoKitServiceImplTest extends BaseServiceTest {
     @Autowired
     @InjectMocks
-    private LegoKitServiceImpl legoKitService;
+    private LegoKitService legoKitService;
 
     @Mock
     private LegoKitDao legoKitDao;

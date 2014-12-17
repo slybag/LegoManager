@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package cz.muni.fi.pa165.legomanager.services;
 
 import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
 import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
@@ -53,6 +53,10 @@ public abstract class BaseServiceTest {
         public LegoPieceDao getLegoPieceDao(){
             return null;
         }
-
+        
+        @Bean 
+        public DozerBeanMapper getMapper(){
+            return new DozerBeanMapper();
+        }
     }
 }

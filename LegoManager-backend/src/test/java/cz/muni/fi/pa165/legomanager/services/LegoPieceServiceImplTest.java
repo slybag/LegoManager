@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package services;
+package cz.muni.fi.pa165.legomanager.services;
 
 import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
@@ -32,7 +32,7 @@ public class LegoPieceServiceImplTest extends BaseServiceTest {
 
     @InjectMocks
     @Autowired
-    private LegoPieceServiceImpl legoPieceService;
+    private LegoPieceService legoPieceService;
 
     @Mock
     private LegoPieceDao legoPieceDao;
