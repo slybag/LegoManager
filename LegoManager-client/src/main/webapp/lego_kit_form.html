@@ -1,7 +1,27 @@
 <!DOCTYPE html>
-<input type="text" ng-model="legoKit.name" class="form-control" id="name" placeholder="Lego kit name here" >
-<input type="text" ng-model="legoKit.ageRestriction" class="form-control" id="ageRestriction" placeholder="Age restriction here">
-<input type="text" ng-model="legoKit.price" class="form-control" id="price" placeholder="Price here">
+<input type="text" ng-model="legoKit.name" class="form-control" id="name" placeholder="Lego kit name" name="name" required>
+<div class="error" 
+        ng-show="kit_form.name.$error.required">
+        Lego kit name is requireda.
+</div> 
+<input type="number" ng-model="legoKit.ageRestriction" class="form-control" id="ageRestriction" name="age" placeholder="Age restriction" ng-pattern="/^[0-9]+$/" required>
+<div class="error" 
+        ng-show="kit_form.age.$error.pattern">
+        Accepts only positive whole numbers.
+</div>
+<div class="error" 
+        ng-show="kit_form.age.$error.required">
+        Age restriction is required and must be a number.
+</div>
+<input type="number" ng-model="legoKit.price" class="form-control" id="price" placeholder="Price here" name="price" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" required>
+<div class="error" 
+        ng-show="kit_form.price.$error.pattern">
+        Has to contain only positive numbers and "." for decimal point
+</div>
+<div class="error" 
+        ng-show="kit_form.price.$error.required">
+        Price is required and must be a number.
+</div>
 <label ng-repeat="legoPiece in legoPieces" ng-model-instant>
     <input 
         type="checkbox" 

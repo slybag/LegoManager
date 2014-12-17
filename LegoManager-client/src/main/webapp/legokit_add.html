@@ -1,5 +1,5 @@
-<form class="form-horizontal" role="form" ng-submit="addLegoKit()">
+ vavavgs<form class="form-horizontal" role="form" name="kit_form" novalidate ng-submit="addLegoKit()">
     <div ng-include="'lego_kit_form.html'">
     </div>
-    <input class="button" type='submit' value='Create'>
+    <input class="button" ng-disabled="kit_form.$invalid" type='submit' value='Create'>
 </form>
