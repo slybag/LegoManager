@@ -1,32 +1,60 @@
 <!DOCTYPE html>
+<table>
+<tr>
+<th>Lego Kit Name:</th>
+<td>
 <input type="text" ng-model="legoKit.name" class="form-control" id="name" placeholder="Lego kit name" name="name" required>
-<div class="error" 
+<span class="error" 
         ng-show="kit_form.name.$error.required">
         Lego kit name is required.
-</div> 
-<input type="number" ng-model="legoKit.ageRestriction" class="form-control" id="ageRestriction" name="age" placeholder="Age restriction" ng-pattern="/^[0-9]+$/" required>
-<div class="error" 
-        ng-show="kit_form.age.$error.pattern">
+</span>
+<td>
+</tr>
+<tr>
+<th>Age Restriction:</th>
+<td>
+<input type="number" ng-model="legoKit.ageRestriction" class="form-control" id="ageRestriction" name="age" placeholder="Age restriction" min="0" ng-pattern="/^[0-9]+$/" required>
+<span class="error" 
+        ng-show="kit_form.age.$error.number || kit_form.age.$error.min || kit_form.age.$error.pattern ">
         Accepts only positive whole numbers.
-</div>
-<div class="error" 
+</span>
+<span class="error" 
         ng-show="kit_form.age.$error.required">
         Age restriction is required and must be a number.
-</div>
-<input type="number" ng-model="legoKit.price" class="form-control" id="price" placeholder="Price here" name="price" ng-pattern="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" required>
-<div class="error" 
-        ng-show="kit_form.price.$error.pattern">
-        Has to contain only positive numbers and "." for decimal point
-</div>
-<div class="error" 
+</span>
+</td>
+</tr>
+<tr>
+<th>Price:</th>
+<td>
+<input type="number" ng-model="legoKit.price" class="form-control" id="price" placeholder="Price here" name="price" min="0" required>
+<span class="error" 
         ng-show="kit_form.price.$error.required">
+        Price is required.
+</span>
+<span class="error" 
+        ng-show="kit_form.price.$error.number || kit_form.price.$error.min">
         Price is required and must be a number.
-</div>
-<label ng-repeat="legoPiece in legoPieces" ng-model-instant>
-    <input 
+</span>
+</td>
+</tr>
+</table>
+<br>
+<table class="listTable">
+    <caption>Add Lego Pieces To Kit</caption>
+    <tr>
+        <th>Is In This Kit</th>
+        <th>Id</th>
+        <th>color</th>
+    </tr>    
+    <tr ng-repeat="legoPiece in legoPieces">
+    <td><input 
         type="checkbox" 
         checklist-model="selectedIds"
         checklist-value="legoPiece.id"
     >
-    {{legoPiece.color}}
-</label>
+    </td>
+    <td>{{legoPiece.id}}</td>
+    <td>{{legoPiece.color}}<td>
+    </tr>
+</table>

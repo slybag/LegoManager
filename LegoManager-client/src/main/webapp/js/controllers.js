@@ -78,6 +78,7 @@ angular.module('legoApp.controllers', []).controller('LegoKitListController', fu
 .controller('LegoPieceCreateController', function($scope, $state, LegoPiece) {
     $scope.legoPiece = new LegoPiece();
     $scope.colors = ['BLACK','WHITE','RED','BLUE','YELLOW','PURPLE','GREEN','VIOLET','GREY'];
+    $scope.legoPiece.color = $scope.colors[1];
     $scope.addLegoPiece = function(){
         $scope.legoPiece.$save(function() {
             $state.go('legoPieces');

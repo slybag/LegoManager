@@ -1,3 +1,5 @@
+<h3>Details About This Lego Piece:</h3>
+<br>
 <table>
     <tr>
     <th>Lego piece color: </th>    
@@ -5,8 +7,12 @@
     </tr>
 </table>
 <br>
-<table>
-    <label>All kits with this piece</label>
+<div ng-show="!legoPiece.legoKits.length > 0">
+    There are no kits with this piece.
+</div>
+<div ng-show="legoPiece.legoKits.length > 0">
+<table class="listTable">
+    <caption>All kits with this piece</caption>
     <tr>
     <th>Id</th>
     <th>Name</th>
@@ -20,3 +26,4 @@
     <td>{{legoKit.price}}</td>
     </tr>
 </table>
+</div>

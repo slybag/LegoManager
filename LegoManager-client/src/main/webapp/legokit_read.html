@@ -12,8 +12,12 @@
     <td>{{legoKit.price}}</td>
 </table>
 <br>
-<table>
-    <label>All pieces in this kit</label>
+<div ng-show="!legoKit.legoPieces.length > 0">
+There are no pieces in this kit.
+</div>
+<div ng-show="legoKit.legoPieces.length > 0">
+<table class="listTable">
+    <caption>All pieces in this kit</caption>
     <tr>
     <th>Id</th>
     <th>Color</th>
@@ -23,3 +27,4 @@
     <td>{{legoPiece.color}}</td>
     </tr>
 </table>
+</div>

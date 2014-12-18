@@ -48,4 +48,4 @@ angular.module('legoApp.services', [])
     });    
 });
 
-function showAlert(){alert("Cannot connect to server, please try again later");}
+function showAlert(){alert("There was an internal server error, server may be unavailable or recieved invalid request. Please try again or later if that does not help");}

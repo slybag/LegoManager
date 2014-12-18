@@ -1,5 +1,8 @@
-<form class="form-horizontal" role="form" ng-submit="updateLegoKit()">
+<!DOCTYPE html>
+<h3>Edit This Lego Kit: </h3>
+<form class="form-horizontal" name="kit_form" role="form" ng-submit="updateLegoKit()">
     <div ng-include="'lego_kit_form.html'">
     </div>
-    <input class="button" type='submit' value='Update'>
+    <br>
+    <input class="button bigtext" ng-disabled="kit_form.$invalid" type='submit' value='Create'>
 </form>

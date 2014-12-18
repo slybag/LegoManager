@@ -68,6 +68,28 @@ body {
     border: 0;
 }
 
+.button:disabled{
+    background: #CCC;
+    -webkit-border-radius: 26;
+    -moz-border-radius: 26;
+    border-radius: 26px;
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    border: 0;
+}
+
+.button:disabled:hover{
+    background: #CCC;
+    -webkit-border-radius: 26;
+    -moz-border-radius: 26;
+    border-radius: 26px;
+    color: #fff;
+    padding: 5px;
+    text-decoration: none;
+    border: 0;
+}
+
 .button:hover {
     background: #DE000D;
     background-image: linear-gradient(to bottom, #DE000D, #E76318);		
@@ -80,4 +102,14 @@ body {
     font-size: 1.5em;
     text-align: center;
     text-decoration: underline;
+}
+
+.error {
+    color:tomato;
+}
+
+.bigtext {
+    font-size: 1.4em;
+    padding-left: 10px;
+    padding-right: 10px;
 }
