@@ -90,6 +90,11 @@
             <param-value>true</param-value>
         </init-param>
 
+        <!--init-param>
+            <param-name>cors.exposedHeaders</param-name>
+            <param-value>*</param-value>
+        </init-param-->
+
         <init-param>
             <param-name>cors.allowOrigin</param-name>
             <param-value>*</param-value>
@@ -97,17 +102,17 @@
 
         <init-param>
             <param-name>cors.allowSubdomains</param-name>
-            <param-value>false</param-value>
+            <param-value>true</param-value>
         </init-param>
 
         <init-param>
             <param-name>cors.supportedMethods</param-name>
-            <param-value>GET, HEAD, POST, DELETE, OPTIONS</param-value>
+            <param-value>PUT, GET, POST, DELETE, HEAD, OPTIONS</param-value>
         </init-param>
 
         <init-param>
             <param-name>cors.supportedHeaders</param-name>
-            <param-value>*</param-value>
+            <param-value>accept, content-type, Origin</param-value>
         </init-param>
 
         <init-param>

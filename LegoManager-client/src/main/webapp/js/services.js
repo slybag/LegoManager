@@ -1,6 +1,6 @@
 angular.module('legoApp.services', [])
 .factory('LegoKit', function($resource){
-    return $resource('http://localhost:8080/pa165/rest/legokits/:id',{id: '@id'}, {
+    return $resource('http://localhost\:8080/pa165/rest/legokits/:id',{id: '@id'}, {
           update: {
               method: 'PUT',
             interceptor: {responseError : showAlert}
@@ -24,7 +24,7 @@ angular.module('legoApp.services', [])
     });
 })
 .factory('LegoPiece', function($resource){
-    return $resource('http://localhost:8080/pa165/rest/legopieces/:id',{id: '@id'},{
+    return $resource('http://localhost\:8080/pa165/rest/legopieces/:id',{id: '@id'},{
         update: {
               method: 'PUT',
             interceptor: {responseError : showAlert}
