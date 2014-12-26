@@ -31,7 +31,6 @@ import org.slf4j.LoggerFactory;
 public class CategoryActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     final static Logger log = LoggerFactory.getLogger(LegoPieceActionBean.class);
-    @SpringBean
     private List<Long> kitIDs;
     private List<Long> setIDs;
     private List<LegoSetTO> legoSets;

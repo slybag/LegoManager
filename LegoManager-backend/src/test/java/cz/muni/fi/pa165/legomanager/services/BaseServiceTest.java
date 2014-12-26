@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
 import cz.muni.fi.pa165.legomanager.dao.LegoKitDao;
 import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
+import cz.muni.fi.pa165.legomanager.dao.UserDao;
 import org.dozer.DozerBeanMapper;
 import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +52,11 @@ public abstract class BaseServiceTest {
 
         @Bean
         public LegoPieceDao getLegoPieceDao(){
+            return null;
+        }
+        
+        @Bean
+        public UserDao getUserDao(){
             return null;
         }
         

@@ -12,4 +12,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <context:component-scan base-package="cz.muni.fi.pa165"/>
 
     <import resource="classpath:jpa-pa165.xml"/>
+    <import resource="classpath:application-security.xml"/>
+    
 </beans>
