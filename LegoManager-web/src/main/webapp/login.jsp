@@ -5,15 +5,15 @@
 <s:layout-render name="/layout.jsp" titlekey="index.title">
     <s:layout-component name="body">
         <fieldset>
-            <legend><f:message key="login"/></legend>
+            <legend><f:message key="login.login"/></legend>
             <form name="f" action="<s:url value='j_spring_security_check'/>" method="POST">
                 <table>
                     <tr>
-                        <td><f:message key="username"/></td>
+                        <td><f:message key="login.username"/></td>
                         <td><input type='text' name='j_username' /></td>
                     </tr>
                     <tr>
-                        <td><f:message key="password"/></td>
+                        <td><f:message key="login.password"/></td>
                         <td><input type='password' name='j_password'></td>
                     </tr>
                     <tr>

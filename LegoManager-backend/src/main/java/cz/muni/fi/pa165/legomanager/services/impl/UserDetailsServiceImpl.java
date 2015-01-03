@@ -6,12 +6,14 @@
 package cz.muni.fi.pa165.legomanager.services.impl;
 
 import cz.muni.fi.pa165.legomanager.dao.UserDao;
+import cz.muni.fi.pa165.legomanager.entity.User;
 import cz.muni.fi.pa165.legomanager.transferobjects.UserTO;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,9 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
         Object o = userDao.findUserByAccountName(string);
-        System.err.println("searching");
         if (o == null) {
-            System.err.println(string +" not found");
             throw new UsernameNotFoundException("User not found {username= " + string + "}");
         }
         
@@ -86,4 +86,9 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         return details;
     }
     
+    @Secured({"ROLE_ADMIN"})
+    public void createUser(UserTO user) {        
+        if(user==null) throw new IllegalArgumentException();
+        userDao.addUser(mapper.map(user, User.class));       
+    }
 }

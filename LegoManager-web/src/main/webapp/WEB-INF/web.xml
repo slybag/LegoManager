@@ -34,7 +34,7 @@
         <param-value>StripesResources</param-value>
     </context-param>
     
-    <display-name>Laszlo Gazsi - Sandbox</display-name>
+    <display-name>Jersey servlet for REST API</display-name>
     <servlet>
         <servlet-name>rest-ws</servlet-name>
         <servlet-class>

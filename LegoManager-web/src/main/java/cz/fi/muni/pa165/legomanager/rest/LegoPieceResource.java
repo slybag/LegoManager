@@ -21,6 +21,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,6 +43,8 @@ public class LegoPieceResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<LegoPieceTO> getAllLegoPieces() {
+        Authentication auth = new UsernamePasswordAuthenticationToken("rest","rest");
+        SecurityContextHolder.getContext().setAuthentication(auth);
         return service.getAllLegoPieces();
     }
 

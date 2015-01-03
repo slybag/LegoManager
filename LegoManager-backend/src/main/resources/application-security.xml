@@ -7,18 +7,32 @@
           http://www.springframework.org/schema/security/spring-security-3.2.xsd
             
 ">
-               
+                 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />  
-        <form-login login-page='/login.jsp' 
-                    default-target-url="/index.jsp" 
+        <intercept-url pattern="/user" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/all" access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/kit/**" access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/set/**" access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/category/**" access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/piece/**" access="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')" />
+
+        <form-login login-page="/login.jsp" 
+                    default-target-url="/" 
                     authentication-failure-url="/login_error.jsp"
         />
-        <logout logout-success-url="/" delete-cookies="JSESSIONID"/>
+        <logout logout-success-url="/login.jsp" delete-cookies="JSESSIONID"/>
     </http>      
         
     <authentication-manager erase-credentials="false">
         <authentication-provider user-service-ref="userAuthenticationProvider"/>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+                <user name="rest" password="rest" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
     </authentication-manager>
     
 </beans:beans>

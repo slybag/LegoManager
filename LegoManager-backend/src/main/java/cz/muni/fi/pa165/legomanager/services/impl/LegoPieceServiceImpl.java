@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import java.util.ArrayList;
 import org.dozer.DozerBeanMapper;
+import org.springframework.security.access.annotation.Secured;
 
 /**
  *
@@ -17,6 +18,7 @@ import org.dozer.DozerBeanMapper;
  */
 @Service
 @Transactional
+@Secured({"ROLE_USER","ROLE_ADMIN"})
 public class LegoPieceServiceImpl implements LegoPieceService{
 
     @Autowired

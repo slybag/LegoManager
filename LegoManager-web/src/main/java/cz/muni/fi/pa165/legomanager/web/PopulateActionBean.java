@@ -4,16 +4,19 @@ import cz.muni.fi.pa165.legomanager.services.CategoryService;
 import cz.muni.fi.pa165.legomanager.services.LegoKitService;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.services.LegoSetService;
+import cz.muni.fi.pa165.legomanager.services.impl.UserDetailsServiceImpl;
 import cz.muni.fi.pa165.legomanager.support.Color;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
+import cz.muni.fi.pa165.legomanager.transferobjects.UserTO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.slf4j.Logger;
@@ -42,6 +45,8 @@ public class PopulateActionBean extends BaseActionBean {
     @SpringBean
     LegoPieceService legoPieceService;
     
+    @SpringBean
+    UserDetailsServiceImpl userService;
     
     @DefaultHandler
     public Resolution populate() {
@@ -75,6 +80,7 @@ public class PopulateActionBean extends BaseActionBean {
             category.setLegoKits(new ArrayList<LegoKitTO>());
             category.setLegoSets(new ArrayList<LegoSetTO>());
             categoryService.createCategory(category);
+            
         }
         return new ForwardResolution("/index.jsp");
     }   

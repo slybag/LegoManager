@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
  * @author xkonecn1
  */
 @Service
+@Secured({"ROLE_USER","ROLE_ADMIN"})
 public class LegoFacadeImpl implements LegoFacade {
     
     
