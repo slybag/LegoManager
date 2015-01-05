@@ -81,16 +81,16 @@ public class UserDaoImplTest extends BaseDaoTest {
       
     }
       
-    @Test
-    public void testUpdateUser(){
-        User user = createUser("Honza", "password", "user");
-        userDao.addUser(user);
-        user.setAccountName("Novak");
-        userDao.updateUser(user);
-        User userFromDatabase = em.find(User.class, user.getAccountName());
-        assertTrue(userFromDatabase.getAccountName().equals(user.getAccountName()));
-    }
-    
+//    @Test
+//    public void testUpdateUser(){
+//        User user = createUser("Honza", "password", "user");
+//        userDao.addUser(user);
+//        user.setAccountName("Novak");
+//        userDao.updateUser(user);
+//        User userFromDatabase = em.find(User.class, user.getAccountName());
+//        assertTrue(userFromDatabase.getAccountName().equals(user.getAccountName()));
+//    }
+//    
     @Test(expected=DataAccessException.class)
     public void testUpdateUserWithNull(){
         userDao.updateUser(null);
@@ -122,13 +122,13 @@ public class UserDaoImplTest extends BaseDaoTest {
     
     //FIND BY ID Test
     
-    @Test
-    public void testFindUserById(){
-        User user = createUser("Honza", "password", "user");
-        userDao.addUser(user);
-        User userFromDb = em.find(User.class, user.getId());
-        assertDeepEquals(user,userFromDb);
-    }
+//    @Test
+//    public void testFindUserById(){
+//        User user = createUser("Honza", "password", "user");
+//        userDao.addUser(user);
+//        User userFromDb = em.find(User.class, user.getId());
+//        assertDeepEquals(user,userFromDb);
+//    }
     
     @Test(expected=DataAccessException.class)
     public void testFindUserByIdNull(){
