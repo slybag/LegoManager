@@ -45,7 +45,7 @@ public class UserDaoImplTest extends BaseDaoTest {
         
         User user = createUser("Honza", "password", "user");
         userDao.addUser(user);
-        User userFromDb = em.find(User.class, user.getId());
+        User userFromDb = em.find(User.class, user.getAccountName());
         assertNotNull (userFromDb);
         assertDeepEquals (userFromDb,user);
             
@@ -66,7 +66,7 @@ public class UserDaoImplTest extends BaseDaoTest {
     }
     
     @Test(expected=DataAccessException.class)
-    public void testCreateSetWithNullPass(){
+    public void testCreateUserWithNullPass(){
 
         User user = createUser("Honza", null, "user");
         userDao.addUser(user);
@@ -74,7 +74,7 @@ public class UserDaoImplTest extends BaseDaoTest {
     }
     
     @Test(expected=DataAccessException.class)
-    public void testCreateSetWithNullRole(){
+    public void testCreateUserWithNullRole(){
 
         User user = createUser("Honza", "password", null);
         userDao.addUser(user);
@@ -87,7 +87,7 @@ public class UserDaoImplTest extends BaseDaoTest {
         userDao.addUser(user);
         user.setAccountName("Novak");
         userDao.updateUser(user);
-        User userFromDatabase = em.find(User.class, user.getId());
+        User userFromDatabase = em.find(User.class, user.getAccountName());
         assertTrue(userFromDatabase.getAccountName().equals(user.getAccountName()));
     }
     
@@ -113,7 +113,7 @@ public class UserDaoImplTest extends BaseDaoTest {
     }
     
     @Test(expected=DataAccessException.class)
-    public void testUpdateSetWithNullRole(){
+    public void testUpdateUserWithNullRole(){
         User user = createUser("Honza", "password", "user");
         userDao.addUser(user);
         user.setRole(null);
@@ -172,7 +172,7 @@ public class UserDaoImplTest extends BaseDaoTest {
     }
     
     @Test
-    public void testGetAllKits(){
+    public void testGetAllUsers(){
         List<User> before = userDao.getAllUsers();
                 
         User user1 = createUser("Honza", "password", "user");
