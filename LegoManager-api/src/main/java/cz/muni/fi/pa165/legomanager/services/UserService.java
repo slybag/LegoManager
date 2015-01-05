@@ -43,5 +43,5 @@ public interface UserService {
      * @param id of wanted user
      * @return user with specified id
      */
-    public UserTO getUser (Long id);
+    public UserTO getUser (String id);
 }

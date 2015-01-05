@@ -111,7 +111,7 @@ public class LegoFacadeImpl implements LegoFacade {
     }
     
     @Override
-    public UserTO getUserById(Long id){
+    public UserTO getUserById(String id){
         return userService.getUser(id);
     }
     

@@ -17,10 +17,10 @@ import javax.persistence.Table;
 @Table(name="LegoUser")
 public class User implements Serializable {
    
-    @Id
-    @GeneratedValue
+    
     private Long id;
     
+    @Id
     @Column(unique = true)
     private String accountName;
    
