@@ -5,7 +5,6 @@
  */
 package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.dao.LegoPieceDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoPiece;
 import cz.muni.fi.pa165.legomanager.support.Color.PieceColor;

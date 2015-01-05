@@ -5,20 +5,13 @@
  */
 package cz.muni.fi.pa165.legomanager.dao;
 
-import cz.muni.fi.pa165.legomanager.dao.CategoryDao;
-import cz.muni.fi.pa165.legomanager.dao.impl.CategoryDaoImpl;
 import cz.muni.fi.pa165.legomanager.entity.Category;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
-import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

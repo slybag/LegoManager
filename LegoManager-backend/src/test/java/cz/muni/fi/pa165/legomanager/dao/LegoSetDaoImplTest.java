@@ -6,13 +6,10 @@
 package cz.muni.fi.pa165.legomanager.dao;
 
 import cz.muni.fi.pa165.legomanager.entity.Category;
-import cz.muni.fi.pa165.legomanager.dao.LegoSetDao;
 import cz.muni.fi.pa165.legomanager.entity.LegoKit;
 import cz.muni.fi.pa165.legomanager.entity.LegoSet;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +19,6 @@ import javax.persistence.PersistenceContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -199,7 +195,7 @@ public class LegoSetDaoImplTest extends BaseDaoTest {
     }
     
     @Test
-    public void testGetAllKits(){
+    public void testGetAllSets(){
         List<LegoSet> before = legoSetDao.getAllLegoSets();
                 
         LegoSet set1 = createLegoSet("Castle",new BigDecimal(100),new ArrayList<LegoKit>(),new HashSet<Category>());
