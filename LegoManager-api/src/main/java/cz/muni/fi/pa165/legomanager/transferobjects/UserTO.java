@@ -39,7 +39,7 @@ public class UserTO {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.accountName);
         return hash;
     }
 
@@ -52,7 +52,7 @@ public class UserTO {
             return false;
         }
         final UserTO other = (UserTO) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.accountName, other.accountName)) {
             return false;
         }
         return true;

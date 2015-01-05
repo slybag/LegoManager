@@ -106,7 +106,7 @@ public interface LegoFacade {
      * @param id id of user to be selected from db
      * @return user with id equals to param id
      */
-    public UserTO getUserById(Long id);
+    public UserTO getUserById(String id);
     
     /**
      * Gets all LegoKits

@@ -129,8 +129,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService{
 
     @Override
     @Transactional
-    public UserTO getUser(Long id) {
+    public UserTO getUser(String id) {
         if(id==null) throw new IllegalArgumentException();
-        return mapper.map(userDao.findUserById(id), UserTO.class);
+        return mapper.map(userDao.findUserByAccountName(id), UserTO.class);
     }
 }
