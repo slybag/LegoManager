@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.legomanager.services.CategoryService;
 import cz.muni.fi.pa165.legomanager.services.LegoKitService;
 import cz.muni.fi.pa165.legomanager.services.LegoPieceService;
 import cz.muni.fi.pa165.legomanager.services.LegoSetService;
+import cz.muni.fi.pa165.legomanager.services.UserService;
 import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
