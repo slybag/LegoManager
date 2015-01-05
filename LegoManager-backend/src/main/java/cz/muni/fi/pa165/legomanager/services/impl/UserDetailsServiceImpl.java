@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.legomanager.services.impl;
 
 import cz.muni.fi.pa165.legomanager.dao.UserDao;
 import cz.muni.fi.pa165.legomanager.entity.User;
+import cz.muni.fi.pa165.legomanager.services.UserService;
 import cz.muni.fi.pa165.legomanager.transferobjects.UserTO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,7 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("userAuthenticationProvider")
 @Transactional
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService, UserService{
 
     @Autowired
     UserDao userDao;
@@ -90,5 +91,46 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public void createUser(UserTO user) {        
         if(user==null) throw new IllegalArgumentException();
         userDao.addUser(mapper.map(user, User.class));       
+    }
+    
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void setMapper(DozerBeanMapper mapper) {
+        this.mapper = mapper;
+    }
+    
+    @Override
+    @Transactional
+    public List<UserTO> getAllUsers() {
+        List<UserTO> userTOs;
+        List<User> users = userDao.getAllUsers();
+        userTOs = new ArrayList<>();
+        for (User user : users) {
+            userTOs.add(mapper.map(user, UserTO.class));
+        }
+        return userTOs;
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(UserTO user) {
+        if(user==null) throw new IllegalArgumentException();
+        userDao.updateUser(mapper.map(user, User.class));
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(UserTO user) {
+        if(user==null) throw new IllegalArgumentException();
+        userDao.deleteUser(mapper.map(user, User.class));
+    }
+
+    @Override
+    @Transactional
+    public UserTO getUser(Long id) {
+        if(id==null) throw new IllegalArgumentException();
+        return mapper.map(userDao.findUserById(id), UserTO.class);
     }
 }
