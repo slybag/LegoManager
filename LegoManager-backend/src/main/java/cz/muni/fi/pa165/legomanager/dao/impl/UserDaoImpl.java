@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165.legomanager.dao.impl;
 
 import cz.muni.fi.pa165.legomanager.dao.UserDao;
@@ -52,18 +47,23 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserById(Long id) {
         User userToFind = entityManager.find(User.class, id);
-        if (userToFind == null) throw new PersistenceException("Lego Set with id: " + id + " is not in DB");
+        if (userToFind == null) throw new PersistenceException("User with id: " + id + " is not in DB");
         
         return userToFind;
     }
     
     //prepared function
     private boolean isValidUser(User user) {                             
+        if (user.getAccountName()== null || 
+                user.getPassword()== null || 
+                user.getRole()== null) return false;        
         return true;
     }
+    
     @Override
     public User findUserByAccountName(String accountName) {
         User userToFind = entityManager.find(User.class, accountName);
+        if (userToFind == null) throw new PersistenceException("User with account name: " + accountName + " is not in DB");
         return userToFind;
     }
 }

@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.legomanager.transferobjects.CategoryTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoKitTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoPieceTO;
 import cz.muni.fi.pa165.legomanager.transferobjects.LegoSetTO;
+import cz.muni.fi.pa165.legomanager.transferobjects.UserTO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -34,6 +35,9 @@ public class LegoFacadeImpl implements LegoFacade {
     
     @Autowired
     CategoryService categoryService;
+    
+    @Autowired
+    UserService userService;
            
     @Override
     public void create(LegoKitTO kit){
@@ -53,6 +57,11 @@ public class LegoFacadeImpl implements LegoFacade {
     @Override
     public void create(CategoryTO category){
         categoryService.createCategory(category);
+    }
+    
+    @Override
+    public void create(UserTO user){
+        userService.createUser(user);
     }
     
     @Override
@@ -76,6 +85,11 @@ public class LegoFacadeImpl implements LegoFacade {
     }
     
     @Override
+    public void update(UserTO user){
+        userService.updateUser(user);
+    }
+    
+    @Override
     public LegoKitTO getLegoKitById (Long id){
         return legoKitService.getLegoKit(id);
     }
@@ -93,6 +107,11 @@ public class LegoFacadeImpl implements LegoFacade {
     @Override
     public CategoryTO getCategoryById(Long id){
         return categoryService.getCategory(id);
+    }
+    
+    @Override
+    public UserTO getUserById(Long id){
+        return userService.getUser(id);
     }
     
     @Override
@@ -116,6 +135,11 @@ public class LegoFacadeImpl implements LegoFacade {
     }
     
     @Override
+    public List<UserTO> getAllUsers(){
+        return userService.getAllUsers();
+    }
+    
+    @Override
     public void delete(LegoKitTO kit){
         legoKitService.deleteLegoKit(kit);
     }
@@ -133,6 +157,11 @@ public class LegoFacadeImpl implements LegoFacade {
     @Override
     public void delete(CategoryTO category){
         categoryService.deleteCategory(category);
+    }
+    
+    @Override
+    public void delete(UserTO user){
+        userService.deleteUser(user);
     }
     
 }
