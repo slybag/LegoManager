@@ -17,6 +17,6 @@
     </tr>   
     <tr>
         <th><s:label for="s2" name="user.role"/></th>
-        <td><s:text id="s2" name="userTO.role"/></td>
+        <td><s:select id="s2" name="userTO.role"><s:options-enumeration enum="cz.muni.fi.pa165.legomanager.support.UserRole"/></s:select></td>
     </tr> 
 </table>
