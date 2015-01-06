@@ -32,7 +32,9 @@ public class UserActionBean extends BaseActionBean implements ValidationErrorHan
     @SpringBean
     protected LegoFacade facade;
 
-    private List<UserTO> users;    
+    private List<UserTO> users;
+    
+    private String newPassword;
     
     @DefaultHandler
     public Resolution list() {
@@ -67,6 +69,14 @@ public class UserActionBean extends BaseActionBean implements ValidationErrorHan
     public void setUserTO(UserTO userTO) {
         this.userTO = userTO;
     }    
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
        
     public Resolution details(){
         log.debug("details() user={}", userTO);
@@ -98,12 +108,15 @@ public class UserActionBean extends BaseActionBean implements ValidationErrorHan
     }
     
     public Resolution edit() {
+        newPassword="";
         log.debug("edit() user={}", userTO);
         return new ForwardResolution("/user/edit.jsp");
     }
 
     public Resolution save() {
         log.debug("save() user={}", userTO);
+        log.debug(getContext().getRequest().getParameter("newPassword"));
+        if (getContext().getRequest().getParameter("newPassword").length()>0) userTO.setPassword(newPassword);
         facade.update(userTO);
         return new RedirectResolution(this.getClass(), "list");
     }

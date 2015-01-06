@@ -6,7 +6,11 @@
     <s:layout-component name="body">
         <fieldset>
             <legend><f:message key="login"/></legend>
+            <div class="error_container">
             Invalid user name or password please try again.
+            </div>
+            <br>
+            <br>
             <form name="f" action="<s:url value='j_spring_security_check'/>" method="POST">
                 <table>
                     <tr>

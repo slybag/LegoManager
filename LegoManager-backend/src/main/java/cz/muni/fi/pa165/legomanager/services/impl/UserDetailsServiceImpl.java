@@ -20,6 +20,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,6 +92,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService{
     @Secured({"ROLE_ADMIN"})
     public void createUser(UserTO user) {        
         if(user==null) throw new IllegalArgumentException();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.addUser(mapper.map(user, User.class));       
     }
     
@@ -117,6 +121,11 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserService{
     @Transactional
     public void updateUser(UserTO user) {
         if(user==null) throw new IllegalArgumentException();
+        String hash = getUser(user.getAccountName()).getPassword();
+        if(!user.getPassword().equals(hash)){
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(passwordEncoder.encode(user.getPassword()));    
+        }
         userDao.updateUser(mapper.map(user, User.class));
     }
 
