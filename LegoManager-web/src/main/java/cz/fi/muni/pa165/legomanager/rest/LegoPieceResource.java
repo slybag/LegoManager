@@ -40,11 +40,14 @@ public class LegoPieceResource {
     @Context
     private UriInfo context;
 
+    public LegoPieceResource() {
+        Authentication auth = new UsernamePasswordAuthenticationToken("rest","rest");
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<LegoPieceTO> getAllLegoPieces() {
-        Authentication auth = new UsernamePasswordAuthenticationToken("rest","rest");
-        SecurityContextHolder.getContext().setAuthentication(auth);
         return service.getAllLegoPieces();
     }
 
