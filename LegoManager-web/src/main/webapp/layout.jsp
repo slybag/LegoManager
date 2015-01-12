@@ -11,19 +11,20 @@
 
         <head>  
             <title><f:message key="${titlekey}"/></title>
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
-            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
-
             <script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/main.js"></script>            
+            <script src="${pageContext.request.contextPath}/js/main.js"></script>   
+            
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css" />
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
+         
             <s:layout-component name="header"/>            
         </head>
         <body>
             <sec:authorize url="/admin">
             <div id="header_admin">
                 <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">               
-                <img class="header_img_admin" src="${pageContext.request.contextPath}/img/ADMIN2.png" alt="Lego Logo">                               
+                <img class="header_img_admin" src="${pageContext.request.contextPath}/img/admin.png" alt="Lego Logo">                               
                 <div id="title">
                 <f:message key="${titlekey}"/>  
                 </div>

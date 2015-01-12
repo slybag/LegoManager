@@ -4,7 +4,7 @@
 <table class = "basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
     <tr>
-        <th><s:label for="s1" name="set.name"/></th>
+        <th><s:label for="s1" name="set.title"/></th>
         <td><s:text id="s1" name="legoSetTO.name"/></td>
     </tr>
     <tr>

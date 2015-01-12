@@ -7,6 +7,9 @@
         <fieldset>
             <legend><f:message key="login"/></legend>
             <div class="error_container">
+            <div>
+            <img class="error_img" src="${pageContext.request.contextPath}/img/error_img.png" alt="Error">               
+            </div>
             Invalid user name or password please try again.
             </div>
             <br>

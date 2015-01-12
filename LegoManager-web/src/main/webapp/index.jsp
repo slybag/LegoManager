@@ -6,7 +6,8 @@
 
 <s:layout-render name="/layout.jsp" titlekey="index.title">
     <s:layout-component name="body">
-        <h2>Welcome to the Lego Manager storage system.</h2> <br><br>
+        <h2>Welcome to the Lego Manager storage system.</h2> <br>
+        <div class="table_container">
         <sec:authorize access="isAnonymous()">
         If you want to login as administrator use this credentials: <br><br>
         <b>Username: admin</b><br>
@@ -19,5 +20,6 @@
            You are now logged in as <b><sec:authentication property="principal.username" /></b>. <br>
            System time is <%= new java.util.Date()%>.
         </sec:authorize>
+        </div>
     </s:layout-component>
 </s:layout-render>

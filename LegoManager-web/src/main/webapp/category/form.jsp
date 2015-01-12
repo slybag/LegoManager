@@ -3,7 +3,7 @@
 <table class="basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
     <tr>
-        <th><s:label for="s1" name="category.name"/></th>
+        <th><s:label for="s1" name="name"/></th>
         <td><s:text id="s1" name="categoryTO.name"/></td>
     </tr>
     <tr>

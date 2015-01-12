@@ -4,7 +4,7 @@
 <table class="basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
     <tr>
-        <th><f:message key="category.name"/></th>
+        <th><f:message key="name"/></th>
         <td>${actionBean.categoryTO.name}</td>
     </tr>
     <tr>

@@ -6,6 +6,7 @@ function create() {
             height: '700',
             width: 'auto',
             modal: true,
+            show: "clip",
             dialogClass: 'info'
         });
     });
