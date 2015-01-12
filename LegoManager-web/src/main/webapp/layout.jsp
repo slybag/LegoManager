@@ -16,18 +16,35 @@
 
             <script src="${pageContext.request.contextPath}/js/jquery-2.1.1.min.js"></script>
             <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/main.js"></script>
-            <s:layout-component name="header"/>
-
+            <script src="${pageContext.request.contextPath}/js/main.js"></script>            
+            <s:layout-component name="header"/>            
         </head>
         <body>
-
+            <sec:authorize url="/admin">
+            <div id="header_admin">
+                <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">               
+                <img class="header_img_admin" src="${pageContext.request.contextPath}/img/ADMIN2.png" alt="Lego Logo">                               
+                <div id="title">
+                <f:message key="${titlekey}"/>  
+                </div>
+            </div>
+            </sec:authorize>  
+            <sec:authorize url="/user">
             <div id="header">
                 <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">
                 <div id="title">
                 <f:message key="${titlekey}"/>  
                 </div>
             </div>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+            <div id="header">
+                <img class="header_img" src="${pageContext.request.contextPath}/img/legomanager.png" alt="Lego Logo">
+                <div id="title">
+                <f:message key="${titlekey}"/>  
+                </div>
+            </div>
+            </sec:authorize>
             <div>
             <div id="nav">
                 <ul>
@@ -58,10 +75,21 @@
                 <s:layout-component name="body"/>
             </div>
             </div>
-
-            <div id="footer" >
-                <f:message key="index.footer"/>
-            </div>
+            <sec:authorize url="/admin">
+                <div id="footer_admin" >
+                    <f:message key="index.footer"/>
+                </div>
+            </sec:authorize>
+            <sec:authorize url="/user">
+                <div id="footer" >
+                    <f:message key="index.footer"/>
+                </div>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <div id="footer" >
+                    <f:message key="index.footer"/>
+                </div>
+            </sec:authorize>
                 <s:messages/>
 
         </body>

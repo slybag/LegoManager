@@ -11,11 +11,30 @@
     height: 55px;
 }
 
+#header_admin {
+    background-color:#1e90ff;
+    background-image: linear-gradient(to bottom, #1e90ff, #4169e1);		
+    color:white;
+    text-align:center;
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+    padding:5px;
+    height: 55px;
+}
+
 .header_img {
     float: left;
     padding-right: 15px;
     padding-left: 6.3px;
     width: 400px;
+}
+
+.header_img_admin {
+    float: right;
+    padding-right: 15px;
+    padding-left: 6.3px;
+    width: 200px;
 }
 
 #nav {
@@ -45,6 +64,17 @@
 }
 #footer {
     background-color:#DE000D;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+    -webkit-border-radius: 16;
+    -moz-border-radius: 16;
+    border-radius: 16px;
+}
+
+#footer_admin {
+    background-color:#1e90ff;
     color:white;
     clear:both;
     text-align:center;
