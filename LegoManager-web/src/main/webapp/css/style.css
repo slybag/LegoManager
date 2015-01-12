@@ -105,7 +105,7 @@
     -moz-border-radius: 26;
     border-radius: 26px;
     color: #4C5156;
-    font-size: 10px;
+    font-size: 1em;
     padding: 5px;
     text-decoration: none;
     border:0;
@@ -221,6 +221,7 @@
 .basic_prop_table {
     min-width: 500px;
     border: solid #CCC;
+    background-color:  #F4F4F4;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
 }
@@ -241,10 +242,10 @@
 }
 
 .error_container{
-    background-color:  #FAED5B;
-    -webkit-border-radius: 16;
-    -moz-border-radius: 16;
-    border-radius: 16px;
+    background-color:  #eeeeee;
+    -webkit-border-radius: 8;
+    -moz-border-radius: 8;
+    border-radius: 8px;
     display: inline-block;
     width: 474px;
     border: solid #DE000D;
@@ -287,5 +288,12 @@ fieldset legend {
     font-family: Helvetica;
 }
 
+.field_error_container {
+    color: red;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
 .basic tr:nth-child(even) {background: #CCC}
-.basic tr:nth-child(odd) {background: #eeeeee}
+.basic tr:nth-child(odd) {background: #F4F4F4}

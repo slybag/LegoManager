@@ -1,8 +1,4 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
-<div>
-<s:errors/>
-</div>
-<br>
 <br>
 <table class="basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
@@ -11,9 +7,15 @@
         <td><s:text id="s1" name="categoryTO.name"/></td>
     </tr>
     <tr>
+        <td></td><td><s:errors field="categoryTO.name"/></td>
+    </tr>
+    <tr>
         <th><s:label for="s2" name="category.description"/></th>
-        <td><s:text id="s2" name="categoryTO.description"/></td>
-    </tr> 
+        <td><s:textarea id="s2" name="categoryTO.description"/></td>
+    </tr>
+    <tr>
+        <td></td><td><s:errors field="categoryTO.description"/></td>
+    </tr>
 </table>
 <br>
 <table class="basic">

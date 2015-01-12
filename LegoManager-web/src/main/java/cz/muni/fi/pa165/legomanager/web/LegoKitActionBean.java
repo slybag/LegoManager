@@ -39,7 +39,8 @@ public class LegoKitActionBean extends BaseActionBean implements ValidationError
     private List<Long> pieceIDs;
     @ValidateNestedProperties(value = {
         @Validate(on = {"add", "save"}, field = "name", required = true),
-        @Validate(on = {"add", "save"}, field = "price", required = true, minvalue = 1)
+        @Validate(on = {"add", "save"}, field = "price", required = true, minvalue = 1),
+        @Validate(on = {"add", "save"}, field = "ageRestriction", minvalue = 1)
     })
     private LegoKitTO legoKitTO;
 

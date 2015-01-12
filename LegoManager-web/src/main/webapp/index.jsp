@@ -16,7 +16,8 @@
         <b>Password: rest</b><br><br>
         </sec:authorize>
         <sec:authorize url="/all">
-           You are now logged in as <b><sec:authentication property="principal.username" /></b>.
+           You are now logged in as <b><sec:authentication property="principal.username" /></b>. <br>
+           System time is <%= new java.util.Date()%>.
         </sec:authorize>
     </s:layout-component>
 </s:layout-render>

@@ -43,15 +43,12 @@
             </table>
         </div>
         <div class="hidden" id="add" title="Add the user">
-            <div>
-                <s:errors />
-            </div>
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.UserActionBean">
-                <fielduser class="table_container"><legend><f:message key="user.list.newuser"/></legend>
+                <fieldset class="table_container"><legend><f:message key="user.list.newuser"/></legend>
                         <%@include file="formCreate.jsp"%>
                     <br>
                     <s:submit class="button" name="add"><f:message key="user.create"/></s:submit>
-                    </fielduser>
+                    </fieldset>
             </s:form>
         </div>
     </s:layout-component>

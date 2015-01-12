@@ -1,9 +1,5 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-    <s:errors/>
-</div>
-<br>
 <br>
 <table class = "basic_prop_table">
     <caption><f:message key="details.basicProperties"/></caption>
@@ -12,8 +8,14 @@
         <td><s:text id="s1" name="userTO.accountName" disabled="true"/></td>
     </tr>
     <tr>
+        <td></td><td><s:errors field="userTO.accountName"/></td>
+    </tr>
+    <tr>
         <th><s:label for="s2" name="newPassword"/></th>
         <td><s:text id="s2" name="newPassword" /></td>
+    </tr>
+    <tr>
+        <td></td><td><s:errors field="newPassword"/></td>
     </tr>
     <tr>
         <th><s:label for="s2" name="user.role"/></th>

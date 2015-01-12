@@ -3,7 +3,7 @@ function create() {
     $(function () {
         $("#add").dialog({
             resizable: false,
-            height: 500,
+            height: '700',
             width: 'auto',
             modal: true,
             dialogClass: 'info'

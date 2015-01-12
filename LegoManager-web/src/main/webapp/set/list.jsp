@@ -43,9 +43,6 @@
             </table>
         </div>
         <div class="hidden" id="add" title="Add the set">
-            <div>
-            <s:errors />
-            </div>
             <s:form beanclass="cz.muni.fi.pa165.legomanager.web.LegoSetActionBean">
                 <fieldset class="table_container"><legend><f:message key="set.list.newset"/></legend>
                     <%@include file="form.jsp"%>
