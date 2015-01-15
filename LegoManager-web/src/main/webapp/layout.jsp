@@ -65,7 +65,6 @@
                     
                     <sec:authorize url="/admin">
                     <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.UserActionBean"><f:message key="index.users.link"/></s:link></li>
-                    <li><s:link beanclass="cz.muni.fi.pa165.legomanager.web.PopulateActionBean"><f:message key="index.populate"/></s:link></li>
                     </sec:authorize>
                 </ul>
                 </div>

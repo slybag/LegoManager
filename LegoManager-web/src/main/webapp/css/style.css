@@ -15,7 +15,6 @@ body {
 
 #header_admin {
     background-color:#000;
-    //background-image: linear-gradient(to bottom, #1e90ff, #489e1);		
     color:white;
     text-align:center;
     -webkit-border-radius: 8;
@@ -85,7 +84,6 @@ body {
 
 .info .ui-dialog-titlebar {
   background-color: #DE000D;
-  background-image: linear-gradient(to bottom, #DE000D, #E76318);		
   color: #fff;
 }
 
@@ -103,7 +101,6 @@ body {
 
 .button {
     background: #FAED5B;
-    background-image: linear-gradient(to bottom, #FFEB70, #FAED5B);		
     -webkit-border-radius: 6;
     -moz-border-radius: 6;
     border-radius: 6px;
@@ -116,7 +113,6 @@ body {
 
 .button:hover {
     background: #DE000D;
-    background-image: linear-gradient(to bottom, #DE000D, #E76318);		
     color:#fff;
     text-decoration: none;
     border:0;
@@ -194,7 +190,7 @@ body {
 .basic {
     min-width: 500px;
     border: solid #4C5156;
-    text-align: center;
+    text-align: left;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
@@ -216,6 +212,7 @@ body {
 .basic_prop_table caption{
     background-color: #4C5156;
     color: white;
+    text-align: left;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     padding: 7px;
@@ -300,6 +297,7 @@ fieldset legend {
     font-size: 0.8em;
     font-weight: bold;
     padding: 5px 15px;
+    
 }
 
 .error_img{
@@ -307,7 +305,10 @@ fieldset legend {
 }
 
 .field_error_img{
-    width: 40px;
+    width: 30px;
+}
+
+#add{
 }
 
 .basic tr:nth-child(even) {background: #CCC}
